@@ -13,22 +13,7 @@ auth = HTTPBasicAuth()
 
 app= Flask(__name__)
 
-def convert_csv():
-    
-tasks=[
-    {
-        'id':1,
-        'title':u'Buy groceries',
-        'description':u'HP,Asus,Toshiba,Acer',
-        'done':False
-    },
-    {
-        'id':2,
-        'title':u'Learn Python',
-        'description':u'Need to find a good Python tutoriel on the web',
-        'done':False
-            }
-            
+d
 ]
 
 # Authentification
