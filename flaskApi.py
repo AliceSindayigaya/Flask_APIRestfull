@@ -13,8 +13,6 @@ auth = HTTPBasicAuth()
 
 app= Flask(__name__)
 
-d
-]
 
 # Authentification
 
