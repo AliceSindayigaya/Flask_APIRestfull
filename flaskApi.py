@@ -1,15 +1,56 @@
+#!/usr/bin/env python2
+# -*- coding: utf-8 -*-
+"""
+Created on Wed Mar 28 15:53:50 2018
+
+@author: to125348
+"""
+
+import os
 import csv
 import json
 
 from flask import Flask, jsonify, abort
 from flask import make_response, request
 from flask import url_for
+from werkzeug import secure_filename
 from flask_httpauth import HTTPBasicAuth
 
 
 auth = HTTPBasicAuth()
+UPLOAD_FILE = '/UPLOAD_FILE'
+
+
 app= Flask(__name__)
 
+app.config['UPLOAD_FOLDER']= UPLOAD_FILE
+ALLOWED_EXTENSIONS = {'csv'}
+          
+
+    
+   
+    
+tasks=[
+    {
+        'id':1,
+        'title':u'Buy groceries',
+        'description':u'HP,Asus,Toshiba,Acer',
+        'done':False
+    },
+    {
+        'id':2,
+        'title':u'Learn Python',
+        'description':u'Need to find a good Python tutoriel on the web',
+        'done':False
+            }
+            
+]
+
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.',1)[1] in ALLOWED_EXTENSIONS
+
+
+    
 # Authentification
 
 @auth.get_password
@@ -34,7 +75,7 @@ def make_public_task(task):
             new_task[field] = task[field]
     return new_task
 
-
+@app.route('/todo/api/v1.0/tasks/upload')
 @app.route('/todo/api/v1.0/tasks', methods=['GET'])
 @auth.login_required
 def get_tasks():
