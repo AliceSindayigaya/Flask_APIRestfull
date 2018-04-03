@@ -1,141 +1,138 @@
 #!/usr/bin/env python2
 # -*- coding: utf-8 -*-
 """
-Created on Wed Mar 28 15:53:50 2018
+Created on Tue Apr  3 10:23:51 2018
 
 @author: to125348
 """
-
-import os
-import csv
+import csv 
 import json
 
-from flask import Flask, jsonify, abort
-from flask import make_response, request
-from flask import url_for
-from werkzeug import secure_filename
+
+from flask import Flask,jsonify,abort
+from flask import make_response,request,url_for
 from flask_httpauth import HTTPBasicAuth
 
+from cStringIO import StringIO
 
-auth = HTTPBasicAuth()
-UPLOAD_FILE = '/UPLOAD_FILE'
+auth= HTTPBasicAuth()
 
-
-app= Flask(__name__)
-
-app.config['UPLOAD_FOLDER']= UPLOAD_FILE
-ALLOWED_EXTENSIONS = {'csv'}
-          
-
-    
-   
-    
-tasks=[
+app = Flask(__name__)
+flights = [
     {
         'id':1,
-        'title':u'Buy groceries',
-        'description':u'HP,Asus,Toshiba,Acer',
+        'title':u'Toulouse-Paris',
+        'description':u'AirFrance-Blagnac-Roissy',
         'done':False
     },
     {
         'id':2,
-        'title':u'Learn Python',
-        'description':u'Need to find a good Python tutoriel on the web',
+        'title':u'Toulouse-Bordeau',
+        'description':u'EasyJet Blagnac-BOrdeau',
         'done':False
             }
             
 ]
 
-def allowed_file(filename):
-    return '.' in filename and filename.rsplit('.',1)[1] in ALLOWED_EXTENSIONS
-
-
+def csv_json(data):
     
-# Authentification
+    reader = csv.DictReader(data)
+    out =json.dumps([row for row in reader]) 
+    return out
 
+def convert():
+    f =request.files['data_file']
+    if not f:
+        return "No file"
+    file_contents= StringIO(f.stream.read())
+    result = csv_json(file_contents)
+    response = make_response(result)
+    response.headers["Content-Disposition"] = 'attachement; filename=converted.json'
+
+#Return the full URI
+def make_public_flight(flight):
+    new_flight = {}
+    for field in flight:
+        if field == 'id':
+            new_flight['uri'] = url_for('get_flight', flight_id=flight['id'])
+        else:
+            new_flight[field] = flight[field]
+    return new_flight
+#authentification
 @auth.get_password
 def get_password(username):
-    if username == 'epg':
+    if username == 'mt':
         return 'python'
     return None
 
 @auth.error_handler
 def unauthorized():
-    return make_response(jsonify({'error': 'Unauthorized access'}),403)
-
-
-#Function to generate a public URI
-
-def make_public_task(task):
-    new_task= {}
-    for field in task:
-        if field == 'id':
-            new_task['uri'] = url_for('get_task', task_id=task['id'], _external=True)
-        else:
-            new_task[field] = task[field]
-    return new_task
-
-@app.route('/todo/api/v1.0/tasks/upload')
-@app.route('/todo/api/v1.0/tasks', methods=['GET'])
-@auth.login_required
-def get_tasks():
-    return jsonify({'tasks': [make_public_task(task) for task in tasks]})
-
-@app.route('/todo/api/v1.0/tasks/<int:task_id>', methods=['GET'])
-@auth.login_required
-def get_task(task_id):
-    task = [task for task in tasks if task['id'] == task_id]
-    if len (task) == 0:
-        abort(404)
-    return jsonify({'task': [make_public_task(task) for task[0] in tasks]})
-
+    return make_response(jsonify({'error':'unauthorized access'}),403)
+#improve the error html response
 @app.errorhandler(404)
-def not_founder(error):
-    return make_response(jsonify({'error': 'Not found'}),404)
+def not_found(error):
+    return make_response(jsonify({'error':'Not found'}),404)
 
-@app.route('/todo/api/v1.0/tasks', methods=['POST'])
+@app.route('/flight/api/v1.0/flights', methods=['GET'])
 @auth.login_required
-def create_task():
+def get_flights():
+    return jsonify({'flights' :[make_public_flight(flight) for flight in flights]})
+
+@app.route('/flight/api/v1.0/flights/<int:flight_id>', methods=['GET'])
+@auth.login_required
+def get_flight(flight_id):
+    flight = [flight for flight in flights if flight['id'] ==  flight_id]
+    if len(flight) ==0:
+        abort(404)
+    return jsonify({'flight':flight[0]})
+
+@app.route('/flight/api/v1.0/flights', methods=['POST'])
+@auth.login_required
+def create_flight():
     if not request.json or not 'title' in request.json:
-        abort(400)
-    task={
-            'id': tasks[-1]['id'] +1,
+        abort(404)
+    flight = {
+            'id':flights[-1]['id'] +1,
             'title':request.json['title'],
             'description':request.json.get('description', ""),
             'done':False
-   }
+    }
+    flights.append(flight)
+    return jsonify({'flight': flight}),201
 
-    tasks.append(task)
-    return jsonify({'tasks': [make_public_task(task) for task in tasks]}),201
-
-@app.route('/todo/api/v1.0/tasks/<int:task_id>', methods=['PUT'])
+@app.route('/flight/api/v1.0/flights/<int:flight_id>', methods=['PUT'])
 @auth.login_required
-def update_task(task_id):
-    task= [task for task in tasks if task['id'] == task_id]
-    if len(task) == 0:
+def update_flight(flight_id):
+    flight = [flight for flight in flights if flight['id'] == flight_id]
+    if len(flight) == 0:
         abort(404)
     if not request.json:
         abort(400)
     if 'title' in request.json and type(request.json['title']) != unicode:
         abort(400)
     if 'description' in request.json and type(request.json['description']) is not unicode:
-        abort(404)
-    if 'done' in request.json and type(request.json['done']) is not bool:
         abort(400)
-    task[0]['title'] = request.json.get('title', task[0]['title'])
-    task[0]['description']= request.json.get('description',task[0]['title'])
-    task[0]['done']= request.json.get('done', task[0]['done'])
-    return jsonify({'task':make_public_task(task[0])})
+    if 'done' in request.json and type(request.json['done']) is not bool :
+        abort(400)
+    flight[0]['title'] = request.json.get('title', flight[0]['title'])
+    flight[0]['description']=request.json.get('description', flight[0]['title'])
+    flight[0]['done']= request.json.get('done',flight[0]['done'])
+    return jsonify({'flight':flight[0]})
 
-@app.route('/todo/api/v1.0/tasks/<int:task_id>)', methods=['DELETE'])
+@app.route('/flight/api/v1.0/flights/<int:flight_id>', methods=['DELETE'])
 @auth.login_required
-def delete_task(task_id):
-    task=[task for task in tasks if task ['id'] == task_id]
-    if len(task) == 0:
+def delete_flight(flight_id):
+    flight =[flight for flight in flights if flight['id'] == flight_id]
+    if len(flight) ==0:
         abort(404)
-    task.remove(task[0])
+    flight.remove(flight[0])
     return jsonify({'result': True})
 
 
-if __name__=='__main__':
-    app.run(host = '0.0.0.0', debug =True)
+
+
+
+
+if __name__ =='__main__':
+    app.run(host = '0.0.0.0', port = 5001, debug =True)
+    
