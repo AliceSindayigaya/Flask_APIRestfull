@@ -1,10 +1,3 @@
-#!/usr/bin/env python2
-# -*- coding: utf-8 -*-
-"""
-Created on Tue Apr  3 10:23:51 2018
-
-@author: to125348
-"""
 import csv 
 import json
 
