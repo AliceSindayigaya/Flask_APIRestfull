@@ -1,9 +1,4 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Tue Apr 03 20:16:51 2018
 
-@author: alice
-"""
 
 import csv 
 import json
