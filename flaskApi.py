@@ -1,3 +1,10 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Tue Apr 03 20:16:51 2018
+
+@author: alice
+"""
+
 import csv 
 import json
 
@@ -27,20 +34,23 @@ flights = [
             
 ]
 
-def csv_json(data):
-    
-    reader = csv.DictReader(data)
-    out =json.dumps([row for row in reader]) 
-    return out
+csvfilename = 'csv_file.csv'
+jsonfilename = csvfilename.split('.')[0] + '.json'
+csvfile = open(csvfilename, 'r')
+jsonfile = open(jsonfilename, 'w')
+reader = csv.DictReader(csvfile)
 
-def convert():
-    f =request.files['data_file']
-    if not f:
-        return "No file"
-    file_contents= StringIO(f.stream.read())
-    result = csv_json(file_contents)
-    response = make_response(result)
-    response.headers["Content-Disposition"] = 'attachement; filename=converted.json'
+fieldnames = ("Name","Address","Gender","Designation","Age")
+
+output = []
+
+for each in reader:
+  row = {}
+  for field in fieldnames:
+    row[field] = each[field]
+output.append(row)
+
+json.dump(output, jsonfile, indent=4, sort_keys=True)
 
 #Return the full URI
 def make_public_flight(flight):
@@ -127,5 +137,4 @@ def delete_flight(flight_id):
 
 
 if __name__ =='__main__':
-    app.run(host = '0.0.0.0', port = 5001, debug =True)
-    
+app.run(host = '0.0.0.0', port = 5001, debug =True)
