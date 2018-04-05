@@ -1,3 +1,4 @@
+import os
 import csv 
 import json
 
@@ -7,10 +8,31 @@ from flask import make_response,request,url_for
 from flask_httpauth import HTTPBasicAuth
 
 
+from werkzeug import secure_filename
+
+
 auth= HTTPBasicAuth()
 
 app = Flask(__name__)
 
+#Check the extesion file
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.',1)[1] in ('csv')
+#Upload csv file 
+def upload():
+    if request.method == 'POST':
+        if 'file' not in request.files:
+            abort(404)
+            
+        f=request.files['file']
+        if f.filename == '':
+            abort(404)
+            
+        if f and allowed_file(f.filename):
+            name= secure_filename(f.filename)
+            f.save(os.path.join(app.config['UPLOAD_FOLDER'], name))
+        else:
+            abort(404)
 #Convert the csv_file 
 
 csvfilename = 'csv_file.csv'
@@ -65,6 +87,7 @@ def get_password(username):
 @auth.error_handler
 def unauthorized():
     return make_response(jsonify({'error':'unauthorized access'}),403)
+
 #improve the error html response
 @app.errorhandler(404)
 def not_found(error):
@@ -126,4 +149,4 @@ def delete_flight(flight_id):
     return jsonify({'result': True})
 
 if __name__ =='__main__':
-    app.run(host = '0.0.0.0', port = 5000, debug =True)
+    app.run(host = '0.0.0.0', port = 5001, debug =True)
