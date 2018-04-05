@@ -15,7 +15,7 @@ auth= HTTPBasicAuth()
 
 app = Flask(__name__)
 
-#Check the extesion file
+#Check the extension file
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.',1)[1] in ('csv')
 #Upload csv file 
