@@ -18,21 +18,10 @@ app = Flask(__name__)
 #Check the extension file
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.',1)[1] in ('csv')
-#Upload csv file 
-def upload():
-    if request.method == 'POST':
-        if 'file' not in request.files:
-            abort(404)
-            
-        f=request.files['file']
-        if f.filename == '':
-            abort(404)
-            
-        if f and allowed_file(f.filename):
-            name= secure_filename(f.filename)
-            f.save(os.path.join(app.config['UPLOAD_FOLDER'], name))
-        else:
-            abort(404)
+
+UPLOAD_FILE = 'chemin' 
+app.config['UPLOAD_FOLDER']= UPLOAD_FILE
+
 #Convert the csv_file 
 
 csvfilename = 'csv_file.csv'
@@ -93,6 +82,25 @@ def unauthorized():
 def not_found(error):
     return make_response(jsonify({'error':'Not found'}),404)
 
+@app.route('/upload', methods=['GET','POST'])
+def upload():
+    if request.method == 'POST':
+        if 'file' not in request.files:
+            return flash ('No file part!')
+            
+        f=request.files['file']
+        if f.filename == '':
+            return flash ('No File selected!')
+            
+        if f and allowed_file(f.filename):
+            name= secure_filename(f.filename)
+            f.save(os.path.join(app.config['UPLOAD_FOLDER'], name))
+        else:
+            flash(u'This file does not have an allowed extension!', 'error')
+        return flash('File uploaded successfully!');
+
+@app.route('/get_file', methods=['GET','POST'])
+def get_file():
 @app.route('/flight/api/v1.0/flights', methods=['GET'])
 @auth.login_required
 def get_flights():
@@ -149,4 +157,4 @@ def delete_flight(flight_id):
     return jsonify({'result': True})
 
 if __name__ =='__main__':
-    app.run(host = '0.0.0.0', port = 5001, debug =True)
+app.run(host = '0.0.0.0', port = 5001, debug =True)
