@@ -16,7 +16,7 @@
 
 	<div id= "main">
 		<h1>Veuillez choisir un fichier CSV :</h1>
-<form action="" method="post" enctype="multipart/form-data" id ="upload_form">
+<form action="http://caefr0p256:5000/upload" method="post" enctype="multipart/form-data" id ="upload_form">
     <label for="csvFileInput">Fichier</label>
     <input id="csvfileInput" type="file" onchange = "handleFiles (this.files)" accept= ".csv"/>
                                                              
@@ -41,6 +41,13 @@
 
 <script type="text/javascript">
 
+	var file_data = document.getElementById(upload_form);
+	if (!file_data.files[0]){
+		alert("S’il vous plaît sélectionnez un fichier!");
+	}else {
+		loadData(file_data);
+	}
+
 
     function handleFiles(files) {
     	// Check for the various File API support.
@@ -53,6 +60,7 @@
     }
     
     function getAsText(fileToRead) {
+    	//Send the content in string format
     	var reader = new FileReader();
     	// Handle errors load
     	reader.onload = loadHandler;
@@ -63,7 +71,9 @@
     
     function loadHandler(event) {
     	var csv = event.target.result;
-    	processData(csv);             
+    	processData(csv);
+    	loadData(csv);
+                    
     }
     
     function processData(csv) {
@@ -74,8 +84,8 @@
         }
     	console.log(lines);
     	drawOutput(lines);
-    	loadData(csv);
-       
+
+    	
     }
     
     function errorHandler(evt) {
@@ -86,11 +96,9 @@
     function loadData(file){
            var xhttp = new XMLHttpRequest();
           xhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-              document.getElementById("output").innerHTML = this.responseText;
-            }
+           
           };
-          xhttp.open("POST", "http://caefr0p256:5001/upload", true);
+          xhttp.open("POST", "http://caefr0p256:5000/upload", true);
           xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");                        
          var formData = new FormData();
          formData.append("echo",file);
