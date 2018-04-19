@@ -5,7 +5,10 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta name="viewport" content="width=device-width,initial-scale=1">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Merienda One">
@@ -16,9 +19,11 @@
 
 	<div id= "main">
 		<h1>Veuillez choisir un fichier CSV :</h1>
-<form action="http://caefr0p256:5000/upload" method="post" enctype="multipart/form-data" id ="upload_form">
+<form action="" method="post" enctype="multipart/form-data" id ="upload_form">
     <label for="csvFileInput">Fichier</label>
-    <input id="csvfileInput" type="file"  accept= ".csv"/>
+    <input id="file-select'" type="file"  name="file" accept= ".csv"/>
+    <input id = "bstsub" type="submit" value="Uploader"/>
+</form>
                                                              
                                                                        
 </form>
@@ -32,41 +37,41 @@
 <div id="output">
 
 </div>
-<br/>
-<br/>
-<br/>
-<br/>
-
-
-
-<script type="text/javascript">
-
-    var file_data = document.getElementById(csvfileInput);
-
-    var form = new FormData();
-    form.append("echo", file_data);
-
-    var settings = {
-      "async": true,
-      "crossDomain": true,
-      "url": "http://caefr0p229:5000/upload",
-      "method": "POST",
-      "headers": {
-        "Cache-Control": "no-cache",
-        "Content-type": "application/x-www-form-urlencoded"      },
-      "processData": false,
-      "contentType": false,
-      "mimeType": "multipart/form-data",
-      "data": form
-    }
-
-    $.ajax(settings).done(function (response) {
-      console.log(response);
-    });
-
-</script>
 
 </div>
 
 </body>
 </html>
+
+
+<script type="text/javascript">
+
+var form = document.getElementById('upload_form');
+var fileSelect = document.getElementById('file-select');
+var uploadButton = document.getElementById('Uploader');
+
+form.onsubmit = function(event){
+    event.preventDefault();
+
+    var files = fileSelect.files;
+    var formData = new FormData();
+    formData.append("echo",files);
+   
+
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST','http://caefr0p235:5000/upload',true);
+    xhr.onload = function () {
+        if(xhr.status ===200){
+            console.log(this.responseText);
+        }else{
+            alert('An error occured')
+        }
+    };
+
+    xhr.send(formData);
+
+
+}
+
+
+</script>
