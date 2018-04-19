@@ -1,14 +1,7 @@
-#!/usr/bin/env python2
-# -*- coding: utf-8 -*-
-"""
-Created on Tue Apr  3 10:23:51 2018
 
-@author: to125348
-"""
 import os
 import csv 
 import json
-
 
 from flask import Flask,jsonify,abort,send_file
 from flask import make_response,request,url_for
@@ -23,16 +16,29 @@ auth= HTTPBasicAuth()
 
 app = Flask(__name__)
 api= Api(app)
-CORS(app)
+cors= CORS(app)
 
-
-UPLOAD_FOLDER = '/UPLOAD_FILE' 
+app.config['CORS_HEADERS'] = 'Content-Type'
+UPLOAD_FOLDER = '/projects/moteur_user/to125348/API/UPLOAD_FILE' 
 app.config['UPLOAD_FOLDER']= UPLOAD_FOLDER
 #Convert the csv_file 
 csvfilename = 'csv_file.csv'
 jsonfilename = csvfilename.split('.')[0] + '.json'
 
-#Read CSV File
+                                
+                                
+@app.after_request 
+def after_request(response):
+  response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
+  response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
+  response.headers.add('Access-Control-Allow-Credentials', 'true')
+  return response
+                                
+#Check the file extension
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.',1)[1] in ('csv')
+
+##Read CSV File
 def read_CSV(csvfilename , json_file):
     csv_rows = []
     with open(csvfilename) as csvfile:
@@ -42,16 +48,16 @@ def read_CSV(csvfilename , json_file):
             csv_rows.extend([{field[i]:row[field[i]] for i in range(len(field))}])
             
         convert_write_json(csv_rows, jsonfilename)
-
-#Convert csv data into json
+#
+##Convert csv data into json
 def convert_write_json(data, jsonfilename):
     with open(jsonfilename, "w") as f:
         f.write(json.dumps(data, sort_keys=False, indent=4, separators=(',', ': ')))
        
 read_CSV(csvfilename ,jsonfilename)
-
-
-#Read the json
+#
+#
+##Read the json
 def read_json():
     with open (jsonfilename, 'r') as data:
         content = data.read()
@@ -70,14 +76,6 @@ def make_public_flight(flight):
             new_flight[field] = flight[field]
             
     return new_flight
-
-#write the file 
-def write_data(data): 
-   csv_file = open('file.csv', 'w') 
-   with csv_file:
-          writer = csv.writer(csv_file)
-          writer.writerows(data)
-   print("writing complete")
    
    
 #authentification
@@ -98,15 +96,23 @@ def not_found(error):
 
 @app.route('/upload',methods=['GET','POST'])
 def upload():
-    if request.method == 'POST':
+     if request.method == 'POST':
+        print "form: ", request.form
+        print request.values
+        print request.files["echo"]
+        data = request.files["echo"]
+        file_data= data.read()
+        
+        if file_data:
+            fname=secure_filename(data.filename)
+            data.save(os.path.join(app.config['UPLOAD_FOLDER'],fname))
+        else:
+            abort(404)
+        print file_data   
+        return file_data
+     return "File Upload"
+    
             
-            csv_file= request.files["echo"].read()
-            if csv_file:
-              data = write_data(csv_file)
-              fname = secure_filename(csv_file.filename)
-              
-            else:
-                abort(404)
            
 @app.route('/get_file', methods=['GET','POST'])
 def get_file():
@@ -171,4 +177,4 @@ def delete_flight(flight_id):
 
 
 if __name__ =='__main__':
-    app.run(host = '0.0.0.0',port=5001, debug =True)
+    app.run(host = '0.0.0.0',port=5000, debug =True)
