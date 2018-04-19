@@ -18,7 +18,7 @@
 		<h1>Veuillez choisir un fichier CSV :</h1>
 <form action="http://caefr0p256:5000/upload" method="post" enctype="multipart/form-data" id ="upload_form">
     <label for="csvFileInput">Fichier</label>
-    <input id="csvfileInput" type="file" onchange = "handleFiles (this.files)" accept= ".csv"/>
+    <input id="csvfileInput" type="file"  accept= ".csv"/>
                                                              
                                                                        
 </form>
@@ -41,84 +41,28 @@
 
 <script type="text/javascript">
 
-	var file_data = document.getElementById(upload_form);
-	if (!file_data.files[0]){
-		alert("S’il vous plaît sélectionnez un fichier!");
-	}else {
-		loadData(file_data);
-	}
+    var file_data = document.getElementById(csvfileInput);
 
+    var form = new FormData();
+    form.append("echo", file_data);
 
-    function handleFiles(files) {
-    	// Check for the various File API support.
-    	if (window.FileReader) {
-    		// FileReader are supported.
-    		getAsText(files[0]);
-    	} else {
-    		alert('FileReader are not supported in this browser.');
-    	}
+    var settings = {
+      "async": true,
+      "crossDomain": true,
+      "url": "http://caefr0p229:5000/upload",
+      "method": "POST",
+      "headers": {
+        "Cache-Control": "no-cache",
+        "Content-type": "application/x-www-form-urlencoded"      },
+      "processData": false,
+      "contentType": false,
+      "mimeType": "multipart/form-data",
+      "data": form
     }
-    
-    function getAsText(fileToRead) {
-    	//Send the content in string format
-    	var reader = new FileReader();
-    	// Handle errors load
-    	reader.onload = loadHandler;
-    	reader.onerror = errorHandler;
-    	// Read file into memory as UTF-8      
-    	reader.readAsText(fileToRead);
-    }
-    
-    function loadHandler(event) {
-    	var csv = event.target.result;
-    	processData(csv);
-    	loadData(csv);
-                    
-    }
-    
-    function processData(csv) {
-        var allTextLines = csv.split(/\r\n|\n/);
-        var lines = [];
-        while (allTextLines.length) {
-            lines.push(allTextLines.shift().split(','));
-        }
-    	console.log(lines);
-    	drawOutput(lines);
 
-    	
-    }
-    
-    function errorHandler(evt) {
-    	if(evt.target.error.name == "NotReadableError") {
-    		alert("Canno't read file !");
-    	}
-    }
-    function loadData(file){
-           var xhttp = new XMLHttpRequest();
-          xhttp.onreadystatechange = function() {
-           
-          };
-          xhttp.open("POST", "http://caefr0p256:5000/upload", true);
-          xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");                        
-         var formData = new FormData();
-         formData.append("echo",file);
-         xhttp.send(formData);
-            }
-      
-       
-        function drawOutput(lines){
-        	//Clear previous data
-        	document.getElementById("output").innerHTML = "";
-        	var table = document.createElement("table");
-        	for (var i = 0; i < lines.length; i++) {
-        		var row = table.insertRow(-1);
-        		for (var j = 0; j < lines[i].length; j++) {
-        			var firstNameCell = row.insertCell(-1);
-        			firstNameCell.appendChild(document.createTextNode(lines[i][j]));
-        		}
-        	}
-        	document.getElementById("output").appendChild(table);
-        }
+    $.ajax(settings).done(function (response) {
+      console.log(response);
+    });
 
 </script>
 
