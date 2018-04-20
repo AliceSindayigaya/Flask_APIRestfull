@@ -1,64 +1,65 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<title>Client_API</title>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	<meta name="viewport" content="width=device-width,initial-scale=1">
-    <script
-  src="https://code.jquery.com/jquery-3.3.1.min.js"
-  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-  crossorigin="anonymous"></script>
-	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Merienda One">
-    <link rel="shortcut icon" href="">
-	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Port Lligat Slab">
-    <link rel="stylesheet" type="text/css" href="static\style.css">
-</head>
-    <body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <meta charset="UTF-8">
+    <title>File Upload</title>
+    
+<body>
+<h1>Please upload the corresponding files</h1>
+<div id="upload">
+    <form id="upload-hc" >
+        <input type="file" name="file" accept=".csv" id="hc">
+        <input type="submit" value="go">
+    </form>
+    <br>
+    <p id="successAlert" style="display:none;">Success!</p>
+	<p id="errorAlert" style="display:none;">Fail!</p>
 
-        <div id= "main">
-        		<h1>Veuillez choisir un fichier CSV :</h1>
-                <form class="upload" action="http://localhost:5000/upload" method="post" enctype="multipart/form-data" id ="upload_form">
-                    <label for="csvFileInput">Fichier</label>
-                    <input id="file-select'" type="file"  name="the_file[]"  multiple="" accept= ".csv"/>
-                    <input id = "bstsub" type="submit" value="Uploader"/>
-                </form>
-                                                                    
 
-                <div id="output">
-                    <p class="rbox"></p>
-                </div>
+</div>
 
-        </div>
+
+</body>
+</html>
+
 <script type="text/javascript">
 
-    var form = new FormData($(this)[0]);
-    form.append("echo",$(this).attr('id'));
+    
+    $(document).ready(function() {
 
-    var settings = {
-      "async": true,
-      "crossDomain": true,
-      "url": "http://localhost:5000/upload",
-      "method": "POST",
-      "headers": {
-        "Cache-Control": "no-cache",
+    $('form').on('submit', function(event) {
+        var form = $('#upload-hc')[0]
+        var fd = new FormData(form)
+
+        $.ajax({
+            type : 'POST',
+            url : 'http://caefr0p266:4555/uploadhc',
+            data : fd,
+            processData: false,  // tell jQuery not to process the data
+            contentType: false   // tell jQuery not to set contentType
+
+        })
+        .done(function(data) {
+
+            if (data.error) {
+                $('#errorAlert').text(data.error).show();
+                $('#successAlert').hide();
+            }
+            else {
+                $('#successAlert').text(data.file).show();
+                $('#errorAlert').hide();
+
+            }
+            
+        });
+
+        event.preventDefault();
         
-      },
-      "processData": false,
-      "contentType": false,
-      "mimeType": "multipart/form-data",
-      "data": form
-    }
 
-    $.ajax(settings).done(function (response) {
-      console.log(response);
     });
 
+});
 
 
 </script>
-    </body>
-</html>
-
-
-
