@@ -1,0 +1,57 @@
+<!doctype html>
+<html class="no-js" lang="fr">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title>{% block title %}{% endblock %}</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Merienda One">
+	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Port Lligat Slab">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.min.css')}}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top" role= "navigation">
+        <div class="container">
+        <!--Navigation Bar --!>
+            <div class="navbar-header">
+                <!--Welcome and Date--!>
+                <table width="100%">
+                    <tbody>
+                        <tr>
+                            <td bgcolor="#717173">
+                                <table class="table_header"s>
+                                    <tbody>
+                                        <tr>
+                                            <td width="730" height="49">
+                                                <img src="{{url_for('static',filename='images/Banner.jpg')}}">
+                                            </td>
+                                            <td align="right" bgcolor="#659385" class="Date" width="253" >
+                                                <script></script>
+                                            </td>
+                                        
+                                        </tr>
+                                    </tbody>
+                                
+                                </table>
+                            
+                            
+                            </td>
+                    
+                    </tbody>
+                
+                </table>
+               
+            </div>
+        </div>
+    </div>
+
+    <div class="container" id="main">
+        {% block main %}{% endblock %}
+    </div>
+
+
+</body>
+</html>

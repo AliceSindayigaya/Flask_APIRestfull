@@ -1,0 +1,84 @@
+{% extends 'layout.html' %}
+
+{% block title %}CSV File{% endblock %}
+
+{% block main %}
+<h1>Please upload the corresponding files</h1>
+<div id="main">
+    <form  id="upload-hc" >
+        <label>Fichier</label>
+        <input type="file" name="file" accept=".csv" id="hc">
+        <input id="bstsub" type="submit" value="Uploader">
+        <input id="bstsub" type="submit" value="Download">
+    </form>
+    <br>
+    <p id="successAlert" style="display:none;">Success!</p>
+	<p id="errorAlert" style="display:none;">Fail!</p>
+
+
+</div>
+
+<div id="output">
+   
+
+</div>
+
+<script type="text/javascript">
+
+    $(document).ready(function() {
+
+    $('form').on('submit', function(event) {
+        var form = $('#upload-hc')[0]
+        var fd = new FormData(form)
+    
+        $.ajax({
+            type : 'POST',
+            url : 'http://caefr0p256:4555/uploadhc',
+            data : fd,
+            processData: false,  
+            contentType: false   
+
+        })
+        .done(function(data) {
+
+            if (data.error) {
+                $('#errorAlert').text(data.error).show();
+                $('#successAlert').hide();
+            }
+            else {
+                $('#successAlert').text(data.file).show();
+                $('#errorAlert').hide();
+
+            }
+          var allText = data.split(/\r\n|\n/);
+          var lines = []
+          while (allText.length) {
+            lines.push(allText.shift().split(','));
+          }
+          document.getElementById("output").innerHTML = "";
+        	var table = document.createElement("table");
+                           
+        	for (var i = 0; i < lines.length; i++) {
+        		var row = table.insertRow(-1);
+        		for (var j = 0; j < lines[i].length; j++) {
+        			var firstNameCell = row.insertCell(-1);
+        			firstNameCell.appendChild(document.createTextNode(lines[i][j]));
+        		}
+        	}
+        	document.getElementById("output").appendChild(table);
+        
+          });
+        
+        event.preventDefault();
+    });
+
+
+});
+
+</script>
+
+{% endblock %}
+
+
+
+

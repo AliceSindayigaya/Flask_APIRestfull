@@ -1,10 +1,16 @@
 body { 
-	margin:0;  
-	padding:0;  
+	margin :0;  
+	padding: 0;  
+    display: block;
 	background: no-repeat center center fixed;  
 	background-image: -moz-linear-gradient(#CDCBD0, #F0EDE9);  
 	background-image: -webkit-linear-gradient(#CDCBD0, #F0EDE9);  
-	background-size : cover; }
+	background-size : 11px;
+   background-color: #ffffff;
+   color: black;
+   font-weight: normal;
+   font-family: Verdana, Arial, Helvetica;
+   }
 #main { 
 	margin: auto;  
 	width: 70%;  
@@ -23,6 +29,20 @@ form {
 	font-family: Port Lligat Slab;  
 	text-shadow: 1px 1px 2px white;  
 	text-align: left; }
+#table_header {
+        width: 100%;
+        display: table;
+        border_color:grey;
+        white-space: normal;
+        line-height: normal;
+        font-weight: normal;
+        font-size: medium;
+        font-style: normal;
+        color: -internal-quirk-inherit;
+        text-align: start;
+        font-variant: normal normal;
+        
+        }
 label { 
 	display: block; 
 	width: 120px; 
@@ -57,6 +77,19 @@ label {
    box-shadow: 1px 1px 7px black; 
 	font-size: 130%; 
 	font-family: Merienda One;  font-weight:bold; }
+
+
+#output{
+
+	position: relative;
+	align-content: center;
+	padding: inherit;
+	margin-top:30px;
+	background-color: #44ca923d;
+	background-size: cover;
+	box-shadow :0px opx 30px #1c3a3c59;
+	border-radius: 10px;
+}
 
 #load_data:hover 
  { 
