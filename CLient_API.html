@@ -1,43 +1,82 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
+  <title>Api Client</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Merienda One">
+  <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Port Lligat Slab">
+    <link rel="stylesheet" type="text/css" href="static/css/style.css">
+    <link rel="stylesheet" type="text/css" href="static/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-    <meta charset="UTF-8">
-    <title>File Upload</title>
-    
+    <script src="C:\Users\to125348\Desktop\ApiClient\static\js\bootstrap.min.js"></script>
+</head>
 <body>
-<h1>Please upload the corresponding files</h1>
-<div id="upload">
-    <form id="upload-hc" >
-        <input type="file" name="file" accept=".csv" id="hc">
-        <input type="submit" value="go">
-    </form>
-    <br>
-    <p id="successAlert" style="display:none;">Success!</p>
-	<p id="errorAlert" style="display:none;">Fail!</p>
+  <table width="100%" border="0" cellpadding="0" cellspacing="0">
+      <tbody><tr> 
+        <td bgcolor="#737173"> <table width="100%" border="0" cellpadding="0" cellspacing="0">
+            <tbody><tr> 
+              <td width="730" height="49" >
+              <img src='static/images/Banner.jpg'>
+              </td>
+           <td align="right" bgcolor="#6593B5" class="Date" width="253">
+                <script></script>Mercredi 25 Avril 2018
+              </td>
+              <td width="20" align="right" class="gcDefaultText">
+              <img src='static/images/pix-trans.gif' width="20" height="8">
+              
+            </tr>
+          </tbody></table></td>
+      </tr>
+    </tbody>
+    </table>
+                
 
+    <div class="container" id="main">
+        <h1>Please upload the corresponding files</h1>
+    <div id="main">
+        <form  id="upload-hc" >
+            <label>CSV Files</label>
+            <input type="file" name="file" accept=".csv" id="hc">
+            <br/>
+            <br/>
+            <br/>
+            <input id="up" type="submit" value="Uploader">
+        </form>
+        <a href="http://caefr0p230:5002/file"><button id="down">Download</button></a>
+        
+        <br>
+        <p id="successAlert" style="display:none;">Success!</p>
+      <p id="errorAlert" style="display:none;">Fail!</p>
+
+    <!--<a href="http://caefr0p230:4555/download"><button>Download</button></a>!-->
+    </div>
+
+    <div id="output">
+       <table class="table table-bordered table-striped" id = "table">
+       
+       
+       </table>
 
 </div>
-
-
+    </div>
 </body>
 </html>
-
 <script type="text/javascript">
 
-    
     $(document).ready(function() {
 
     $('form').on('submit', function(event) {
         var form = $('#upload-hc')[0]
         var fd = new FormData(form)
-
+    
         $.ajax({
             type : 'POST',
-            url : 'http://caefr0p266:4555/uploadhc',
+            url : 'http://caefr0p230:5002/uploadhc',
             data : fd,
-            processData: false,  // tell jQuery not to process the data
-            contentType: false   // tell jQuery not to set contentType
+            processData: false,  
+            contentType: false   
 
         })
         .done(function(data) {
@@ -51,15 +90,32 @@
                 $('#errorAlert').hide();
 
             }
-            
-        });
-
-        event.preventDefault();
+          var allText = data.split(/\r\n|\n/);
+          var lines = []
+          while (allText.length) {
+            lines.push(allText.shift().split(','));
+          }
+          
+          document.getElementById("output").innerHTML = "";
+          var table = document.createElement("table");
+           table.className= 'table table-striped table-bordered table-condensed';
+                           
+          for (var i = 0; i < lines.length; i++) {
+            var row = table.insertRow(-1);
+            for (var j = 0; j < lines[i].length; j++) {
+              var firstCell = row.insertCell(-1);
+              firstCell.appendChild(document.createTextNode(lines[i][j]));
+            }
+          }
+          document.getElementById("output").appendChild(table);
         
-
+          });
+        
+        event.preventDefault();
     });
+
 
 });
 
-
 </script>
+
