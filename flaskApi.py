@@ -3,29 +3,23 @@ import os
 
 
 
-from flask import Flask, request, jsonify,send_file
+from flask import Flask, request, jsonify,send_from_directory,send_file
 
-import StringIO
+
+
 
 app = Flask(__name__)
 APP_ROOT = os.path.dirname(os.path.abspath(__file__))
+UPLOAD_FOLDER = '/projects/moteur_user/to125348/API/UPLOAD_FILE' 
+app.config['UPLOAD_FOLDER']= UPLOAD_FOLDER
 
 
-#def read_data(data):
 
-#
-#def download(data): 
-#    #memory_file = StringIO.StringIO()
-#    #with zipfile.ZipFile(memory_file, 'w') as zf:
-#    #    zf.writestr("Data.csv", data)
-#        
-#    #memory_file.seek(0)
-#    strIO = StringIO.StringIO()
-#    strIO.write('Hello from Dan Jacob and Stephane Wirtel !')
-#    strIO.seek(0)
-#    return send_file(strIO,
-#                     attachment_filename='file.zip',
-#                     as_attachment=True)
+    
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory(os.path.join(app.root_path, 'static'),
+                               'favicon.ico', mimetype='image/vnd.microsoft.icon')
 @app.after_request 
 def after_request(response):
     
@@ -36,24 +30,29 @@ def after_request(response):
   return response
 
 
-@app.route("/uploadhc", methods=['GET','POST'])
+@app.route("/uploadhc", methods=['POST'])
 def uploadhc():
-    if request.method=='POST':
-        if 'file' not in request.files:
-            error = "Missing data source!"
-            return jsonify({'error': error})
-        data = request.files['file']  
-        file_data= data.read()
-        print file_data
-        return file_data
+            target = os.path.join(APP_ROOT, "UPLOAD_FILE/")
+            if 'file' not in request.files:
+                error = "Missing data source!"
+                return jsonify({'error': error})
+            data = request.files['file'] 
+            fname="Data.csv"
+            destination = '/'.join([target, fname])
+            data.save(destination)
+            with open (os.path.join(target,'Data.csv')) as f:
+                file_data=f.read()
+            print file_data
+            return file_data
+            
+#            success="Success"
+#            return jsonify({'success': success})
+            
+@app.route("/file",methods=['GET','POST'])
+def download():
     
-    if request.method=='GET':
-        strIO = StringIO.StringIO()
-        strIO.seek(0);
-        return send_file(strIO,
-                     attachment_filename='file.zip',
-                     as_attachment=True)
+    return send_file('/projects/moteur_user/to125348/API/UPLOAD_FILE/Data.csv',as_attachment=True,
+                         attachment_filename="file.txt")
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0',port=5000, debug=True)
-
+    app.run(host='0.0.0.0',port=5002, debug=True)
