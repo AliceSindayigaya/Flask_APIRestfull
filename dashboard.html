@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--Head start-->
+<head>
+    <meta charset="utf-8" />    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>SPPMS TOOLS</title>
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+    <!--     Fonts and icons     -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
+    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+    <!-- CSS Files -->
+    <link href="../assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../assets/css/now-ui-dashboard.css?v=1.0.1" rel="stylesheet" />
+</head>
+<!--End Head-->
+
+<body class="">
+    <!--Body start-->
+    <div class="wrapper ">
+        <!--Sidebar start-->
+        <div class="sidebar" data-color="white">
+            <div class="logo">
+                <a href="#" class="simple-text logo-normal">
+                        SPPMS TOOLS
+                </a>
+            </div>
+            <div class="sidebar-wrapper">
+                <ul class="nav">
+                    <li class="">
+                        <a href="../templates/dashboard.html" data-toggle="tooltip" data-animation="false" title="Librairie moteur validée par EPG">
+                            <i class="now-ui-icons design_app"></i>
+                            <p>Librairie Homologuée</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../templates/autres.html" data-toggle="tooltip" data-animation="false" title="Librairie moteur non validée par EPG">
+                            <i class="now-ui-icons design_bullet-list-67"></i>
+                            <p>Autres librairies</p>
+                        </a>
+                    </li>
+                    <li id="resultat" style="display: none;">
+                        <a href="../templates/resultat.html">
+                            <i class="now-ui-icons design_vector"></i>
+                            <p>Résultat</p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!--Sidebar End-->
+        <div class="main-panel">
+            <!-- Navbar -->
+            <nav class="navbar navbar-expand-lg navbar-transparent  navbar-absolute bg-primary fixed-top">
+                <div class="container-fluid">
+                    <div class="navbar-wrapper">
+                        <div class="navbar-toggle">
+                            <button type="button" class="navbar-toggler">
+                                <span class="navbar-toggler-bar bar1"></span>
+                                <span class="navbar-toggler-bar bar2"></span>
+                                <span class="navbar-toggler-bar bar3"></span>
+                            </button>
+                        </div>
+                        <a class="navbar-brand" href="../templates/dashboard.html" data-toggle="tooltip" data-placement="botton" title="Librairie moteur validée par EPG">Librairie Homologuée</a>
+
+                    </div>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-bar navbar-kebab"></span>
+                        <span class="navbar-toggler-bar navbar-kebab"></span>
+                        <span class="navbar-toggler-bar navbar-kebab"></span>
+                    </button>
+                    <div class="collapse navbar-collapse justify-content-end" id="navigation">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="now-ui-icons loader_gear"></i>
+                                    <p>
+                                        <span class="d-lg-none d-md-block">Help</span>
+                                    </p>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                                    <a class="dropdown-item" href="../doc/mu_sppms_interface.pdf">manuel utilisateur</a>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="now-ui-icons location_world"></i>
+                                    <p>
+                                        <span class="d-lg-none d-md-block">Langue</span>
+                                    </p>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                                    <a class="dropdown-item" href="#">Anglais</a>
+                                    <a class="dropdown-item" href="#">Français</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <!-- End Navbar -->
+            <!--Bleu Panel-->
+            <div class="panel-header panel-header-lg">
+            
+            </div>
+            <!--End bleu panel-->
+            <div class="content">
+                <div class="row">
+                    <!--API card-->
+                    <div class="col-lg-4">
+                        <div class="card card-chart">
+                            <div class="card-header">
+                                <h5 class="card-category"><strong>Veuillez choisir le type d'API utilisée</strong></h5>
+                                <h4 class="card-title">API</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="chart-area">
+                                    <div class="table-full-width table-responsive">
+                                       <label class="custom-control custom-radio">
+                                       <input id="radio1" name="radio" type="radio" class="custom-control-input" onclick="showApiDga()">
+                                        <span class="custom-control-indicator"></span>
+                                        <span class="custom-control-description" data-toggle="tooltip" data-animation="false" title="Ancien API de gestions de base de données(n'est plus utilisées depuis 2011). Seulement utilisée en mode non optimisée double précision">API DGA</span>
+                                        </label>
+                                        <label class="custom-control custom-radio">
+                                        <input id="radio2" name="radio" type="radio" class="custom-control-input" onclick="showApiBdmodel()">
+                                        <span class="custom-control-indicator"></span>
+                                        <span class="custom-control-description" data-toggle="tooltip" data-animation="false" title="">API Bdmodel</span>
+                                      </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--End API card-->
+                    <div class="col-lg-4 col-md-6">
+                        <!--API Bdmodel-->
+                        <div class="card card-chart" id="bdmodel">
+                            <div class="card-header">
+                                <h5 class="card-category"><strong>API Bdmodel</strong></h5>
+                            </div>
+                            <div class="card-body" >
+                               <div class="table-type" >
+                                    <label class="custom-control custom-radio">
+                                      <input id="radio1" name="radio" type="radio" class="custom-control-input">
+                                      <span class="custom-control-indicator"></span>
+                                      <span class="custom-control-description">Normal(double précision)</span>
+                                    </label>
+                                     <label class="custom-control custom-radio">
+                                      <input id="radio1" name="radio" type="radio" class="custom-control-input">
+                                      <span class="custom-control-indicator"></span>
+                                      <span class="custom-control-description">Normal(précision simple)</span>
+                                    </label>
+                                     <label class="custom-control custom-radio">
+                                      <input id="radio1" name="radio" type="radio" class="custom-control-input">
+                                      <span class="custom-control-indicator"></span>
+                                      <span class="custom-control-description">Optimisée(double précision)</span>
+                                    </label>
+                                    <label class="custom-control custom-radio">
+                                      <input id="radio1" name="radio" type="radio" class="custom-control-input">
+                                      <span class="custom-control-indicator"></span>
+                                      <span class="custom-control-description">Optimisée(précision simple)</span>
+                                    </label>                                          
+                                </div>
+                            </div>
+                        </div>
+                        <!--End API Bdmodel-->
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <!--Banque Moteur-->
+                        <div class="card card-chart">
+                            <div class="card-header">
+                                <h5 class="card-category"><strong>Banque moteur</strong></h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-full-width table-responsive">
+                                    <div class="" >
+                                        <label class="custom-control custom-radio" >
+                                            <input id="radio" name="radio" type="radio" class="custom-control-input" onclick="showLocal()">
+                                            <span class="custom-control-indicator"></span>
+                                            <span class="custom-control-description">Base Locale</span>
+                                        </label>
+                                         <div class="input-group mb-3" id="locale" style="display: none;">
+                                            <form id="customfileUp">
+                                                <label class="custom-file" id="customFile"></label>
+                                                <input type="file" name="file" id="hc">
+                                             <input id="locale" type="submit" value="File" >
+                                            </form>
+                                        </div>
+                                       
+                                    </div>
+                                    <div class="">
+                                        <label class="custom-control custom-radio">
+                                            <input id="radio" name="radio" type="radio" class="custom-control-input" onclick="showProjet()">
+                                            <span class="custom-control-indicator"></span>
+                                            <span class="custom-control-description">Banque projet</span>
+                                        </label> 
+                                        <form class="form-inline visible="none" id="projet" style="display: none;">
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <label>Banque</label>
+                                                        <input type="text" class="form-control inputfield">
+                                                        
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <label>Version</label>
+                                                        <input type="text" class="form-control inputfield">
+                                                    </div>
+                                                </div>
+                                                 <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <label>Domaine</label>
+                                                        <input type="text" class="form-control inputfield">
+                                                    </div>
+                                                </div>
+                                                 <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <label>Repère</label>
+                                                        <input type="text" class="form-control inputfield">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="">
+                                                <label class="custom-control custom-checkbox">
+                                                    <input type="checkbox" class="custom-control-input">
+                                                    <span class="custom-control-indicator"></span>
+                                                    <span class="custom-control-description">Avec rèpere</span>
+                                                    <hr>
+                                                    <!--Modal button-->
+                                                    <button type="button" class="btn" data-toggle="modal" data-target="#myModal">...</button>
+                                                    <!--The modal panel-->
+                                                    <div class="modal" id="myModal">
+                                                      <div class="modal-dialog">
+                                                        <div class="modal-content">
+
+                                                          <!-- Modal Header -->
+                                                          <div class="modal-header">
+                                                            <h4 class="modal-title">Séléctionner une banque projet</h4>
+                                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                          </div>
+                                                          <div class="check-modal">
+                                                            <label class="custom-control custom-checkbox">
+                                                               <input type="checkbox" class="custom-control-input">
+                                                                <span class="custom-control-indicator"></span>
+                                                                <span class="custom-control-description">Réf. Moteur</span>
+                                                            </label>
+                                                          </div>
+                                                    
+
+                                                          <!-- Modal body -->
+                                                          <div class="modal-body">
+                                                            <div class="row">
+                                                                <div class="col-md-3">
+                                                                    <label>Domaine</label>
+                                                                     <div class="btn-group">
+                                                                        <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                            Domaines
+                                                                          </button>
+                                                                          <div class="dropdown-menu dropdown-menu-right">
+                                                                            <button class="dropdown-item" type="button">AERO</button>
+                                                                            <button class="dropdown-item" type="button">BRUIT</button>
+                                                                            <button class="dropdown-item" type="button">GEOM</button>
+                                                                            <button class="dropdown-item" type="button">KGENE</button>
+                                                                            <button class="dropdown-item" type="button">MOTESS</button>
+                                                                            <button class="dropdown-item" type="button">MOTEUR</button>
+                                                                            <button class="dropdown-item" type="button">QDV</button>
+                                                                            <button class="dropdown-item" type="button">MOTESS</button>
+                                                                          </div>
+                                                                    </div>
+                                                                    
+                                                                </div>
+                                                                <div class="col-md-3">
+                                                                    <label>Avion</label>
+                                                                    <div class="btn-group">
+                                                                        <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                            Avions
+                                                                          </button>
+                                                                          <div class="dropdown-menu dropdown-menu-right">
+                                                                            <button class="dropdown-item" type="button">MA300</button>
+                                                                            <button class="dropdown-item" type="button">MA300-600</button>
+                                                                            <button class="dropdown-item" type="button">MA310</button>
+                                                                            <button class="dropdown-item" type="button">MA319</button>
+                                                                            <button class="dropdown-item" type="button">MA320</button>
+                                                                            <button class="dropdown-item" type="button">MA321</button>
+                                                                            <button class="dropdown-item" type="button">MA330</button>
+                                                                            <button class="dropdown-item" type="button">MA340</button>
+                                                                          </div>
+                                                                    </div>
+
+                                                                    
+                                                                </div>
+                                                                <div class="col-md-3">
+                                                                    <label>Version Avion</label>
+                                                                    <div class="btn-group">
+                                                                        <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                                Version
+                                                                          </button>
+                                                                          <div class="dropdown-menu dropdown-menu-right">
+                                                                            <button class="dropdown-item" type="button"></button>
+                                                                           
+                                                                          </div>
+                                                                    </div>
+                                                                    
+                                                                </div>
+                                                            </div>
+                                                            
+                                                          </div>
+
+                                                          <!-- Modal footer -->
+                                                          <div class="modal-footer">
+                                                             <button type="button" class="btn">Valider</button>
+                                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Annuler</button>
+                                                          </div>
+
+                                                        </div>
+                                                      </div>
+                                                    </div>
+                                                </label>
+                                                
+                                            </div>
+                                        </form>     
+                                    </div>
+                                  
+                                </div>
+                            </div>
+                        </div>
+                        <!--End Banque moteur-->
+                    </div>
+                
+              
+                  <div class="col-md-6">
+                    <div class="card card-tasks">
+                      <div class="card-header">
+                        <h5 class="card-category"><strong>Conditions de vol</strong></h5>
+                      </div>
+                      <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Altitude(ft)</label>
+                                    <input type="text" class="form-control" >
+                                    <label>Mach</label>
+                                    <input type="text" class="form-control" >
+                                    <label>Delta Isa(c)</label>
+                                    <input type="text" class="form-control" >
+                                    
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Humidité</label>
+                                    <input type="text" class="form-control" placeholder="-10" >
+                                    <label>Alt Piste(ft)</label>
+                                    <input type="text" class="form-control" >
+                                    <label>Temps. Flex(c)</label>
+                                    <input type="text" class="form-control" >
+                                </div>
+                                
+                            </div>
+                            
+                        </div>
+                                      
+                      </div>
+                      <div class="card-body">
+                        <h5 class="card-category"><strong>Paramètres de conduite</strong></h5>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>TYPAR</label>
+                                    <input type="text" class="form-control" >
+                                    
+                                </div>
+                                
+                            </div>
+                             <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>VAPAR</label>
+                                    <input type="text" class="form-control" >
+                                    
+                                </div>
+                                
+                            </div>
+                            
+                        </div>        
+                      </div>
+
+                  </div>
+                  </div>
+                  <div class="col-md-6">
+                      <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-category"><strong>Conditions d'installation</strong></h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>INSTALL</label>
+                                        <input type="text" class="form-control">
+                                        <label>FLHV(btu/lb)</label>
+                                        <input type="text" class="form-control" >
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>WBIPHP(kg/s)</label>
+                                        <input type="text" class="form-control">
+                                        <label>HPX(hp)</label>
+                                        <input type="text" class="form-control" >
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-category"><strong>Définition d'un cas de calcul</strong></h5>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>REGIME</label>
+                                        <input type="text" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>CODE MOTEUR</label>
+                                        <input type="text" class="form-control" > 
+                                    </div>  
+                                </div>
+                                        
+                            </div>  
+                         </div>
+                            <div class="col-md-6">
+                                    <div class="form-group">
+                                         <div class="btn-group">
+                                            <div class="input-group mb-1 ">
+                                            
+                                            <div class="btn-group col-md-3">
+                                                  <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    CODE RESULTAT
+                                                  </button>
+                                                  <div class="dropdown-menu dropdown-menu-right">
+                                                    <button class="dropdown-item" type="button">1</button>
+                                                    <button class="dropdown-item" type="button">2</button>
+                                                    <button class="dropdown-item" type="button">3</button>
+                                                    <button class="dropdown-item" type="button">4</button>
+                                                    <button class="dropdown-item" type="button">5</button>
+                                                  </div>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <div class="input-group mb-1 ">
+                                            <div class="btn-group col-md-3">
+                                                  <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                                    CODI1
+                                                  </button>
+                                                  <div class="dropdown-menu dropdown-menu-right">
+                                                    <button class="dropdown-item" type="button">0</button>
+                                                    <button class="dropdown-item" type="button">1</button>
+                                                    <button class="dropdown-item" type="button">2</button>
+                                                    <button class="dropdown-item" type="button">3</button>
+                                                    <button class="dropdown-item" type="button">4</button>
+                                                    <button class="dropdown-item" type="button">5</button>
+                                                  </div>
+                                            </div>
+                                        </div>
+                                        <br>
+                                                
+                                        </div>
+                                    </div>
+                                </div>
+                             
+                            <div class="card-body">
+                             <div class="chart-area">
+                                  <div class="modal-footer">
+                                        <button type="button" class="btn" data-toggle="modal" data-target="#Modal">Valider</button>
+                                        <button type="button" class="btn btn-danger" onclick="hideResult()">Quitter</button>
+                                </div>
+                               
+                            </div>
+                            </div>
+                            <!--The modal panel-->
+                            <div class="modal" id="Modal">
+                              <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+
+                                  <!-- Modal Header -->
+                                  <div class="modal-header">
+                                    <h4 class="modal-title">MOTEUR</h4>
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                  </div>
+                                  <!-- Modal body -->
+                                  <div class="modal-body">
+                                        <div class="card-body">
+                                <form id= "moteur">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <div class="form-group" id="1">
+                                                <label>ZSPHUM (kg/kg)</label>
+                                                <input type="text" class="form-control" id="ZSPHUM" >
+                                                <label>ZPCON</label>
+                                                <input type="text" class="form-control" id="ZPCON">
+                                                <label>ZFNI (daN)</label>
+                                                <input type="text" class="form-control" id="ZFNI">
+                                                <label>ZFGI (daN)</label>
+                                                <input type="text" class="form-control" id="ZFGI">
+                                                <label>ZW1A (kg/s)</label>
+                                                <input type="text" class="form-control" id="ZW1A">
+                                                <label>ZWFE(kg/h)</label>
+                                                <input type="text" class="form-control" id="ZWFE" >
+                                                <label>ZEGT(C)</label>
+                                                <input type="text" class="form-control" id="ZEGT">
+                                                <label>ZPNL(%)</label>
+                                                <input type="text" class="form-control" id="ZPNL" >
+                                                <label>ZPNH(%)</label>
+                                                <input type="text" class="form-control" id="ZPNH" >
+                                                <label>ZPS3(bar)</label>
+                                                <input type="text" class="form-control" id="ZPS3" >
+                                                <label>ZPTF(bar)</label>
+                                                <input type="text" class="form-control" id="ZPTF">
+                                                <label>ZPTP(bar)</label>
+                                                <input type="text" class="form-control" id="ZPTP">
+                                                <label>ZW25(kg/s)</label>
+                                                <input type="text" class="form-control" id="ZW25" >
+                                                <label>ZPT3(bar)</label>
+                                                <input type="text" class="form-control" id="ZPT3" >
+                                                <label>ZPED(bar)</label>
+                                                <input type="text" class="form-control" id="ZPED" >
+                                                <label>ZPEF(bar)</label>
+                                                <input type="text" class="form-control" id="ZPEF" >
+                                                <label>ZPEH(bar)</label>
+                                                <input type="text" class="form-control" id="ZPEH" >
+                                                <label>ZPEI(bar)</label>
+                                                <input type="text" class="form-control" id="ZPEI" >
+                                                <label>ZP8M(bar)</label>
+                                                <input type="text" class="form-control" id="ZP8M">
+                                                <label>ZVEJ(m/s)</label>
+                                                <input type="text" class="form-control" id="ZVEJ" >
+                                                
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3" id="1">
+                                            <div class="form-group">
+                                                <label>ZWBINS(kg/s)</label>
+                                                <input type="text" class="form-control" id="ZWBINS">
+                                                <label>ZPCONR</label>
+                                                <input type="text" class="form-control" id="ZPCONR">
+                                                <label>ZFNIR(daN)</label>
+                                                <input type="text" class="form-control" id="ZFNIR">
+                                                <label>ZFGIR(daN)</label>
+                                                <input type="text" class="form-control" id="ZFGIR">
+                                                <label>ZW1AR(kg/s)</label>
+                                                <input type="text" class="form-control" id="ZW1AR">
+                                                <label>ZWFER(kg/h)</label>
+                                                <input type="text" class="form-control" id="ZWFER">
+                                                <label>ZEGTR(C)</label>
+                                                <input type="text" class="form-control" id="ZEGTR">
+                                                <label>ZPNLR(%)</label>
+                                                <input type="text" class="form-control" id="ZPNLR">
+                                                <label>ZPNHR(%)</label>
+                                                <input type="text" class="form-control" id="ZPNHR">
+                                                <label>ZEPS</label>
+                                                <input type="text" class="form-control" id="ZEPS">
+                                                <label>ZTTF(C)</label>
+                                                <input type="text" class="form-control" id="ZTTF">
+                                                <label>ZTTP(C)</label>
+                                                <input type="text" class="form-control" id="ZTTP">
+                                                <label>ZT25(C)</label>
+                                                <input type="text" class="form-control" id="ZT25">
+                                                <label>ZTT3(C)</label>
+                                                <input type="text" class="form-control" id="ZTT3">
+                                                <label>ZTED(C)</label>
+                                                <input type="text" class="form-control" id="ZTED">
+                                                <label>ZTEF(C)</label>
+                                                <input type="text" class="form-control" id="ZTEF">
+                                                <label>ZTEH(C)</label>
+                                                <input type="text" class="form-control" id="ZTEH">
+                                                <label>ZTEI(C)</label>
+                                                <input type="text" class="form-control" id="ZTEI">
+                                                <label>ZT8M(C)</label>
+                                                <input type="text" class="form-control" id="ZT8M">
+                                                <label>IR</label>
+                                                <input type="text" class="form-control" id="IR">
+
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                 <label>ZPNI(%)</label>
+                                                 <input type="text" class="form-control" id="ZPNI">
+                                                 <label>ZPIA(bar)</label>
+                                                 <input type="text" class="form-control" id="ZPIA">
+                                                 <label>ZP41(bar)</label>
+                                                 <input type="text" class="form-control" id="ZP41">
+                                                 <label>ZP5(bar)</label>
+                                                 <input type="text" class="form-control" id="ZP5">
+                                                 <label>ZP8(bar)</label>
+                                                 <input type="text" class="form-control" id="ZP8">
+                                                 <label>ZP18(bar)</label>
+                                                 <input type="text" class="form-control" id="ZP18">
+                                                 <label>ZPS5(bar)</label>
+                                                 <input type="text" class="form-control" id="ZPS5">
+                                                 <label>ZV9(m/s)</label>
+                                                 <input type="text" class="form-control" id="ZV9">
+                                                 <label>ZV19(m/s)</label>
+                                                 <input type="text" class="form-control" id="ZV19">
+                                                 <label>ZAE8(m²)</label>
+                                                 <input type="text" class="form-control" id="ZAE8">
+                                                 <label>ZAE18(m²)</label>
+                                                 <input type="text" class="form-control" id="ZAE18">
+                                                 <br/><br/><br/><br/><br/><br/>
+                                                 <label>ZEPMIX</label>
+                                                 <input type="text" class="form-control" id="ZEPMIX">
+                                                 <label>ZECO2</label>
+                                                 <input type="text" class="form-control" id="ZECO2">
+                                                 <label>ZESO2</label>
+                                                 <input type="text" class="form-control" id="ZESO2">
+                                                 <label>ZEH20</label>
+                                                 <input type="text" class="form-control" id="ZEH20">
+                                                 <label>ZECO</label>
+                                                 <input type="text" class="form-control" id="ZECO">
+                                                 <label>ZEHC</label>
+                                                 <input type="text" class="form-control" id="ZEHC">
+                                                 <label>ZENOX</label>
+                                                 <input type="text" class="form-control" id="ZENOX">
+                                            </div>
+                                          
+                                        </div>
+                                         <div class="col-md-3">
+                                            <div class="form-group">
+                                                 <label>ZPNIR(%)</label>
+                                                 <input type="text" class="form-control" id="ZPNIR">
+                                                 <label>ZT1A(C)</label>
+                                                 <input type="text" class="form-control" id="ZT1A">
+                                                 <label>ZT41(C)</label>
+                                                 <input type="text" class="form-control" id="ZT41">
+                                                 <label>ZT5(C)</label>
+                                                 <input type="text" class="form-control" id="ZT5">
+                                                 <label>ZT8(C)</label>
+                                                 <input type="text" class="form-control" id="ZT8">
+                                                 <label>ZT18(C)</label>
+                                                 <input type="text" class="form-control" id="ZT18">
+                                                 <label>ZT13(C)</label>
+                                                 <input type="text" class="form-control" id="ZT13">
+                                                 <label>ZV9M(m/s)</label>
+                                                 <input type="text" class="form-control" id="ZV9M">
+                                                 <br/><br/><br/>
+                                                 <label>ZAE8M(m²)</label>
+                                                 <input type="text" class="form-control" id="ZAE8M">
+                                                 <br/><br/><br/><br/><br/><br/>
+                                                 <label>ZW3(kg/s)</label>
+                                                 <input type="text" class="form-control" id="ZW3">
+                                                 <label>ZW8(kg/s)</label>
+                                                 <input type="text" class="form-control" id="ZW8">
+                                                 <label>ZW18(kg/s)</label>
+                                                 <input type="text" class="form-control" id="ZW18">
+                                                 <label style="color:blue;">ZOUT1</label>
+                                                 <input type="text" class="form-control" id="ZOUT1">
+                                                 <label style="color:blue;">ZOUT2</label>
+                                                 <input type="text" class="form-control" id="ZOUT2">
+                                                 <label style="color:blue;">ZOUT3</label>
+                                                 <input type="text" class="form-control" id="ZOUT3">
+                                                 <label style="color:blue;">ZOUT4</label>
+                                                 <input type="text" class="form-control" id="ZOUT4<">
+                                                 <label style="color:blue;">ZOUT5</label>
+                                                 <input type="text" class="form-control" id="ZOUT5">
+                                            </div>
+                                          
+                                        </div>
+                                    </div>
+                                </form>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <label>VERSION MOTEUR UTILISEE</label>
+                                        <input type="text" class="form-control" id="VERSION">
+                                        <p style="color:green;"><strong>Résultat cohérent avec les données affichées</strong></p>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                                    
+                                        
+                                    </div>
+                                    
+                                
+
+                                  <!-- Modal footer -->
+                                  <div class="modal-footer">
+                                     
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Annuler</button>
+                                  </div>
+
+                                </div>
+                              </div>
+                            </div>
+                                      
+                      </div>
+                      </div>
+                </div>
+            </div>
+            <div id="output">
+                
+            </div>
+        </div>
+    </div>
+</body>
+<!--   Core JS Files   -->
+<script src="../assets/js/core/jquery.min.js"></script>
+<script src="../assets/js/core/popper.min.js"></script>
+<script src="../assets/js/core/bootstrap.min.js"></script>
+<script src="../assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+<!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
+<script src="../assets/js/now-ui-dashboard.js?v=1.0.1"></script>
+
+<script type="text/javascript">
+var form = new FormData();
+form.append("file", "C:\\Users\\TO125348\\Desktop\\sppms\\templates\\resultat.json");
+
+var settings = {
+  "async": true,
+  "crossDomain": true,
+  "url": "http://caefr0p230:5002/uploadhc",
+  "method": "POST",
+  "headers": {
+    "Content-Type": "application/x-www-form-urlencoded",
+    "Cache-Control": "no-cache",
+    "Postman-Token": "974e5ec7-70d3-4cf1-8968-c69148637fe1"
+  },
+  "processData": false,
+  "contentType": false,
+  "mimeType": "multipart/form-data",
+  "data": form
+}
+
+$.ajax(settings).done(function (response) {
+  console.log(response);
+});
+</script>
+
+</html>
