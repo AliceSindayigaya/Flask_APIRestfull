@@ -1,4 +1,3 @@
-
 (function () {
     isWindows = navigator.platform.indexOf('Win') > -1 ? true : false;
 
@@ -52,6 +51,7 @@ $(document).ready(function () {
     });
 });
 
+//navbar 
 $(document).on('click', '.navbar-toggle', function () {
     $toggle = $(this);
 
@@ -106,7 +106,7 @@ nowuiDashboard = {
             }
         });
     },
-
+//Sidebar menu
     showSidebarMessage: function showSidebarMessage(message) {
         try {
             $.notify({
@@ -138,15 +138,19 @@ hexToRGB = function hexToRGB(hex, alpha) {
         return "rgb(" + r + ", " + g + ", " + b + ")";
     }
 };
+//Show resultat page
+function showResult(){
+    document.getElementById('resultat').style.display='block';
+}
 //content API show
     function showApiDga(){
         document.getElementById('bdmodel').style.display='none';
-        document.getElementById('').style.display='none';
+     
     }
     function showApiBdmodel(){
         document.getElementById('bdmodel').style.display='block';
     } 
-    //Show the bank moteur
+//Show the content bank moteur
     function showLocal(){
 
         document.getElementById('projet').style.display='none';
@@ -158,14 +162,319 @@ hexToRGB = function hexToRGB(hex, alpha) {
         document.getElementById('projet').style.display='block';
         document.getElementById('locale').style.display='none';
     } 
-    
 
-    //Hide Result
-       function hideResult(){
-        document.getElementById('resultat').style.display='none';
+    function showtab1(){
+        document.getElementById('1').style.display='block';
     }
+
+    function showtab2(){
+        document.getElementById('1').style.display='block';
+        document.getElementById('2').style.display='block';
+    }
+
+    function showtab3(){
+        document.getElementById('1').style.display='block';
+        document.getElementById('2').style.display='block';
+        document.getElementById('3').style.display='block';
+    }
+
+    function showtab4(){
+        document.getElementById('1').style.display='block';
+        document.getElementById('2').style.display='block';
+        document.getElementById('3').style.display='block';
+        document.getElementById('4').style.display='block';
+    }
+
+    function showtab5(){
+        document.getElementById('1').style.display='block';
+        document.getElementById('2').style.display='block';
+        document.getElementById('3').style.display='block';
+        document.getElementById('4').style.display='block';
+        document.getElementById('5').style.display='block';
+    }
+
+//'CONTROL RESULTAT' AND 'CODI' buttons
     $('.custom-file-input').on('change',function(){
     $(this).next('.form-control-file').addClass("selected").html($(this).val());
 })
+    $('.first a').on('click', function(){    
+    $('.first-toggle').html($(this).html());    
+})
+
+    $('.second a').on('click', function(){    
+    $('.second-toggle').html($(this).html());    
+})
+
+//Control the user enter
+// Fonction to unable the "tooltips"
+function deactivateTooltips() {
+
+    var tooltips = document.querySelectorAll('.tooltip'),
+        tooltipsLength = tooltips.length;
+
+    for (var i = 0; i < tooltipsLength; i++) {
+        tooltips[i].style.display = 'none';
+    }
+
+}
+//Get the input tooltips
+function getTooltip(elements) {
+
+    while (elements = elements.nextSibling) {
+        if (elements.className === 'tooltip') {
+            return elements;
+        }
+    }
+
+    return false;
+
+}
+
+var check= {};
+
+check['api'] =function (){
+    var api = document.getElementsByName('api'),
+        tooltipStyle = getTooltip(api[1].parentNode).style;
+    if(api[0].checked || api[1].checked){
+        tooltipStyle.display = 'none';
+        return true;
+    }else{
+        tooltipStyle.display = 'inline-block';
+        return false;
+    }
+
+};
+
+(function() { 
+
+    var myForm = document.getElementById('myForm'),
+        inputs = document.querySelectorAll('input[type=text]'),
+        inputsLength = inputs.length;
+
+    for (var i = 0; i < inputsLength; i++) {
+        inputs[i].addEventListener('keyup', function(e) {
+            check[e.target.id](e.target.id); 
+        });
+    }
+//Submit function,( don't control 'CODE RESULTAT' button)
+    myForm.addEventListener('submit', function(e) {
+
+        var result = true;
+
+        for (var i in check) {
+            result = check[i](i) && result;
+        }
+
+        if (result) {
+            alert('Le formulaire est bien rempli.');
+        }
+
+        e.preventDefault();
+
+    });
+
+//RAZ button
+    myForm.addEventListener('reset', function() {
+
+        for (var i = 0; i < inputsLength; i++) {
+            inputs[i].className = '';
+        }
+
+        deactivateTooltips();
+
+    });
+
+})();
 
 
+//Submit button
+$(document).ready(function() {
+    $("#buttons").click(function(){
+        var select = $('#cresult');
+        if (select.val() === ''){
+            alert("Veuillez sélectionner le code résultat.");
+        }else if (select.val() === '1'){
+            document.getElementById('1').style.display='block';
+        }
+            return false;
+      
+
+
+          });
+});
+
+//Server communication 
+
+ $(document).ready(function(){
+        $('form').on('submit', function(event){
+            var form = $('#customfileUp')[0];
+            var fd = new FormData(form);
+                 var settings = {
+                  "async": true,
+                  "crossDomain": true,
+                  "url": "http://caefr0p230:5002/uploadhc",
+                  "method": "POST",
+                  "processData": false,
+                  "contentType": false,
+                  "mimeType": "multipart/form-data",
+                  "data": fd
+                }
+
+            $.ajax(settings).done(function (response) {
+
+                let alldata = JSON.parse(response);
+
+                //console.log(alldata.ZPCON);
+                document.getElementById('ZSPHUM').value =  alldata.ZSPHUM;
+                document.getElementById('ZPCON').value = alldata.ZPCON;
+                document.getElementById('ZFNI').value = alldata.ZFNI;
+                document.getElementById('ZFGI').value =  alldata.ZFGI;
+                document.getElementById('ZW1A').value = alldata.ZW1A;
+                document.getElementById('ZWFE').value = alldata.ZWFE;
+
+                document.getElementById('ZEGT').value =  alldata.ZEGT;
+                document.getElementById('ZPNL').value = alldata.ZPNL;
+                document.getElementById('ZPNH').value = alldata.ZPNH;
+                document.getElementById('ZPS3').value =  alldata.ZPS3;
+                document.getElementById('ZPTF').value = alldata.ZPTF;
+                document.getElementById('ZPTP').value = alldata.ZPTP;
+
+                document.getElementById('ZW25').value =  alldata.ZW25;
+                document.getElementById('ZPT3').value = alldata.ZPT3;
+                document.getElementById('ZPED').value = alldata.ZPED;
+                document.getElementById('ZPEF').value =  alldata.ZPEF;
+                document.getElementById('ZPEH').value = alldata.ZPEH;
+                document.getElementById('ZPEI').value = alldata.ZPEI;
+
+                document.getElementById('ZP8M').value =  alldata.ZP8M;
+                document.getElementById('ZVEJ').value =  alldata.ZVEJ;
+                document.getElementById('ZWBINS').value = alldata.ZWBINS;
+                document.getElementById('ZPCONR').value = alldata.ZPCONR;
+                document.getElementById('ZFNIR').value =  alldata.ZFNIR;
+                document.getElementById('ZFGIR').value = alldata.ZFGIR;
+                document.getElementById('ZW1AR').value = alldata.ZW1AR;
+
+                document.getElementById('ZWFER').value =  alldata.ZWFER;
+                document.getElementById('ZEGTR').value = alldata.ZEGTR;
+                document.getElementById('ZPNLR').value = alldata.ZPNLR;
+                document.getElementById('ZPNHR').value =  alldata.ZPNHR;
+                document.getElementById('ZEPS').value = alldata.ZEPS;
+                document.getElementById('ZTTF').value = alldata.ZTTF;
+
+                document.getElementById('ZTTP').value =  alldata.ZTTP;
+                document.getElementById('ZT25').value = alldata.ZT25;
+                document.getElementById('ZTT3').value = alldata.ZTT3;
+                document.getElementById('ZTED').value =  alldata.ZTED;
+                document.getElementById('ZTEF').value = alldata.ZTEF;
+                document.getElementById('ZTEH').value = alldata.ZTEH;
+
+                document.getElementById('ZTEI').value =  alldata.ZTEI;
+                document.getElementById('ZT8M').value = alldata.ZT8M;
+                document.getElementById('IR').value = alldata.IR;
+                document.getElementById('ZPNI').value =  alldata.ZPNI;
+                document.getElementById('ZPIA').value = alldata.ZPIA;
+                document.getElementById('ZP41').value = alldata.ZP41;
+
+                document.getElementById('ZP5').value =  alldata.ZP5;
+                document.getElementById('ZP8').value = alldata.ZP8;
+                document.getElementById('ZP18').value = alldata.ZP18;
+                document.getElementById('ZPS5').value =  alldata.ZPS5;
+                document.getElementById('ZV9').value = alldata.ZV9;
+                document.getElementById('ZV19').value = alldata.ZV19;
+
+                document.getElementById('ZAE8').value =  alldata.ZAE8;
+                document.getElementById('ZAE18').value = alldata.ZAE18;
+                document.getElementById('ZEPMIX').value = alldata.ZEPMIX;
+                document.getElementById('ZECO2').value =  alldata.ZECO2;
+                document.getElementById('ZESO2').value = alldata.ZESO2;
+                document.getElementById('ZEH20').value = alldata.ZEH20;
+
+                document.getElementById('ZECO').value =  alldata.ZECO;
+                document.getElementById('ZEHC').value = alldata.ZEHC;
+                document.getElementById('ZENOX').value = alldata.ZENOX;
+                document.getElementById('ZPNIR').value =  alldata.ZPNIR;
+                document.getElementById('ZT1A').value = alldata.ZT1A;
+                document.getElementById('ZT41').value = alldata.ZT41;
+
+                document.getElementById('ZT5').value =  alldata.ZT5;
+                document.getElementById('ZT8').value = alldata.ZT8;
+                document.getElementById('ZT18').value = alldata.ZT18;
+                document.getElementById('ZT13').value =  alldata.ZT13;
+                document.getElementById('ZV9M').value = alldata.ZV9M;
+                document.getElementById('ZAE8M').value = alldata.ZAE8M;
+
+                document.getElementById('ZW3').value =  alldata.ZW3;
+                document.getElementById('ZW8').value = alldata.ZW8;
+                document.getElementById('ZW18').value = alldata.ZW18;
+                document.getElementById('ZOUT1').value =  alldata.ZOUT1;
+                document.getElementById('ZOUT2').value = alldata.ZOUT2;
+                document.getElementById('ZOUT3').value = alldata.ZOUT3;
+
+                document.getElementById('ZOUT4').value = alldata.ZOUT4;
+                document.getElementById('ZOUT5').value = alldata.ZOUT5;
+                document.getElementById('VERSION').value = alldata.VERSION;
+
+                var blob = new Blob([JSON.stringify(alldata)], {type: 'application/json'});
+                saveAs (blob, "test.txt");
+    });
+               
+  event.preventDefault();
+        });
+});
+
+//Check the form
+
+function surligne(champ,error){
+    if (error)
+        champ.style.backgroundColor = "#fba";
+    else
+        champ.style.backgroundColor = "";
+}
+
+function selectLib(){
+    if(document.getElementById("hc").files.length == 0){
+        alert('No file selected');
+    }
+}
+
+
+function verifinstall(champ){
+
+    if(champ.value.length <3){
+        surligne(champ, true);
+        return false;
+    }
+    else
+
+    {
+        surligne(champ, false);
+        return true;
+    }
+}
+
+function verifregime(champ){
+    if(champ.value.length <3){
+        surligne(champ, true);
+        return false;
+    }
+    else
+    {
+        surligne(champ, false);
+        return true;
+    }
+}
+
+function verifform(form){
+    var install = verifinstall(form.install);
+    var regime = verifregime(form.regime);
+
+    if(install && regime)
+    {
+        return true;
+    }else{
+        alert("Veuiller remplir correctement, INSTALL, REGIME");
+        
+        return false;
+    }
+
+}
