@@ -312,7 +312,7 @@ $(document).ready(function() {
                  var settings = {
                   "async": true,
                   "crossDomain": true,
-                  "url": "http://caefr0p230:5002/uploadhc",
+                  "url": "http://caefr0p235:5001/uploadhc",
                   "method": "POST",
                   "processData": false,
                   "contentType": false,
@@ -414,8 +414,8 @@ $(document).ready(function() {
                 document.getElementById('ZOUT5').value = alldata.ZOUT5;
                 document.getElementById('VERSION').value = alldata.VERSION;
 
-                var blob = new Blob([JSON.stringify(alldata)], {type: 'application/json'});
-                saveAs (blob, "test.txt");
+                // var blob = new Blob([JSON.stringify(alldata)], {type: 'application/json'});
+                // saveAs (blob, "test.txt");
     });
                
   event.preventDefault();
@@ -478,3 +478,5 @@ function verifform(form){
     }
 
 }
+
+
