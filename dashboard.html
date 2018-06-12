@@ -12,37 +12,39 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
     <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
     <!-- CSS Files -->
-    <link href="../static/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="../static/css/sppms.css?v=1.0.1" rel="stylesheet" />
+    <link href="{{url_for ('static',filename= 'css/bootstrap.min.css')}}" rel="stylesheet" />
+    <link href="{{url_for('static', filename= 'css/sppms.css')}}" rel="stylesheet" />
 </head>
 <!--End Head-->
 
 <body class="">
+{% block main %}
+   
     <!--Body start-->
     <div class="wrapper ">
         <!--Sidebar start-->
         <div class="sidebar" data-color="white">
             <div class="logo">
-                <a href="{% set active_page = active_page|default('dashboard.html') %}" class="simple-text logo-normal">
+                <a href="{{url_for('dashboard')}}" class="simple-text logo-normal">
                         SPPMS TOOLS
                 </a>
             </div>
             <div class="sidebar-wrapper">
                 <ul class="nav">
                     <li class="">
-                        <a href="{% set active_page = 'dashboard.html' %}" data-toggle="tooltip" data-animation="false" title="Librairie moteur validée par EPG">
+                        <a href="{{url_for('dashboard')}}" data-toggle="tooltip" data-animation="false" title="Librairie moteur validée par EPG">
                             <i class="now-ui-icons design_app"></i>
                             <p>Librairie Homologuée</p>
                         </a>
                     </li>
                     <li>
-                        <a href="{% set active_page = 'autres.html' %}" data-toggle="tooltip" data-animation="false" title="Librairie moteur non validée par EPG">
+                        <a href="{{url_for('others')}}" data-toggle="tooltip" data-animation="false" title="Librairie moteur non validée par EPG">
                             <i class="now-ui-icons design_bullet-list-67"></i>
                             <p>Autres librairies</p>
                         </a>
                     </li>
                     <li id="resultat">
-                        <a href="{% set active_page = 'resultat.html'%}">
+                        <a href="{{url_for('result') }}">
                             <i class="now-ui-icons design_vector"></i>
                             <p>Résultat</p>
                         </a>
@@ -193,14 +195,15 @@
                                             <span class="custom-control-indicator"></span>
                                             <span class="custom-control-description">Base Locale</span>
                                         </label>
+                                        
                                          <div class="input-group mb-3" id="locale" style="display: none;">
-                                            <form id="customfileUp">
+                                           
                                                 <label for="file" class="custom-file" id="customFile">
-                                                    <input type="file" class="input-file" name="file" id="hc" webkitdirectory flow-btn flow-directory ng-show="$flow.supportDirectory">
-                                                </label>
-                                              <!--   <button class="btn" id="locale" type="submit" value="File" >Envoyer</button>  -->
+                                                    <input type="file" class="input-file" name="file" id="hc"  webkitdirectory mozdirectory msdirectory odirectory directory multiple />
+                                               </label> 
+                                              <!--<button class="btn" id="locale" type="submit" value="File" >Envoyer</button> -->
                                             
-                                            </form>
+                                          <!--</form>--> 
                                         </div>
                                        
                                     </div>
@@ -210,8 +213,8 @@
                                             <span class="custom-control-indicator"></span>
                                             <span class="custom-control-description">Banque projet</span>
                                         </label> 
-                                        <form class="form-inline visible='none'" id='projet' style="display: none;">
-                                            <div class="row">
+                                       <!-- <form class="form-inline visible='none'"  style="display: none;">-->
+                                            <div class="row" id="projet">
                                                 <div class="col-md-3">
                                                     <div class="form-group">
                                                         <label>Banque</label>
@@ -332,10 +335,10 @@
                                                                     
                                                                 </div>
                                                             </div>
-                                                    <!--         <br><br>
+                                                             <br><br>
                                                             <div class="form-group">
                                                                 <input type="text" class="form-control"  name="">
-                                                            </div> -->
+                                                            </div>
                                                             
                                                           </div>
                                                           <!-- Modal footer -->
@@ -350,7 +353,8 @@
                                                 </label>
                                                 
                                             </div>
-                                        </form>     
+                                        <!--</form>-->
+                                        
                                     </div>
                                   
                                 </div>
@@ -358,27 +362,28 @@
                         </div>
                         <!--End Banque moteur-->
                     </div>
-                </form>
+             
                 
               
                   <div class="col-md-6">
-                    <form id="form_valid" class="form-submit">
                     <div class="card card-tasks">
                       <div class="card-header">
                         <h5 class="card-category"><strong>Conditions de vol</strong></h5>
                       </div>
+                     
                       <div class="card-body">
                         <div class="row">
-                            <div class="col-md-6">
+                          <div class="col-md-6">
+                       
                                 <div class="form-group">
+                                 
                                     <label>Altitude(ft)</label>
                                     <input type="text" class="form-control" data-toggle="tooltip" data-animation="false" title="Altitude-pression" id = "altitude" name="altitude" value="">
                                     <label>Mach</label>
                                     <input type="text" class="form-control" id = "mach" name="mach" value="" >
                                     <label>Delta Isa(c)</label>
-                                    <input type="text" class="form-control" data-toggle="tooltip" data-animation="false" title="Ecart entre la température ambiante et la température ISA standard" id="disa" name="disa" value="">
-                                    
-                                                                    </div>
+                                    <input type="text" class="form-control" data-toggle="tooltip" data-animation="false" title="Ecart entre la température ambiante et la température ISA standard" id="disa" name="disa" value="">  
+                                </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
@@ -423,11 +428,9 @@
                             
                         </div>        
                       </div>
-                  </div>
-          <!--     </form> -->
+                   </div>
                   </div>
                   <div class="col-md-6">
-                <!--     <form id="myForm"> -->
                       <div class="card">
                         <div class="card-header">
                             <h5 class="card-category"><strong>Conditions d'installation</strong></h5>
@@ -481,7 +484,7 @@
                             <div class="col-md-6">
                                     <div class="form-group">
                                          <div class="btn-group">
-                                            <div class="input-group mb-1 " id = "code_result">
+                                            <div class="input-group mb-1 ">
                                             
                                             <div class="btn-group col-md-3" id="cresult">
                                                   <button type="button" class="btn btn-secondary dropdown-toggle first-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-toggle="tooltip" data-animation="false"  title="Indique au module le type de sortie désirée(1(synthétique)-5(détaillée))">
@@ -496,10 +499,10 @@
                                                   </div>
                                             </div>
                                         </div>
-                                    
-                                        <div class="input-group mb-1 " id = "code1">
-                                            <div class="btn-group col-md-3">
-                                                  <button type="button" class="btn btn-secondary dropdown-toggle second-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" data-toggle="tooltip" data-animation="false" title="Dans ce cas de non convergence, indique au programme la valeur à donner(la dernière valeur urilisée ou -999">
+                                        <hr>
+                                        <div class="input-group mb-1 ">
+                                            <div class="btn-group col-md-3" id="code1">
+                                                  <button type="button" class="btn btn-secondary dropdown-toggle second-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" data-toggle="tooltip" data-animation="false" title="Dans ce cas de non convergence, indique au programme la valeur à donner(la dernière valeur utilisée ou -999">
                                                     CODI1
                                                   </button>
                                                   <div class="dropdown-menu second dropdown-menu-right">
@@ -587,7 +590,7 @@
                                                         <label>ZVEJ(m/s)</label>
                                                         <input type="text" class="form-control" id="ZVEJ">
                                                         
-                                        s            </div>
+                                                    </div>
                                                  </div>
                                                  <div class="col-md-3" id="2">
                                                     <div class="form-group">
@@ -699,7 +702,9 @@
                                                  <br/><br/><br/><br/><br/><br/>
                                                  <label>ZW3(kg/s)</label>
                                                  <input type="text" class="form-control" id="ZW3" >
-                                                 <label>ZW8(kg/s)</label>
+                    
+    <!-- Control Center for SPPMS: parallax effects, scripts for the example pages etc -->
+    <script type="text/javascript" src= "{{ url_for('static',filename= 'js/sppms.js') }}"></script>     <label>ZW8(kg/s)</label>
                                                  <input type="text" class="form-control" id="ZW8">
                                                  <label>ZW18(kg/s)</label>
                                                  <input type="text" class="form-control" id="ZW18" >
@@ -750,22 +755,16 @@
          
         </div>
     </div>
-</body>
 <!--   Core JS Files   -->
-<script src="../static/js/core/jquery.min.js"></script>
-<script src="../static/js/core/FileSaver.js"></script>
-<script src="../static/js/core/popper.min.js"></script>
-<script src="../static/js/core/bootstrap.min.js"></script>
-<script src="../static/js/plugins/perfect-scrollbar.jquery.min.js"></script>
-<!-- Control Center for SPPMS: parallax effects, scripts for the example pages etc -->
-<script src="../static/js/sppms.js?v=1.0.1"></script>
+<script type="text/javascript" src="{{ url_for('static', filename= 'js/core/jquery.min.js') }}"></script>
+<script type="text/javascript" src="{{url_for('static', filename= 'js/core/popper.min.js') }}"></script>
+<script type="text/javascript" src="{{url_for('static', filename= 'js/core/bootstrap.min.js') }}"></script>
+<script type="text/javascript" src="{{url_for('static', filename= 'js/plugins/perfect-scrollbar.jquery.min.js') }}"></script>
+<script type="text/javascript" src= "{{url_for('static',filename= 'js/sppms.js') }}"></script>
 
-<!-- <script type="text/javascript">
-    function getfolder(e) {
-    var files = e.target.files;
-    var path = files[0].webkitRelativePath;
-  /*  var Folder = path.split("/");*/
-    console.log(path);
-}
-</script> -->
+ 
+{% endblock %}
+</body>
+
 </html>
+
