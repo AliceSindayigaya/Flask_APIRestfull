@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>SPPMS TOOLS</title>
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+    <!--     Fonts and icons     -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
+    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+    <!-- CSS Files -->
+ <link href="{{url_for ('static',filename= 'css/bootstrap.min.css')}}" rel="stylesheet" />
+    <link href="{{url_for('static', filename= 'css/sppms.css')}}" rel="stylesheet" />
+</head>
+
+<body class="">
+{% block main %}
+    <div class="wrapper ">
+        <div class="sidebar" data-color="white">
+
+            <div class="logo">
+                <a href="{{url_for('dashboard')}}" class="simple-text logo-normal">
+                    SPPMS TOOLS
+                </a>
+            </div>
+            <div class="sidebar-wrapper">
+                <ul class="nav">
+                    <li class="">
+                        <a href="{{url_for('dashboard')}}" data-toggle="tooltip" data-animation="false" title="Librairie moteur validée par EPG">
+                            <i class="now-ui-icons design_app"></i>
+                            <p>Librairie Homologuée</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{url_for('others')}}" data-toggle="tooltip" data-animation="false" title="Librairie moteur non validée par EPG">
+                            <i class="now-ui-icons design_bullet-list-67"></i>
+                            <p>Autres librairies</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{url_for('result') }}">
+                            <i class="now-ui-icons design_vector"></i>
+                            <p>Résultat</p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="main-panel">
+            <!-- Navbar -->
+           <nav class="navbar navbar-expand-lg navbar-transparent  navbar-absolute bg-primary fixed-top">
+                <div class="container-fluid">
+                    <div class="navbar-wrapper">
+                        <div class="navbar-toggle">
+                            <button type="button" class="navbar-toggler">
+                                <span class="navbar-toggler-bar bar1"></span>
+                                <span class="navbar-toggler-bar bar2"></span>
+                                <span class="navbar-toggler-bar bar3"></span>
+                            </button>
+                        </div>
+                        <a class="navbar-brand" href="../templates/resultat.html">Résultat</a>
+                    </div>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-bar navbar-kebab"></span>
+                        <span class="navbar-toggler-bar navbar-kebab"></span>
+                        <span class="navbar-toggler-bar navbar-kebab"></span>
+                    </button>
+                   <div class="collapse navbar-collapse justify-content-end" id="navigation">
+                        <ul class="navbar-nav">
+                                <li class="nav-item">
+                                <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="now-ui-icons loader_gear"></i>
+                                    <p>
+                                        <span class="d-lg-none d-md-block">Help</span>
+                                    </p>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                                    <a class="dropdown-item" href="../doc/mu_sppms_interface.pdf">manuel utilisateur</a>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="now-ui-icons location_world"></i>
+                                    <p>
+                                        <span class="d-lg-none d-md-block">Langue</span>
+                                    </p>
+                                    </a>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                                    <a class="dropdown-item" href="#">Anglais</a>
+                                    <a class="dropdown-item" href="#">Français</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <!-- End Navbar -->
+            <div class="panel-header panel-header-sm">
+               <!--  <div class="header-card">
+                    <button type="button" class="btn">Valider</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Annuler</button>
+                </div> -->
+            </div>
+            <div class="content" >
+                 <div class="row">
+                    <div class="col-lg-12 card">
+                            <div class="card-header">
+                                <h5 class="title">MOTEUR</h5>
+                            
+                                
+                            </div>
+                            <div class="card-body">
+                                <form>
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <div class="form-group" id="1">
+                                                <label>ZSPHUM (kg/kg)</label>
+                                                <input type="text" class="form-control" >
+                                                <label>ZPCON</label>
+                                                <input type="text" class="form-control">
+                                                <label>ZFNI (daN)</label>
+                                                <input type="text" class="form-control">
+                                                <label>ZFGI (daN)</label>
+                                                <input type="text" class="form-control">
+                                                <label>ZW1A (kg/s)</label>
+                                                <input type="text" class="form-control" >
+                                                <label>ZWFE(kg/h)</label>
+                                                <input type="text" class="form-control" >
+                                                <label>ZEGT(C)</label>
+                                                <input type="text" class="form-control" >
+                                                <label>ZPNL(%)</label>
+                                                <input type="text" class="form-control" >
+                                                <label>ZPNH(%)</label>
+                                                <input type="text" class="form-control" >
+                                                <label>ZPS3(bar)</label>
+                                                <input type="text" class="form-control" >
+                                                <label>ZPTF(bar)</label>
+                                                <input type="text" class="form-control" >
+                                                <label>ZPTP(bar)</label>
+                                                <input type="text" class="form-control" >
+                                                <label>ZW25(kg/s)</label>
+                                                <input type="text" class="form-control" >
+                                                <label>ZPT3(bar)</label>
+                                                <input type="text" class="form-control" >
+                                                <label>ZPED(bar)</label>
+                                                <input type="text" class="form-control" >
+                                                <label>ZPEF(bar)</label>
+                                                <input type="text" class="form-control" >
+                                                <label>ZPEH(bar)</label>
+                                                <input type="text" class="form-control" >
+                                                <label>ZPEI(bar)</label>
+                                                <input type="text" class="form-control" >
+                                                <label>ZP8M(bar)</label>
+                                                <input type="text" class="form-control" >
+                                                <label>ZVEJ(m/s)</label>
+                                                <input type="text" class="form-control" >
+                                                
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3" id="1">
+                                            <div class="form-group">
+                                                <label>ZWBINS(kg/s)</label>
+                                                <input type="text" class="form-control">
+                                                <label>ZPCONR</label>
+                                                <input type="text" class="form-control">
+                                                <label>ZFNIR(daN)</label>
+                                                <input type="text" class="form-control">
+                                                <label>ZFGIR(daN)</label>
+                                                <input type="text" class="form-control">
+                                                <label>ZW1AR(kg/s)</label>
+                                                <input type="text" class="form-control">
+                                                <label>ZWFER(kg/h)</label>
+                                                <input type="text" class="form-control">
+                                                <label>ZEGTR(C)</label>
+                                                <input type="text" class="form-control">
+                                                <label>ZPNLR(%)</label>
+                                                <input type="text" class="form-control">
+                                                <label>ZPNHR(%)</label>
+                                                <input type="text" class="form-control">
+                                                <label>ZEPS</label>
+                                                <input type="text" class="form-control">
+                                                <label>ZTTF(C)</label>
+                                                <input type="text" class="form-control">
+                                                <label>ZTTP(C)</label>
+                                                <input type="text" class="form-control">
+                                                <label>ZT25(C)</label>
+                                                <input type="text" class="form-control">
+                                                <label>ZTT3(C)</label>
+                                                <input type="text" class="form-control">
+                                                <label>ZTED(C)</label>
+                                                <input type="text" class="form-control">
+                                                <label>ZTEF(C)</label>
+                                                <input type="text" class="form-control">
+                                                <label>ZTEH(C)</label>
+                                                <input type="text" class="form-control">
+                                                <label>ZTEI(C)</label>
+                                                <input type="text" class="form-control">
+                                                <label>ZT8M(C)</label>
+                                                <input type="text" class="form-control">
+                                                <label>IR</label>
+                                                <input type="text" class="form-control">
+
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                 <label>ZPNI(%)</label>
+                                                 <input type="text" class="form-control">
+                                                 <label>ZPIA(bar)</label>
+                                                 <input type="text" class="form-control">
+                                                 <label>ZP41(bar)</label>
+                                                 <input type="text" class="form-control">
+                                                 <label>ZP5(bar)</label>
+                                                 <input type="text" class="form-control">
+                                                 <label>ZP8(bar)</label>
+                                                 <input type="text" class="form-control">
+                                                 <label>ZP18(bar)</label>
+                                                 <input type="text" class="form-control">
+                                                 <label>ZPS5(bar)</label>
+                                                 <input type="text" class="form-control">
+                                                 <label>ZV9(m/s)</label>
+                                                 <input type="text" class="form-control">
+                                                 <label>ZV19(m/s)</label>
+                                                 <input type="text" class="form-control">
+                                                 <label>ZAE8(m²)</label>
+                                                 <input type="text" class="form-control">
+                                                 <label>ZAE18(m²)</label>
+                                                 <input type="text" class="form-control">
+                                                 <br/><br/><br/><br/><br/><br/>
+                                                 <label>ZEPMIX</label>
+                                                 <input type="text" class="form-control">
+                                                 <label>ZECO2</label>
+                                                 <input type="text" class="form-control">
+                                                 <label>ZESO2</label>
+                                                 <input type="text" class="form-control">
+                                                 <label>ZEH20</label>
+                                                 <input type="text" class="form-control">
+                                                 <label>ZECO</label>
+                                                 <input type="text" class="form-control">
+                                                 <label>ZEHC</label>
+                                                 <input type="text" class="form-control">
+                                                 <label>ZENOX</label>
+                                                 <input type="text" class="form-control">
+                                            </div>
+                                          
+                                        </div>
+                                         <div class="col-md-3">
+                                            <div class="form-group">
+                                                 <label>ZPNIR(%)</label>
+                                                 <input type="text" class="form-control">
+                                                 <label>ZT1A(C)</label>
+                                                 <input type="text" class="form-control">
+                                                 <label>ZT41(C)</label>
+                                                 <input type="text" class="form-control">
+                                                 <label>ZT5(C)</label>
+                                                 <input type="text" class="form-control">
+                                                 <label>ZT8(C)</label>
+                                                 <input type="text" class="form-control">
+                                                 <label>ZT18(C)</label>
+                                                 <input type="text" class="form-control">
+                                                 <label>ZT13(C)</label>
+                                                 <input type="text" class="form-control">
+                                                 <label>ZV9M(m/s)</label>
+                                                 <input type="text" class="form-control">
+                                                 <br/><br/><br/>
+                                                 <label>ZAE8M(m²)</label>
+                                                 <input type="text" class="form-control">
+                                                 <br/><br/><br/><br/><br/><br/>
+                                                 <label>ZW3(kg/s)</label>
+                                                 <input type="text" class="form-control">
+                                                 <label>ZW8(kg/s)</label>
+                                                 <input type="text" class="form-control">
+                                                 <label>ZW18(kg/s)</label>
+                                                 <input type="text" class="form-control">
+                                                 <label style="color:blue;">ZOUT1</label>
+                                                 <input type="text" class="form-control">
+                                                 <label style="color:blue;">ZOUT2</label>
+                                                 <input type="text" class="form-control">
+                                                 <label style="color:blue;">ZOUT3</label>
+                                                 <input type="text" class="form-control">
+                                                 <label style="color:blue;">ZOUT4</label>
+                                                 <input type="text" class="form-control">
+                                                 <label style="color:blue;">ZOUT5</label>
+                                                 <input type="text" class="form-control">
+                                            </div>
+                                          
+                                        </div>
+                                    </div>
+                                </form>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <label>VERSION MOTEUR UTILISEE</label>
+                                        <input type="text" class="form-control">
+                                        <p style="color:green;"><strong>Résultat cohérent avec les données affichées</strong></p>
+                                    </div>
+                                    
+                                </div>
+                                <div class="modal-footer">
+                                      <button type="submit" class="btn" data-toggle="modal" id="save_modal">Enregistrer</button>
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="showResult()">Annuler</button>
+                                </div>
+
+                            </div>
+                        </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    <!--   Core JS Files   -->
+
+    <script src="{{ url_for('static', filename= 'js/core/jquery.min.js' )}}"></script>
+    <script src="{{url_for('static', filename= 'js/core/popper.min.js' )}}"></script>
+    <script src="{{url_for('static', filename= 'js/core/bootstrap.min.js' )}}"></script>
+    <script src="{{url_for('static', filename= 'js/plugins/perfect-scrollbar.jquery.min.js') }}"></script>
+    <script src= "{{ url_for('static',filename= 'js/sppms.js') }}"></script>
+
+{% endblock %}
+</body>
+
+
+</html>
+
+
