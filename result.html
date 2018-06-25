@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <title>SPPMS TOOLS</title>
+    <title>OUTPUT</title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
     <!--     Fonts and icons     -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
@@ -20,14 +20,14 @@
         <div class="sidebar" data-color="white">
 
             <div class="logo">
-                <a href="{{url_for('dashboard')}}" class="simple-text logo-normal">
+                <a href="{{url_for('homologate')}}" class="simple-text logo-normal">
                     SPPMS TOOLS
                 </a>
             </div>
             <div class="sidebar-wrapper">
                 <ul class="nav">
                     <li class="">
-                        <a href="{{url_for('dashboard')}}" data-toggle="tooltip" data-animation="false" title="Librairie moteur validée par EPG">
+                        <a href="{{url_for('homologate')}}" data-toggle="tooltip" data-animation="false" title="Librairie moteur validée par EPG">
                             <i class="now-ui-icons design_app"></i>
                             <p>Librairie Homologuée</p>
                         </a>
@@ -97,202 +97,214 @@
             </nav>
             <!-- End Navbar -->
             <div class="panel-header panel-header-sm">
-               <!--  <div class="header-card">
-                    <button type="button" class="btn">Valider</button>
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Annuler</button>
-                </div> -->
+                 
             </div>
             <div class="content" >
                  <div class="row">
                     <div class="col-lg-12 card">
                             <div class="card-header">
                                 <h5 class="title">MOTEUR</h5>
-                            
-                                
+                                <div class="header-card">
+                                   <!-- <button type="button" class="btn">Enregistrer</button>-->
+                                    <!--<button type="button" class="btn btn-danger" data-dismiss="modal">Annuler</button>-->
+                                </div>  
                             </div>
-                            <div class="card-body">
-                                <form>
+                            
+                            <div class="card-body" id="output">
+                            <div class="tabble-line">
+                                 <ul class="nav nav-tabs">
+                                     <li class="nav-item">
+                                         <a class="nav-link active" href="#tab_default_1" role="tab" data-toggle="tab">Calcul 1</a>
+                                     </li>
+                                 </ul>
+                                <br><br>
+              
+                                <div class="tab_content">
+                                    <div class="tab-pane active" id="tab_default_1">
                                     <div class="row">
+                                     
                                         <div class="col-md-3">
                                             <div class="form-group" id="1">
+                                             <form method="post" action="" id= "resultForm">
                                                 <label>ZSPHUM (kg/kg)</label>
-                                                <input type="text" class="form-control" >
+                                                <input type="text" class="form-control" id="ZSPHUM1">
                                                 <label>ZPCON</label>
-                                                <input type="text" class="form-control">
+                                                <input type="text" class="form-control" id="ZPCON1">
                                                 <label>ZFNI (daN)</label>
-                                                <input type="text" class="form-control">
+                                                <input type="text" class="form-control" id="ZFNI1">
                                                 <label>ZFGI (daN)</label>
-                                                <input type="text" class="form-control">
+                                                <input type="text" class="form-control" id="ZFGI1">
                                                 <label>ZW1A (kg/s)</label>
-                                                <input type="text" class="form-control" >
+                                                <input type="text" class="form-control" id="ZW1A1">
                                                 <label>ZWFE(kg/h)</label>
-                                                <input type="text" class="form-control" >
+                                                <input type="text" class="form-control" id="ZWFE1" >
                                                 <label>ZEGT(C)</label>
-                                                <input type="text" class="form-control" >
+                                                <input type="text" class="form-control" id="ZEGT1">
                                                 <label>ZPNL(%)</label>
-                                                <input type="text" class="form-control" >
+                                                <input type="text" class="form-control" id="ZPNL1" >
                                                 <label>ZPNH(%)</label>
-                                                <input type="text" class="form-control" >
+                                                <input type="text" class="form-control" id="ZPNH1">
                                                 <label>ZPS3(bar)</label>
-                                                <input type="text" class="form-control" >
+                                                <input type="text" class="form-control" id="ZPS31">
                                                 <label>ZPTF(bar)</label>
-                                                <input type="text" class="form-control" >
+                                                <input type="text" class="form-control" id="ZPTF1">
                                                 <label>ZPTP(bar)</label>
-                                                <input type="text" class="form-control" >
+                                                <input type="text" class="form-control" id="ZPTP1">
                                                 <label>ZW25(kg/s)</label>
-                                                <input type="text" class="form-control" >
+                                                <input type="text" class="form-control" id="ZW251">
                                                 <label>ZPT3(bar)</label>
-                                                <input type="text" class="form-control" >
+                                                <input type="text" class="form-control" id="ZPT31">
                                                 <label>ZPED(bar)</label>
-                                                <input type="text" class="form-control" >
+                                                <input type="text" class="form-control" id="ZPED1">
                                                 <label>ZPEF(bar)</label>
-                                                <input type="text" class="form-control" >
+                                                <input type="text" class="form-control" id="ZPEF1" >
                                                 <label>ZPEH(bar)</label>
-                                                <input type="text" class="form-control" >
+                                                <input type="text" class="form-control" id="ZPEH1">
                                                 <label>ZPEI(bar)</label>
-                                                <input type="text" class="form-control" >
+                                                <input type="text" class="form-control" id="ZPEI1">
                                                 <label>ZP8M(bar)</label>
-                                                <input type="text" class="form-control" >
+                                                <input type="text" class="form-control" id="ZP8M1">
                                                 <label>ZVEJ(m/s)</label>
-                                                <input type="text" class="form-control" >
+                                                <input type="text" class="form-control" id="ZVEJ1">
                                                 
                                             </div>
                                         </div>
                                         <div class="col-md-3" id="1">
                                             <div class="form-group">
                                                 <label>ZWBINS(kg/s)</label>
-                                                <input type="text" class="form-control">
+                                                <input type="text" class="form-control" id="ZWBINS1">
                                                 <label>ZPCONR</label>
-                                                <input type="text" class="form-control">
+                                                <input type="text" class="form-control" id="ZPCONR1">
                                                 <label>ZFNIR(daN)</label>
-                                                <input type="text" class="form-control">
+                                                <input type="text" class="form-control" id="ZFNIR1">
                                                 <label>ZFGIR(daN)</label>
-                                                <input type="text" class="form-control">
+                                                <input type="text" class="form-control" id="ZFGIR1">
                                                 <label>ZW1AR(kg/s)</label>
-                                                <input type="text" class="form-control">
+                                                <input type="text" class="form-control" id="ZW1AR1">
                                                 <label>ZWFER(kg/h)</label>
-                                                <input type="text" class="form-control">
+                                                <input type="text" class="form-control" id="ZWFER1">
                                                 <label>ZEGTR(C)</label>
-                                                <input type="text" class="form-control">
+                                                <input type="text" class="form-control" id="ZEGTR1">
                                                 <label>ZPNLR(%)</label>
-                                                <input type="text" class="form-control">
+                                                <input type="text" class="form-control" id="ZPNLR1">
                                                 <label>ZPNHR(%)</label>
-                                                <input type="text" class="form-control">
+                                                <input type="text" class="form-control" id="ZPNHR1">
                                                 <label>ZEPS</label>
-                                                <input type="text" class="form-control">
+                                                <input type="text" class="form-control" id="ZEPS1">
                                                 <label>ZTTF(C)</label>
-                                                <input type="text" class="form-control">
+                                                <input type="text" class="form-control" id="ZTTF1">
                                                 <label>ZTTP(C)</label>
-                                                <input type="text" class="form-control">
+                                                <input type="text" class="form-control" id="ZTTP1">
                                                 <label>ZT25(C)</label>
-                                                <input type="text" class="form-control">
+                                                <input type="text" class="form-control" id="ZT251">
                                                 <label>ZTT3(C)</label>
-                                                <input type="text" class="form-control">
+                                                <input type="text" class="form-control" id="ZTT31">
                                                 <label>ZTED(C)</label>
-                                                <input type="text" class="form-control">
+                                                <input type="text" class="form-control" id="ZTED1">
                                                 <label>ZTEF(C)</label>
-                                                <input type="text" class="form-control">
+                                                <input type="text" class="form-control" id="ZTEF1">
                                                 <label>ZTEH(C)</label>
-                                                <input type="text" class="form-control">
+                                                <input type="text" class="form-control" id="ZTEH1">
                                                 <label>ZTEI(C)</label>
-                                                <input type="text" class="form-control">
+                                                <input type="text" class="form-control" id="ZTEI1">
                                                 <label>ZT8M(C)</label>
-                                                <input type="text" class="form-control">
+                                                <input type="text" class="form-control" id="ZT8M1">
                                                 <label>IR</label>
-                                                <input type="text" class="form-control">
+                                               <!-- <input type="text" class="form-control" id="IR1">-->
 
                                             </div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                  <label>ZPNI(%)</label>
-                                                 <input type="text" class="form-control">
+                                                 <input type="text" class="form-control" id="ZPNI1">
                                                  <label>ZPIA(bar)</label>
-                                                 <input type="text" class="form-control">
+                                                 <input type="text" class="form-control" id="ZPIA1">
                                                  <label>ZP41(bar)</label>
-                                                 <input type="text" class="form-control">
+                                                 <input type="text" class="form-control" id="ZP411">
                                                  <label>ZP5(bar)</label>
-                                                 <input type="text" class="form-control">
+                                                 <input type="text" class="form-control" id="ZP51">
                                                  <label>ZP8(bar)</label>
-                                                 <input type="text" class="form-control">
+                                                 <input type="text" class="form-control" id="ZP81">
                                                  <label>ZP18(bar)</label>
-                                                 <input type="text" class="form-control">
+                                                 <input type="text" class="form-control" id="ZP181">
                                                  <label>ZPS5(bar)</label>
-                                                 <input type="text" class="form-control">
+                                                 <input type="text" class="form-control" id="ZPS51">
                                                  <label>ZV9(m/s)</label>
-                                                 <input type="text" class="form-control">
+                                                 <input type="text" class="form-control"id ="ZV91">
                                                  <label>ZV19(m/s)</label>
-                                                 <input type="text" class="form-control">
+                                                 <input type="text" class="form-control" id="ZV191">
                                                  <label>ZAE8(m²)</label>
-                                                 <input type="text" class="form-control">
+                                                 <input type="text" class="form-control" id="ZAE81">
                                                  <label>ZAE18(m²)</label>
-                                                 <input type="text" class="form-control">
+                                                 <input type="text" class="form-control" id="ZAE181">
                                                  <br/><br/><br/><br/><br/><br/>
                                                  <label>ZEPMIX</label>
-                                                 <input type="text" class="form-control">
+                                                 <input type="text" class="form-control" id="ZEPMIX1">
                                                  <label>ZECO2</label>
-                                                 <input type="text" class="form-control">
+                                                 <input type="text" class="form-control" id="ZECO21">
                                                  <label>ZESO2</label>
-                                                 <input type="text" class="form-control">
+                                                 <input type="text" class="form-control" id="ZESO21">
                                                  <label>ZEH20</label>
-                                                 <input type="text" class="form-control">
+                                                 <input type="text" class="form-control" id="ZEH201">
                                                  <label>ZECO</label>
-                                                 <input type="text" class="form-control">
+                                                 <input type="text" class="form-control" id="ZECO1">
                                                  <label>ZEHC</label>
-                                                 <input type="text" class="form-control">
+                                                 <input type="text" class="form-control" id="ZEHC1">
                                                  <label>ZENOX</label>
-                                                 <input type="text" class="form-control">
+                                                 <input type="text" class="form-control" id="ZENOX1">
                                             </div>
                                           
                                         </div>
                                          <div class="col-md-3">
                                             <div class="form-group">
                                                  <label>ZPNIR(%)</label>
-                                                 <input type="text" class="form-control">
+                                                 <input type="text" class="form-control" id="ZPNIR1">
                                                  <label>ZT1A(C)</label>
-                                                 <input type="text" class="form-control">
+                                                 <input type="text" class="form-control" id="ZT1A1">
                                                  <label>ZT41(C)</label>
-                                                 <input type="text" class="form-control">
+                                                 <input type="text" class="form-control" id="ZT411">
                                                  <label>ZT5(C)</label>
-                                                 <input type="text" class="form-control">
+                                                 <input type="text" class="form-control" id="ZT51">
                                                  <label>ZT8(C)</label>
-                                                 <input type="text" class="form-control">
+                                                 <input type="text" class="form-control" id="ZT81">
                                                  <label>ZT18(C)</label>
-                                                 <input type="text" class="form-control">
+                                                 <input type="text" class="form-control" id="ZT181">
                                                  <label>ZT13(C)</label>
-                                                 <input type="text" class="form-control">
+                                                 <input type="text" class="form-control" id="ZT131">
                                                  <label>ZV9M(m/s)</label>
-                                                 <input type="text" class="form-control">
+                                                 <input type="text" class="form-control" id="ZV9M1">
                                                  <br/><br/><br/>
                                                  <label>ZAE8M(m²)</label>
-                                                 <input type="text" class="form-control">
+                                                 <input type="text" class="form-control" id="ZAE8M1">
                                                  <br/><br/><br/><br/><br/><br/>
                                                  <label>ZW3(kg/s)</label>
-                                                 <input type="text" class="form-control">
+                                                 <input type="text" class="form-control" id="ZW31">
                                                  <label>ZW8(kg/s)</label>
-                                                 <input type="text" class="form-control">
+                                                 <input type="text" class="form-control" id="ZW81">
                                                  <label>ZW18(kg/s)</label>
-                                                 <input type="text" class="form-control">
+                                                 <input type="text" class="form-control" id="ZW181">
                                                  <label style="color:blue;">ZOUT1</label>
-                                                 <input type="text" class="form-control">
+                                                 <input type="text" class="form-control" id="ZOUT11">
                                                  <label style="color:blue;">ZOUT2</label>
-                                                 <input type="text" class="form-control">
+                                                 <input type="text" class="form-control" id="ZOUT21">
                                                  <label style="color:blue;">ZOUT3</label>
-                                                 <input type="text" class="form-control">
+                                                 <input type="text" class="form-control" id="ZOUT31">
                                                  <label style="color:blue;">ZOUT4</label>
-                                                 <input type="text" class="form-control">
+                                                 <input type="text" class="form-control" id="ZOUT41">
                                                  <label style="color:blue;">ZOUT5</label>
-                                                 <input type="text" class="form-control">
+                                                 <input type="text" class="form-control" id="ZOUT51">
                                             </div>
                                           
                                         </div>
                                     </div>
-                                </form>
+                                    </div>
+                                </div >
                                 <hr>
                                 <div class="row">
                                     <div class="col-md-12">
                                         <label>VERSION MOTEUR UTILISEE</label>
-                                        <input type="text" class="form-control">
+                                        <input type="text" class="form-control" id="VERSION1">
                                         <p style="color:green;"><strong>Résultat cohérent avec les données affichées</strong></p>
                                     </div>
                                     
@@ -301,9 +313,12 @@
                                       <button type="submit" class="btn" data-toggle="modal" id="save_modal">Enregistrer</button>
                                     <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="showResult()">Annuler</button>
                                 </div>
-
+                            </div>
+                            </form>
                             </div>
                         </div>
+                    </div>
+                    </div>
                 </div>
             </div>
             
@@ -319,7 +334,10 @@
 
 {% endblock %}
 </body>
+ <script type="text/javascript">
 
+S
+ </script>
 
 </html>
 
