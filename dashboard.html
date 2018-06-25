@@ -6,11 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta http-equiv="Content-Language"
      content="fr,en"/>
-    <title>SPPMS TOOLS</title>
+    <title>LIBRAIRIE HOMOLOGUEE</title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
     <!--     Fonts and icons     -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
     <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+    
     <!-- CSS Files -->
     <link href="{{url_for ('static',filename= 'css/bootstrap.min.css')}}" rel="stylesheet" />
     <link href="{{url_for('static', filename= 'css/sppms.css')}}" rel="stylesheet" />
@@ -25,14 +26,14 @@
         <!--Sidebar start-->
         <div class="sidebar" data-color="white">
             <div class="logo">
-                <a href="{{url_for('dashboard')}}" class="simple-text logo-normal">
+                <a href="{{url_for('homologate')}}" class="simple-text logo-normal">
                         SPPMS TOOLS
                 </a>
             </div>
             <div class="sidebar-wrapper">
                 <ul class="nav">
                     <li class="">
-                        <a href="{{url_for('dashboard')}}" data-toggle="tooltip" data-animation="false" title="Librairie moteur validée par EPG">
+                        <a href="{{url_for('homologate')}}" data-toggle="tooltip" data-animation="false" title="Librairie moteur validée par EPG">
                             <i class="now-ui-icons design_app"></i>
                             <p>Librairie Homologuée</p>
                         </a>
@@ -43,7 +44,7 @@
                             <p>Autres librairies</p>
                         </a>
                     </li>
-                    <li id="resultat">
+                    <li id="resultat" style="display: none;" >
                         <a href="{{url_for('result') }}">
                             <i class="now-ui-icons design_vector"></i>
                             <p>Résultat</p>
@@ -65,7 +66,7 @@
                                 <span class="navbar-toggler-bar bar3"></span>
                             </button>
                         </div>
-                        <a class="navbar-brand" href="../templates/dashboard.html" data-toggle="tooltip" data-placement="botton" title="Librairie moteur validée par EPG">Librairie Homologuée</a>
+                        <a class="navbar-brand" href="#" data-toggle="tooltip" data-placement="botton" title="Librairie moteur validée par EPG">Librairie Homologuée</a>
 
                     </div>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
@@ -76,7 +77,7 @@
                     <div class="collapse navbar-collapse justify-content-end" id="navigation">
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="now-ui-icons loader_gear"></i>
                                     <p>
                                         <span class="d-lg-none d-md-block">Help</span>
@@ -152,25 +153,27 @@
                             <div class="card-header">
                                 <h5 class="card-category"><strong>API Bdmodel</strong></h5>
                             </div>
+                         <form id="form_valid" class="form-submit"  method="GET" action="result.html">
                             <div class="card-body" >
+                            
                                <div class="table-type" >
                                     <label class="custom-control custom-radio">
-                                      <input id="radio1" name="bdmodel" type="radio" class="custom-control-input">
+                                      <input id="input_path1" name="bdmodel" type="radio" class="custom-control-input" value="/opt/soft/cdtng/tools/sppms_moteur/10.4/lib/libmoteur.a">
                                       <span class="custom-control-indicator"></span>
                                       <span class="custom-control-description" data-toggle="tooltip" data-animation="false" title="Les programmes de manipulation et de gestion des bases et des labels dans cet environnement sont de type BDmodel et de l'option de compilation choisie est de double précision pour les réels">Normal(double précision)</span>
                                     </label>
                                      <label class="custom-control custom-radio" >
-                                      <input id="radio1" name="bdmodel" type="radio" class="custom-control-input">
+                                      <input id="input_path2" name="bdmodel" type="radio" class="custom-control-input" value="/opt/soft/cdtng/tools/sppms_moteur/10.4/lib/libmoteur8.a">
                                       <span class="custom-control-indicator"></span>
                                       <span class="custom-control-description" data-toggle="tooltip" data-animation="false" title="Les programmes de manipulation et de gestion des bases et des labels dans cet environnement sont de type Bdmodel">Normal(précision simple)</span>
                                     </label>
                                      <label class="custom-control custom-radio">
-                                      <input id="radio1" name="bdmodel" type="radio" class="custom-control-input">
+                                      <input id="input_path3" name="bdmodel" type="radio" class="custom-control-input" value="/opt/soft/cdtng/tools/sppms_moteur/10.4/lib/libmoteuropt.a">
                                       <span class="custom-control-indicator"></span>
                                       <span class="custom-control-description" data-toggle="tooltip" data-animation="false" title="Les programmes de manipulation et de gestion des bases et des labels dans cet environnement sont de type Bdmodel(Nouvelle environnement mis en place sous UNIX), les API d'interpolation et d'extrapolation sont optimisées en terme de vitesse de calcul et l'option de compilation choisie est de simple précision pour les réels">Optimisée(double précision)</span>
                                     </label>
                                     <label class="custom-control custom-radio">
-                                      <input id="radio1" name="bdmodel" type="radio" class="custom-control-input">
+                                      <input id="input_path4" name="bdmodel" type="radio" class="custom-control-input" value="/opt/soft/cdtng/tools/sppms_moteur/10.4/lib/libmoteuropt8.a">
                                       <span class="custom-control-indicator"></span>
                                       <span class="custom-control-description" data-toggle="tooltip" data-animation="false" title="Les programmes de manipulation et de gestions des bases et des labels dans cet environnement sont de type Bdmodel, les API d'interpolation et d'extrapolation sont optimisées en terme de vitesse de calcule et l'option de compilation choisie est de double précision pour les réels">Optimisée(précision simple)</span>
                                     </label>                                          
@@ -189,7 +192,7 @@
                             <div class="card-body">
                                 <div class="table-full-width table-responsive">
                                     <div class="" >
-                                     <form id="form_valid" class="form-submit">
+                                    
                                         <label class="custom-control custom-radio" >
                                             <input id="base" name="radio" type="radio" class="custom-control-input" onclick="showLocal()">
                                             <span class="custom-control-indicator"></span>
@@ -199,7 +202,7 @@
                                          <div class="input-group mb-3" id="locale" style="display: none;">
                                            
                                                 <label for="file" class="custom-file" id="customFile">
-                                                    <input type="file" class="input-file" name="file" id="hc"  webkitdirectory mozdirectory msdirectory odirectory directory multiple />
+                                                    <input type="file" class="input-file" name="file" id="hc" accept= ".sda" webkitdirectory mozdirectory msdirectory odirectory directory multiple />
                                                </label> 
                                               <!--<button class="btn" id="locale" type="submit" value="File" >Envoyer</button> -->
                                             
@@ -213,19 +216,18 @@
                                             <span class="custom-control-indicator"></span>
                                             <span class="custom-control-description">Banque projet</span>
                                         </label> 
-                                       <!-- <form class="form-inline visible='none'"  style="display: none;">-->
-                                            <div class="row" id="projet">
+                         
+                                            <div class="row" id="projet" style="display:none;"  visible='none'>
                                                 <div class="col-md-3">
                                                     <div class="form-group">
                                                         <label>Banque</label>
-                                                        <input type="text" class="form-control inputfield" data-toggle="tooltip" data-animation="false" title="Banque moteur(ie MA320">
-                                                        
+                                                        <input type="text" class="form-control inputfield" data-toggle="tooltip" data-animation="false" title="Banque moteur(ie MA320)">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-3">
                                                     <div class="form-group">
                                                         <label>Version</label>
-                                                        <input type="text" class="form-control inputfield" data-toggle="tooltip" data-animation="false" title="Version moteur(ie PW11124G1-JM">
+                                                        <input type="text" class="form-control inputfield" data-toggle="tooltip" data-animation="false" title="Version moteur(ie PW11124G1-JM)">
                                                     </div>
                                                 </div>
                                                  <div class="col-md-3">
@@ -240,7 +242,7 @@
                                                         <input type="text" class="form-control inputfield" data-toggle="tooltip" data-animation="false" title="Date réference qui identifiele repère">
                                                     </div>
                                                 </div>
-                                            </div>
+                                         
                                             <div class="">
                                                 <label class="custom-control custom-checkbox">
                                                     <input type="checkbox" class="custom-control-input">
@@ -267,7 +269,7 @@
                                                           </div>
                                                     
                                                           <!-- Modal body -->
-                                                          <div class="modal-body">
+                                                          <div class="modal-body1">
                                                             <div class="row">
                                                                 <div class="col-md-3">
                                                                     <label>Domaine</label>
@@ -353,6 +355,7 @@
                                                 </label>
                                                 
                                             </div>
+                                           </div>
                                         <!--</form>-->
                                         
                                     </div>
@@ -388,7 +391,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Humidité</label>
-                                    <input type="text" id="humidite" class="form-control" placeholder="-10" data-toggle="tooltip" data-animation="false" name="humidite" value="" title="Code utilisé pour le calcul de l'humidité:
+                                    <input type="text" id="humidite" class="form-control" value="-10" data-toggle="tooltip" data-animation="false" name="humidite" value="" title="Code utilisé pour le calcul de l'humidité:
                                         HUM=0. :Calcul effectué avec un air sec
                                         HUM=1.0. : Calcul effectué avec une humidité standard FAR25
                                         0.<HUM<1.0:Calcul effectué avec une humidité spécifique(Kg eau/Kg air)
@@ -543,181 +546,181 @@
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                 </div>
                                   <!-- Modal body -->
+                                <form>  
                                 <div class="modal-body">
                                     <div class="card-body">
-                                        <form id= "moteur">
+                                        <form id= "moteur" action = "http://caefr0p256:8125/result" method ="POST">
                                             <div class="row">
                                                  <div class="col-md-3">
                                                     <div class="form-group" id="1">
                                                         <label>ZSPHUM (kg/kg)</label>
-                                                        <input type="text" class="form-control" id="ZSPHUM">
+                                                        <input type="text" class="form-control" name="ZSPHUM" id="ZSPHUM">
                                                         <label>ZPCON</label>
-                                                        <input type="text" class="form-control" id="ZPCON">
+                                                        <input type="text" class="form-control" name="ZPCON" id="ZPCON">
                                                         <label>ZFNI (daN)</label>
-                                                        <input type="text" class="form-control" id="ZFNI" >
+                                                        <input type="text" class="form-control" name="ZFNI" id="ZFNI" >
                                                         <label>ZFGI (daN)</label>
-                                                        <input type="text" class="form-control" id="ZFGI" >
+                                                        <input type="text" class="form-control" name="ZFGI" id="ZFGI">
                                                         <label>ZW1A (kg/s)</label>
-                                                        <input type="text" class="form-control" id="ZW1A">
+                                                        <input type="text" class="form-control" name="ZW1A" id="ZW1A">
                                                         <label>ZWFE(kg/h)</label>
-                                                        <input type="text" class="form-control" id="ZWFE">
+                                                        <input type="text" class="form-control" name="ZWFE" id="ZWFE">
                                                         <label>ZEGT(C)</label>
-                                                        <input type="text" class="form-control" id="ZEGT">
+                                                        <input type="text" class="form-control" name="ZEGT" id="ZEGT">
                                                         <label>ZPNL(%)</label>
-                                                        <input type="text" class="form-control" id="ZPNL">
+                                                        <input type="text" class="form-control" name="ZPNL" id="ZPNL">
                                                         <label>ZPNH(%)</label>
-                                                        <input type="text" class="form-control" id="ZPNH">
+                                                        <input type="text" class="form-control" name="ZPNH" id="ZPNH">
                                                         <label>ZPS3(bar)</label>
-                                                        <input type="text" class="form-control" id="ZPS3">
+                                                        <input type="text" class="form-control" name="ZPS3" id="ZPS3">
                                                         <label>ZPTF(bar)</label>
-                                                        <input type="text" class="form-control" id="ZPTF">
+                                                        <input type="text" class="form-control" name="ZPTF"  id="ZPTF">
                                                         <label>ZPTP(bar)</label>
-                                                        <input type="text" class="form-control" id="ZPTP">
+                                                        <input type="text" class="form-control" name="ZPTP" id="ZPTP">
                                                         <label>ZW25(kg/s)</label>
-                                                        <input type="text" class="form-control" id="ZW25">
+                                                        <input type="text" class="form-control" name="ZW25" id="ZW25">
                                                         <label>ZPT3(bar)</label>
-                                                        <input type="text" class="form-control" id="ZPT3">
+                                                        <input type="text" class="form-control" name="ZPT3" id="ZPT3">
                                                         <label>ZPED(bar)</label>
-                                                        <input type="text" class="form-control" id="ZPED">
+                                                        <input type="text" class="form-control" name="ZPED" id="ZPED">
                                                         <label>ZPEF(bar)</label>
-                                                        <input type="text" class="form-control" id="ZPEF">
+                                                        <input type="text" class="form-control" name="ZPEF" id="ZPEF">
                                                         <label>ZPEH(bar)</label>
-                                                        <input type="text" class="form-control" id="ZPEH">
+                                                        <input type="text" class="form-control" name="ZPEH" id="ZPEH">
                                                         <label>ZPEI(bar)</label>
-                                                        <input type="text" class="form-control" id="ZPEI">
+                                                        <input type="text" class="form-control" name="ZPEI" id="ZPEI">
                                                         <label>ZP8M(bar)</label>
-                                                        <input type="text" class="form-control" id="ZP8M">
+                                                        <input type="text" class="form-control" name="ZP8M" id="ZP8M">
                                                         <label>ZVEJ(m/s)</label>
-                                                        <input type="text" class="form-control" id="ZVEJ">
+                                                        <input type="text" class="form-control" name="ZVEJ" id="ZVEJ">
                                                         
                                                     </div>
                                                  </div>
                                                  <div class="col-md-3" id="2">
                                                     <div class="form-group">
                                                         <label>ZWBINS(kg/s)</label>
-                                                        <input type="text" class="form-control" id="ZWBINS">
+                                                        <input type="text" class="form-control" name="ZWBINS" id="ZWBINS">
                                                         <label>ZPCONR</label>
-                                                        <input type="text" class="form-control" id="ZPCONR">
+                                                        <input type="text" class="form-control" name="ZPCONR" id="ZPCONR">
                                                         <label>ZFNIR(daN)</label>
-                                                        <input type="text" class="form-control" id="ZFNIR">
+                                                        <input type="text" class="form-control" name="ZFNIR" id="ZFNIR">
                                                         <label>ZFGIR(daN)</label>
-                                                        <input type="text" class="form-control" id="ZFGIR">
+                                                        <input type="text" class="form-control" name="ZFGIR" id="ZFGIR">
                                                         <label>ZW1AR(kg/s)</label>
-                                                        <input type="text" class="form-control" id="ZW1AR">
+                                                        <input type="text" class="form-control" name="ZW1AR" id="ZW1AR">
                                                         <label>ZWFER(kg/h)</label>
-                                                        <input type="text" class="form-control" id="ZWFER">
+                                                        <input type="text" class="form-control" name="ZWFER" id="ZWFER">
                                                         <label>ZEGTR(C)</label>
-                                                        <input type="text" class="form-control" id="ZEGTR">
+                                                        <input type="text" class="form-control" name="ZEGTR" id="ZEGTR">
                                                         <label>ZPNLR(%)</label>
-                                                        <input type="text" class="form-control" id="ZPNLR">
+                                                        <input type="text" class="form-control" name="ZPNLR" id="ZPNLR">
                                                         <label>ZPNHR(%)</label>
-                                                        <input type="text" class="form-control" id="ZPNHR">
+                                                        <input type="text" class="form-control" name="ZPNHR" id="ZPNHR">
                                                         <label>ZEPS</label>
-                                                        <input type="text" class="form-control" id="ZEPS">
+                                                        <input type="text" class="form-control" name="ZEPS" id="ZEPS">
                                                         <label>ZTTF(C)</label>
-                                                        <input type="text" class="form-control" id="ZTTF">
+                                                        <input type="text" class="form-control" name="ZTTF" id="ZTTF">
                                                         <label>ZTTP(C)</label>
-                                                        <input type="text" class="form-control" id="ZTTP">
+                                                        <input type="text" class="form-control" name="ZTTP" id="ZTTP">
                                                         <label>ZT25(C)</label>
-                                                        <input type="text" class="form-control" id="ZT25">
+                                                        <input type="text" class="form-control" name="ZT25" id="ZT25">
                                                         <label>ZTT3(C)</label>
-                                                        <input type="text" class="form-control" id="ZTT3">
+                                                        <input type="text" class="form-control" name="ZTT3" id="ZTT3"> 
                                                         <label>ZTED(C)</label>
-                                                        <input type="text" class="form-control" id="ZTED">
+                                                        <input type="text" class="form-control" name="ZTED" id="ZTED">
                                                         <label>ZTEF(C)</label>
-                                                        <input type="text" class="form-control" id="ZTEF">
+                                                        <input type="text" class="form-control" name="ZTEF" id="ZTEF">
                                                         <label>ZTEH(C)</label>
-                                                        <input type="text" class="form-control" id="ZTEH">
+                                                        <input type="text" class="form-control" name="ZTEH" id="ZTEH">
                                                         <label>ZTEI(C)</label>
-                                                        <input type="text" class="form-control" id="ZTEI">
+                                                        <input type="text" class="form-control" name="ZTEI" id="ZTEI">
                                                         <label>ZT8M(C)</label>
-                                                        <input type="text" class="form-control" id="ZT8M">
+                                                        <input type="text" class="form-control" name="ZT8M" id="ZT8M">
                                                         <label>IR</label>
-                                                        <input type="text" class="form-control" id="IR">
+                                                        <input type="text" class="form-control" name="IR" id="IR">
                                                     </div>
                                                      </div>
                                                  <div class="col-md-3" id="3">
                                             <div class="form-group">
                                                  <label>ZPNI(%)</label>
-                                                 <input type="text" class="form-control" id="ZPNI">
+                                                 <input type="text" class="form-control" name="ZPNI" id="ZPNI">
                                                  <label>ZP1A(bar)</label>
-                                                 <input type="text" class="form-control" id="ZP1A">
+                                                 <input type="text" class="form-control" name="ZP1A" id="ZP1A">
                                                  <label>ZP41(bar)</label>
-                                                 <input type="text" class="form-control" id="ZP41">
+                                                 <input type="text" class="form-control" name="ZP41" id="ZP41">
                                                  <label>ZP5(bar)</label>
-                                                 <input type="text" class="form-control" id="ZP5" >
+                                                 <input type="text" class="form-control" name="ZP5" id="ZP5">
                                                  <label>ZP8(bar)</label>
-                                                 <input type="text" class="form-control" id="ZP8" >
+                                                 <input type="text" class="form-control" name="ZP8" id="ZP8">
                                                  <label>ZP18(bar)</label>
-                                                 <input type="text" class="form-control" id="ZP18">
+                                                 <input type="text" class="form-control" name="ZP18" id="ZP18">
                                                  <label>ZPS5(bar)</label>
-                                                 <input type="text" class="form-control" id="ZPS5">
+                                                 <input type="text" class="form-control" name="ZPS5" id="ZPS5">
                                                  <label>ZV9(m/s)</label>
-                                                 <input type="text" class="form-control" id="ZV9" >
+                                                 <input type="text" class="form-control" name="ZV9" id="ZV9">
                                                  <label>ZV19(m/s)</label>
-                                                 <input type="text" class="form-control" id="ZV19">
+                                                 <input type="text" class="form-control" name="ZV19" id="ZV19">
                                                  <label>ZAE8(m²)</label>
-                                                 <input type="text" class="form-control" id="ZAE8">
+                                                 <input type="text" class="form-control" name="ZAE8" id="ZAE8">
                                                  <label>ZAE18(m²)</label>
-                                                 <input type="text" class="form-control" id="ZAE18">
+                                                 <input type="text" class="form-control" name="ZAE18" id="ZAE18">
                                                  <br/><br/><br/><br/><br/><br/>
                                                  <label>ZEPMIX</label>
-                                                 <input type="text" class="form-control" id="ZEPMIX">
+                                                 <input type="text" class="form-control" name="ZEPMIX" id="ZEPMIX">
                                                  <label>ZECO2</label>
-                                                 <input type="text" class="form-control" id="ZECO2">
+                                                 <input type="text" class="form-control" name="ZECO2" id="ZECO2">
                                                  <label>ZESO2</label>
-                                                 <input type="text" class="form-control" id="ZESO2">
+                                                 <input type="text" class="form-control" name="ZESO2" id="ZESO2">
                                                  <label>ZEH20</label>
-                                                 <input type="text" class="form-control" id="ZEH2O">
+                                                 <input type="text" class="form-control" name="ZEH2O" id="ZEH2O">
                                                  <label>ZECO</label>
-                                                 <input type="text" class="form-control" id="ZECO" >
+                                                 <input type="text" class="form-control" name="ZECO" id="ZECO">
                                                  <label>ZEHC</label>
-                                                 <input type="text" class="form-control" id="ZEHC">
+                                                 <input type="text" class="form-control" name="ZEHC" id="ZEHC">
                                                  <label>ZENOX</label>
-                                                 <input type="text" class="form-control" id="ZENOX">
+                                                 <input type="text" class="form-control" name="ZENOX" id="ZENOX">
                                             </div>
                                           
                                         </div>
                                          <div class="col-md-3" id="4">
                                             <div class="form-group">
                                                  <label>ZPNIR(%)</label>
-                                                 <input type="text" class="form-control" id="ZPNIR">
+                                                 <input type="text" class="form-control" name="ZPNIR" id="ZPNIR">
                                                  <label>ZT1A(C)</label>
-                                                 <input type="text" class="form-control" id="ZT1A">
+                                                 <input type="text" class="form-control" name="ZT1A" id="ZT1A">
                                                  <label>ZT41(C)</label>
-                                                 <input type="text" class="form-control" id="ZT41">
+                                                 <input type="text" class="form-control" name="ZT41" id="ZT41">
                                                  <label>ZT5(C)</label>
-                                                 <input type="text" class="form-control" id="ZT5">
+                                                 <input type="text" class="form-control" name="ZT5" id="ZT5">
                                                  <label>ZT8(C)</label>
-                                                 <input type="text" class="form-control" id="ZT8">
+                                                 <input type="text" class="form-control" name="ZT8" id="ZT8">
                                                  <label>ZT18(C)</label>
-                                                 <input type="text" class="form-control" id="ZT18">
+                                                 <input type="text" class="form-control" name="ZT18" id="ZT18">
                                                  <label>ZT13(C)</label>
-                                                 <input type="text" class="form-control" id="ZT13">
+                                                 <input type="text" class="form-control" name="ZT13" id="ZT13">
                                                  <label>ZV9M(m/s)</label>
-                                                 <input type="text" class="form-control" id="ZV9M">
+                                                 <input type="text" class="form-control" name="ZV9M" id="ZV9M">
                                                  <br/><br/><br/>
                                                  <label>ZAE8M(m²)</label>
-                                                 <input type="text" class="form-control" id="ZAE8M">
+                                                 <input type="text" class="form-control" name="ZAE8M" id="ZAE8M">
                                                  <br/><br/><br/><br/><br/><br/>
                                                  <label>ZW3(kg/s)</label>
-                                                 <input type="text" class="form-control" id="ZW3" >
+                                                 <input type="text" class="form-control" name="ZW3" id="ZW3">
                     
-    <!-- Control Center for SPPMS: parallax effects, scripts for the example pages etc -->
-    <script type="text/javascript" src= "{{ url_for('static',filename= 'js/sppms.js') }}"></script>     <label>ZW8(kg/s)</label>
-                                                 <input type="text" class="form-control" id="ZW8">
+                                                 <label>ZW8(kg/s)</label>
+                                                 <input type="text" class="form-control" name="ZW8" id="ZW8">
                                                  <label>ZW18(kg/s)</label>
-                                                 <input type="text" class="form-control" id="ZW18" >
+                                                 <input type="text" class="form-control" name="ZW18" id="ZW18">
                                                  <label style="color:blue;">ZOUT1</label>
-                                                 <input type="text" class="form-control" id="ZOUT1" >
+                                                 <input type="text" class="form-control" name="ZOUT1" id="ZOUT1">
                                                  <label style="color:blue;">ZOUT2</label>
-                                                 <input type="text" class="form-control" id="ZOUT2" >
+                                                 <input type="text" class="form-control" name="ZOUT2" id="ZOUT2" >
                                                  <label style="color:blue;">ZOUT3</label>
-                                                 <input type="text" class="form-control" id="ZOUT3"  >
+                                                 <input type="text" class="form-control" name="ZOUT3" id="ZOUT3" >
                                                  <label style="color:blue;">ZOUT4</label>
-                                                 <input type="text" class="form-control" id="ZOUT4" >
+                                                 <input type="text" class="form-control" name="ZOUT4" id="ZOUT4">
                                                  <label style="color:blue;">ZOUT5</label>
-                                                 <input type="text" class="form-control" id="ZOUT5">
+                                                 <input type="text" class="form-control" name="ZOUT5" id="ZOUT5">
                                             </div>
                                           
                                         </div>
@@ -727,27 +730,28 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <label>VERSION MOTEUR UTILISEE</label>
-                                        <input type="text" class="form-control" id="VERSION">
-                                        <p style="color:green;"><strong>Résultat cohérent avec les données affichées</strong></p>
-                                    </div>
-                                    
-                                </div>
-                            </div>
-                                    
+                                        <input type="text" class="form-control" name="VERSION" id="VERSION">
                                         
+                                        <p style="color:green;">
+                                        <strong>Résultat cohérent avec les données affichées</strong>
+                                        </p>
                                     </div>
                                     
-                                
-                                  <!-- Modal footer -->
-                                  <div class="modal-footer">
-                                     
-                                    <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="showResult()">Annuler</button>
-                                  </div>
-
                                 </div>
-                              </div>
-                            </div>
-                                      
+                            </div>            
+                        </div>
+                          <!-- Modal footer -->
+                          <div class="modal-footer">
+                              <button type="submit" class="btn" data-toggle="modal" id="save_modal">Sauvegarder</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="showResult()">Annuler</button>
+                          </div>
+                        <!--<div id="overlay">-->
+                            <!--<div class="spinner"></div>-->
+                        <!--</div>-->
+                        </div>
+                      </div>
+                    </div>
+                              
                       </div>
                       </div>
                 </div>
@@ -756,9 +760,9 @@
         </div>
     </div>
 <!--   Core JS Files   -->
-<script type="text/javascript" src="{{ url_for('static', filename= 'js/core/jquery.min.js') }}"></script>
-<script type="text/javascript" src="{{url_for('static', filename= 'js/core/popper.min.js') }}"></script>
-<script type="text/javascript" src="{{url_for('static', filename= 'js/core/bootstrap.min.js') }}"></script>
+<script type="text/javascript" src="{{url_for('static', filename= 'js/core/jquery.min.js')}}"></script>
+<script type="text/javascript" src="{{url_for('static', filename= 'js/core/popper.min.js')}}"></script>
+<script type="text/javascript" src="{{url_for('static', filename= 'js/core/bootstrap.min.js')}}"></script>
 <script type="text/javascript" src="{{url_for('static', filename= 'js/plugins/perfect-scrollbar.jquery.min.js') }}"></script>
 <script type="text/javascript" src= "{{url_for('static',filename= 'js/sppms.js') }}"></script>
 
