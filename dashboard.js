@@ -1,9 +1,8 @@
-
 (function () {
     isWindows = navigator.platform.indexOf('Win') > -1 ? true : false;
 
     if (isWindows) {
-        $('.sidebar .sidebar-wrapper, .main-panel').perfectScrollbar();
+     //   $('.sidebar .sidebar-wrapper, .main-panel, .modal').perfectScrollbar();
 
         $('html').addClass('perfect-scrollbar-on');
     } else {
@@ -108,7 +107,7 @@ nowuiDashboard = {
         });
     },
 //Sidebar menu
-    showSidebarMessage: function showSidebarMessage(message) {
+showSidebarMessage: function showSidebarMessage(message) {
         try {
             $.notify({
                 icon: "now-ui-icons ui-1_bell-53",
@@ -237,7 +236,7 @@ function getTooltip(elements) {
 
 }
 
-/*var check= {};
+var check= {};
 
 check['api'] =function (){
     var api = document.getElementsByName('api'),
@@ -250,47 +249,25 @@ check['api'] =function (){
         return false;
     }
 
-};*/
+};
 
-// (function() { 
+// //Submit function,( don't control 'CODE RESULTAT' button)*
+//form_valid.addEventListener('submit', function(e) {
+//        var result = true;
+//        for (var i in check) {
+//            result = check[i](i) && result;
+//       }
+//        if (result) {
+//           alert('Le formulaire est bien rempli.');
+//      }       e.preventDefault();   });
 
-//     var myForm = document.getElementById('myForm'),
-//         inputs = document.querySelectorAll('input[type=text]'),
-//         inputsLength = inputs.length;
-
-//     for (var i = 0; i < inputsLength; i++) {
-//         inputs[i].addEventListener('keyup', function(e) {
-//             check[e.target.id](e.target.id); 
-//         });
-//     }
-// //Submit function,( don't control 'CODE RESULTAT' button)
-/*    form_valid.addEventListener('submit', function(e) {
-
-        var result = true;
-
-        for (var i in check) {
-            result = check[i](i) && result;
-        }
-
-        if (result) {
-            alert('Le formulaire est bien rempli.');
-        }
-
-        e.preventDefault();
-
-    });
-*/
 //RAZ button
-/*    form_valid.addEventListener('reset', function() {
+//form_valid.addEventListener('reset', function() {
+//        for (var i = 0; i < inputs.length; i++) {
+//            inputs[i].className = '';        }
+//        deactivateTooltips();
+//    });
 
-        for (var i = 0; i < inputs.length; i++) {
-            inputs[i].className = '';
-        }
-
-        deactivateTooltips();
-
-    });
-*/
 
 
 
@@ -309,128 +286,6 @@ $(document).ready(function() {
 
           });
 });
-
-//Server communication 
-
-//  $(document).ready(function(){
-//         $('form').on('submit', function(event){
-//             var form = $('#customfileUp')[0];
-//             var fd = new FormData(form);
-//                  var settings = {
-//                   "async": true,
-//                   "crossDomain": true,
-//                   "url": "http://caefr0p235:5001/uploadhc",
-//                   "method": "POST",
-//                   "processData": false,
-//                   "contentType": false,
-//                   "mimeType": "multipart/form-data",
-//                   "data": fd
-//                 }
-
-//             $.ajax(settings).done(function (response) {
-
-//                 let alldata = JSON.parse(response);
-
-//                 //console.log(alldata.ZPCON);
-//                 document.getElementById('ZSPHUM').value =  alldata.ZSPHUM;
-//                 document.getElementById('ZPCON').value = alldata.ZPCON;
-//                 document.getElementById('ZFNI').value = alldata.ZFNI;
-//                 document.getElementById('ZFGI').value =  alldata.ZFGI;
-//                 document.getElementById('ZW1A').value = alldata.ZW1A;
-//                 document.getElementById('ZWFE').value = alldata.ZWFE;
-
-//                 document.getElementById('ZEGT').value =  alldata.ZEGT;
-//                 document.getElementById('ZPNL').value = alldata.ZPNL;
-//                 document.getElementById('ZPNH').value = alldata.ZPNH;
-//                 document.getElementById('ZPS3').value =  alldata.ZPS3;
-//                 document.getElementById('ZPTF').value = alldata.ZPTF;
-//                 document.getElementById('ZPTP').value = alldata.ZPTP;
-
-//                 document.getElementById('ZW25').value =  alldata.ZW25;
-//                 document.getElementById('ZPT3').value = alldata.ZPT3;
-//                 document.getElementById('ZPED').value = alldata.ZPED;
-//                 document.getElementById('ZPEF').value =  alldata.ZPEF;
-//                 document.getElementById('ZPEH').value = alldata.ZPEH;
-//                 document.getElementById('ZPEI').value = alldata.ZPEI;
-
-//                 document.getElementById('ZP8M').value =  alldata.ZP8M;
-//                 document.getElementById('ZVEJ').value =  alldata.ZVEJ;
-//                 document.getElementById('ZWBINS').value = alldata.ZWBINS;
-//                 document.getElementById('ZPCONR').value = alldata.ZPCONR;
-//                 document.getElementById('ZFNIR').value =  alldata.ZFNIR;
-//                 document.getElementById('ZFGIR').value = alldata.ZFGIR;
-//                 document.getElementById('ZW1AR').value = alldata.ZW1AR;
-
-//                 document.getElementById('ZWFER').value =  alldata.ZWFER;
-//                 document.getElementById('ZEGTR').value = alldata.ZEGTR;
-//                 document.getElementById('ZPNLR').value = alldata.ZPNLR;
-//                 document.getElementById('ZPNHR').value =  alldata.ZPNHR;
-//                 document.getElementById('ZEPS').value = alldata.ZEPS;
-//                 document.getElementById('ZTTF').value = alldata.ZTTF;
-
-//                 document.getElementById('ZTTP').value =  alldata.ZTTP;
-//                 document.getElementById('ZT25').value = alldata.ZT25;
-//                 document.getElementById('ZTT3').value = alldata.ZTT3;
-//                 document.getElementById('ZTED').value =  alldata.ZTED;
-//                 document.getElementById('ZTEF').value = alldata.ZTEF;
-//                 document.getElementById('ZTEH').value = alldata.ZTEH;
-
-//                 document.getElementById('ZTEI').value =  alldata.ZTEI;
-//                 document.getElementById('ZT8M').value = alldata.ZT8M;
-//                 document.getElementById('IR').value = alldata.IR;
-//                 document.getElementById('ZPNI').value =  alldata.ZPNI;
-//                 document.getElementById('ZPIA').value = alldata.ZPIA;
-//                 document.getElementById('ZP41').value = alldata.ZP41;
-
-//                 document.getElementById('ZP5').value =  alldata.ZP5;
-//                 document.getElementById('ZP8').value = alldata.ZP8;
-//                 document.getElementById('ZP18').value = alldata.ZP18;
-//                 document.getElementById('ZPS5').value =  alldata.ZPS5;
-//                 document.getElementById('ZV9').value = alldata.ZV9;
-//                 document.getElementById('ZV19').value = alldata.ZV19;
-
-//                 document.getElementById('ZAE8').value =  alldata.ZAE8;
-//                 document.getElementById('ZAE18').value = alldata.ZAE18;
-//                 document.getElementById('ZEPMIX').value = alldata.ZEPMIX;
-//                 document.getElementById('ZECO2').value =  alldata.ZECO2;
-//                 document.getElementById('ZESO2').value = alldata.ZESO2;
-//                 document.getElementById('ZEH20').value = alldata.ZEH20;
-
-//                 document.getElementById('ZECO').value =  alldata.ZECO;
-//                 document.getElementById('ZEHC').value = alldata.ZEHC;
-//                 document.getElementById('ZENOX').value = alldata.ZENOX;
-//                 document.getElementById('ZPNIR').value =  alldata.ZPNIR;
-//                 document.getElementById('ZT1A').value = alldata.ZT1A;
-//                 document.getElementById('ZT41').value = alldata.ZT41;
-
-//                 document.getElementById('ZT5').value =  alldata.ZT5;
-//                 document.getElementById('ZT8').value = alldata.ZT8;
-//                 document.getElementById('ZT18').value = alldata.ZT18;
-//                 document.getElementById('ZT13').value =  alldata.ZT13;
-//                 document.getElementById('ZV9M').value = alldata.ZV9M;
-//                 document.getElementById('ZAE8M').value = alldata.ZAE8M;
-
-//                 document.getElementById('ZW3').value =  alldata.ZW3;
-//                 document.getElementById('ZW8').value = alldata.ZW8;
-//                 document.getElementById('ZW18').value = alldata.ZW18;
-//                 document.getElementById('ZOUT1').value =  alldata.ZOUT1;
-//                 document.getElementById('ZOUT2').value = alldata.ZOUT2;
-//                 document.getElementById('ZOUT3').value = alldata.ZOUT3;
-
-//                 document.getElementById('ZOUT4').value = alldata.ZOUT4;
-//                 document.getElementById('ZOUT5').value = alldata.ZOUT5;
-//                 document.getElementById('VERSION').value = alldata.VERSION;
-
-//                 // var blob = new Blob([JSON.stringify(alldata)], {type: 'application/json'});
-//                 // saveAs (blob, "test.txt");
-//     });
-               
-//   event.preventDefault();
-//         });
-// });
-
-
-
 
 //Check the form
 
@@ -473,7 +328,7 @@ function verifregime(champ){
         return true;
     }
 }
-
+//Check the form content
 function verifform(form){
     var install = verifinstall(form.install);
     var regime = verifregime(form.regime);
@@ -489,23 +344,75 @@ function verifform(form){
 
 }
 
+//Librairy checkbox funcion 
+function getLibChecked(){
+        
+        var pathLib = ['path1', 'path2', 'path3','path4'];
+        for (var i=0; i < pathLib.length; i++){
+                if (document.getElementById("input_"+pathLib[i]).checked){
+                        return document.getElementById("input_"+pathLib[i]).value ;
+                        }
+                }
+        }
+// Move the modal content in result page
 
+function result (data){
+        
+        
+        }
+//function to generate result page 
+function addComment()
+	{
+        $("#save_modal").on("click", function(){
+            //e.preventDefault();
+            var parameters = location.search.substring(1).split("&");
+        
+        		var temp = parameters[0].split("=");
+        		l = unescape(temp[1]);
+        
+        		temp = parameters[1].split("=");
+        		c = unescape(temp[1]);
+        
+        		document.getElementById("ZSPHUM1").innerHTML = l;
+        		document.getElementById("ZPCON1").innerHTML = c;
+                
+                });
+        		
+	}
+    
+//function save(data){
+       
+  //       $("#save_modal").on("click", function(e){   
+  
+    //		var parameters = location.search.substring(1).split("&");
 
+	//	var temp = parameters[0].split("=");
+	//	l = unescape(temp[1]);
+
+	//	temp = parameters[1].split("=");
+	//	c = unescape(temp[1]);
+
+	//	document.getElementById("ZSPHUM1").innerHTML = l;
+	//	document.getElementById("ZPCON1").innerHTML = c;
+        //document.getElementById('resultat').style.display='block';
+       // $('#Modal').modal('hide');     
+         
+     //    });
+ //   }
 
 $(document).ready(function(){
 
-  
-     $('form').on('submit', function(event){
+   $('form').on('submit', function(event){
 /*var file = document.getElementById('hc').value;*/
 var data = {
-    file:document.getElementById('hc').value,
-  /*  file_path :file.replace(/[\\]/g, "/"),*/
+    file_path:document.getElementById('hc').value,
     altitude : document.getElementById('altitude').value,
     mach : document.getElementById('mach').value,
     disa: document.getElementById('disa').value,
-    // humidite: document.getElementById('humidite').value,
+    humidite: document.getElementById('humidite').value,
+    pathLibrary: getLibChecked(),
     // alt_piste: document.getElementById('alt-piste').value,
-    // temps_flex: document.getElementById('temps-flex').valucd to125e,
+    // temps_flex: document.getElementById('temps-flex').value,
     // typar: document.getElementById('typar').value,
     // vapar: document.getElementById('vapar').value,
     install: document.getElementById('install').value, 
@@ -523,7 +430,6 @@ $.ajax({
     "crossDomain": true,
     type : 'POST',
     url : "http://caefr0p266:8125/sppms/api/v1.0",
-   /* contentType:"application/json; charset=utf-8",*/
     dataType: "html",
     data: data,
     success : function(data){
@@ -531,6 +437,8 @@ $.ajax({
         let alldata = JSON.parse(data)
 
         console.log(alldata);
+                   
+                   
         document.getElementById('ZSPHUM').value =  alldata.ZSPHUM;
         document.getElementById('ZPCON').value = alldata.ZPCON;
         document.getElementById('ZFNI').value = alldata.ZFNI;
@@ -576,7 +484,7 @@ $.ajax({
 
         document.getElementById('ZTEI').value =  alldata.ZTEI;
         document.getElementById('ZT8M').value = alldata.ZT8M;
-        /*document.getElementById('IR').value = alldata.IR;*/
+        //document.getElementById('IR').value = alldata.IR;
         document.getElementById('ZPNI').value =  alldata.ZPNI;
         document.getElementById('ZP1A').value = alldata.ZP1A;
         document.getElementById('ZP41').value = alldata.ZP41;
@@ -607,6 +515,7 @@ $.ajax({
         document.getElementById('ZT18').value = alldata.ZT18;
         document.getElementById('ZT13').value =  alldata.ZT13;
         document.getElementById('ZV9M').value = alldata.ZV9M;
+                               
         document.getElementById('ZAE8M').value = alldata.ZAE8M;
 
         document.getElementById('ZW3').value =  alldata.ZW3;
@@ -618,14 +527,36 @@ $.ajax({
 
         document.getElementById('ZOUT4').value = alldata.ZOUT4;
         document.getElementById('ZOUT5').value = alldata.ZOUT5;
-       /* document.getElementById('VERSION').value = alldata.VERSION;*/
-        
+       // document.getElementById('VERSION').value = alldata.VERSION;
+       
+      addComment();
+    
     }
-})
+    
+});
 return false
-event.preventDefault();
+    event.preventDefault();
 });
 
 
 });
+    
+
+//Auto complet alt_piste and disa_piste
+$("#altitude").keyup(function(){
+        $("#alt_piste").val(this.value);
+        });
+$("#disa").keyup(function(){
+        $("#disa_piste").val(this.value)
+        });
+
+//Preloader
+var overlay = document.getElementById("overlay");
+
+window.addEventListenner('load',function(){
+        overlay.style.display ='none';
+        
+        });
+
+
     
