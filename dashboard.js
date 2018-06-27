@@ -361,24 +361,24 @@ function result (data){
         
         }
 //function to generate result page 
-function addComment()
-	{
-        $("#save_modal").on("click", function(){
+//function addComment()
+//	{
+ //       $("#save_modal").on("click", function(){
             //e.preventDefault();
-            var parameters = location.search.substring(1).split("&");
+ //           var parameters = location.search.substring(1).split("&");
         
-        		var temp = parameters[0].split("=");
-        		l = unescape(temp[1]);
+//        		var temp = parameters[0].split("=");
+ //       		l = unescape(temp[1]);
         
-        		temp = parameters[1].split("=");
-        		c = unescape(temp[1]);
+ //       		temp = parameters[1].split("=");
+  //      		c = unescape(temp[1]);
         
-        		document.getElementById("ZSPHUM1").innerHTML = l;
-        		document.getElementById("ZPCON1").innerHTML = c;
+  //      		document.getElementById("ZSPHUM1").innerHTML = l;
+  //      		document.getElementById("ZPCON1").innerHTML = c;
                 
-                });
+    //            });
         		
-	}
+	//}
     
 //function save(data){
        
@@ -429,17 +429,17 @@ $.ajax({
     "async": true,
     "crossDomain": true,
     type : 'POST',
-    url : "http://caefr0p266:8125/sppms/api/v1.0",
+    url : "http://caefr0p256:8125/sppms/api/v1.0",
     dataType: "html",
     data: data,
     success : function(data){
      
-        let alldata = JSON.parse(data)
+        let alldata = JSON.parse(data);
 
         console.log(alldata);
                    
                    
-        document.getElementById('ZSPHUM').value =  alldata.ZSPHUM;
+        document.getElementById('ZSPHUM').value = alldata.ZSPHUM;
         document.getElementById('ZPCON').value = alldata.ZPCON;
         document.getElementById('ZFNI').value = alldata.ZFNI;
         document.getElementById('ZFGI').value =  alldata.ZFGI;
@@ -529,7 +529,7 @@ $.ajax({
         document.getElementById('ZOUT5').value = alldata.ZOUT5;
        // document.getElementById('VERSION').value = alldata.VERSION;
        
-      addComment();
+      //addComment();
     
     }
     
@@ -551,12 +551,12 @@ $("#disa").keyup(function(){
         });
 
 //Preloader
-var overlay = document.getElementById("overlay");
+//var overlay = document.getElementById("overlay");
 
-window.addEventListenner('load',function(){
-        overlay.style.display ='none';
+//window.addEventListenner('load',function(){
+  //      overlay.style.display ='none';
         
-        });
+   //     });
 
 
     
