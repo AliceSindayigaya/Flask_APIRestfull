@@ -153,7 +153,7 @@
                             <div class="card-header">
                                 <h5 class="card-category"><strong>API Bdmodel</strong></h5>
                             </div>
-                         <form id="form_valid" class="form-submit"  method="GET" action="result.html">
+                         <form id="form_valid" class="form-submit"  method="GET" action="result.html" target="_blank">
                             <div class="card-body" >
                             
                                <div class="table-type" >
@@ -181,6 +181,7 @@
                                 <span class="tooltip">Veuillez choisir un mode d'éxecution</span>
                             </div>
                         </div>
+                
                         <!--End API Bdmodel-->
                     </div>
                     <div class="col-lg-4 col-md-6">
@@ -218,39 +219,46 @@
                                         </label> 
                          
                                             <div class="row" id="projet" style="display:none;"  visible='none'>
-                                                <div class="col-md-3">
-                                                    <div class="form-group">
-                                                        <label>Banque</label>
+                                                <div class="col-md-3" id="pbanque">
+                                                    <div class="form-group"  >
+                                                        <label>Repère</label>
                                                         <input type="text" class="form-control inputfield" data-toggle="tooltip" data-animation="false" title="Banque moteur(ie MA320)">
                                                     </div>
                                                 </div>
-                                                <div class="col-md-3">
+                                                <div class="col-md-3" id="pbanque"> 
                                                     <div class="form-group">
-                                                        <label>Version</label>
+                                                        <label>Domaine</label>
                                                         <input type="text" class="form-control inputfield" data-toggle="tooltip" data-animation="false" title="Version moteur(ie PW11124G1-JM)">
                                                     </div>
                                                 </div>
-                                                 <div class="col-md-3">
+                                                 <div class="col-md-3" id="pbanque">
                                                     <div class="form-group">
-                                                        <label>Domaine</label>
+                                                        <label>Version</label>
                                                         <input type="text" class="form-control inputfield" data-toggle="tooltip" data-animation="false" title="Domaine de la base utilisée(ie MOTEUR)">
                                                     </div>
                                                 </div>
-                                                 <div class="col-md-3">
+                                                 <div class="col-md-3" id="pbanque">
                                                     <div class="form-group">
-                                                        <label>Repère</label>
+                                                        <label>Banque</label>
                                                         <input type="text" class="form-control inputfield" data-toggle="tooltip" data-animation="false" title="Date réference qui identifiele repère">
                                                     </div>
                                                 </div>
-                                         
-                                            <div class="">
-                                                <label class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input">
-                                                    <span class="custom-control-indicator"></span>
-                                                    <span class="custom-control-description">Avec repère</span>
-                                                    <hr>
-                                                    <!--Modal button-->
-                                                    <button type="button" class="btn" data-toggle="modal" data-target="#myModal">...</button>
+                                      
+                                              <div  class="col-md-6" id= "pmodal">
+                                                 <div class="labelCheckbox">
+                                                  <div class="repere">
+                                                    <label class="custom-control custom-checkbox">
+                                                        <input type="checkbox" class="custom-control-input">
+                                                        <span class="custom-control-indicator"></span>
+                                                        <span class="custom-control-description">Avec repère</span>
+                                                          <!--Modal launch button-->
+                                                         <button type="button" class="btn" data-toggle="modal" data-target="#myModal" id="pbotton">...</button>
+                                                     </label>
+                                                    </div>
+                                                      
+                                                
+                                                </div>
+                                                    
                                                     <!--The modal panel-->
                                                     <div class="modal" id="myModal">
                                                       <div class="modal-dialog">
