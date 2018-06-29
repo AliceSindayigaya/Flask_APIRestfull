@@ -361,24 +361,14 @@ function result (data){
         
         }
 //function to generate result page 
-//function addComment()
-//	{
- //       $("#save_modal").on("click", function(){
-            //e.preventDefault();
- //           var parameters = location.search.substring(1).split("&");
+function addComment()
+	{
+    $("#save_modal").on("click", function(){   
+     document.getElementById('resultat').style.display='block';
+       $('#Modal').modal('hide');
         
-//        		var temp = parameters[0].split("=");
- //       		l = unescape(temp[1]);
-        
- //       		temp = parameters[1].split("=");
-  //      		c = unescape(temp[1]);
-        
-  //      		document.getElementById("ZSPHUM1").innerHTML = l;
-  //      		document.getElementById("ZPCON1").innerHTML = c;
-                
-    //            });
-        		
-	//}
+    });
+	}
     
 //function save(data){
        
@@ -429,7 +419,7 @@ $.ajax({
     "async": true,
     "crossDomain": true,
     type : 'POST',
-    url : "http://caefr0p256:8125/sppms/api/v1.0",
+    url : "http://caefr0p233:8125/sppms/api/v1.0",
     dataType: "html",
     data: data,
     success : function(data){
@@ -529,7 +519,7 @@ $.ajax({
         document.getElementById('ZOUT5').value = alldata.ZOUT5;
        // document.getElementById('VERSION').value = alldata.VERSION;
        
-      //addComment();
+        addComment();
     
     }
     
