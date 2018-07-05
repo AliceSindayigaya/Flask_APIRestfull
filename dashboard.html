@@ -353,6 +353,7 @@
                                                           </div>
                                                           <!-- Modal footer -->
                                                           <div class="modal-footer">
+                                                          <button type="button" class="btn" data-toggle="modal" id="fButton">Form</button>
                                                             <button type="button" class="btn" >Valider</button>
                                                             <button type="button" class="btn btn-danger" data-dismiss="modal">Annuler</button>
                                                           </div>
@@ -405,7 +406,7 @@
                                         0.<HUM<1.0:Calcul effectué avec une humidité spécifique(Kg eau/Kg air)
                                         0.1<HUM<100. : Calcul effectué avec une humidité relative(%)">
                                     <label>Alt Piste(ft)</label>
-                                    <input type="text" class="form-control" data-toggle="tooltip" data-animation="false" title="Altitude-pression de la piste" id="alt_piste" name="alt_piste">
+                                    <input type="text" id="alt_piste" class="form-control" data-toggle="tooltip" data-animation="false" title="Altitude-pression de la piste"  name="alt_piste">
                                     <label>Disa Piste(c)</label>
                                     <input type="text" id="disa_piste" class="form-control" data-toggle="tooltip" data-animation="false" name="disa_piste" title="Ecart entre la température ambiante et la température ISA standard, à l'altitude de la piste">
                                     <label>Temps. Flex(c)</label>
@@ -535,6 +536,7 @@
                             <div class="card-body">
                              <div class="chart-area">
                                   <div class="modal-footer">
+                                        <button class="btn" onclick= "loadValue();">Form</button>
                                         <button type="submit" class="btn" data-toggle="modal" data-target="#Modal">Valider</button>
                                         <button type="reset" class="btn btn-danger">RAZ</button>
                                 </div>
@@ -554,10 +556,10 @@
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                 </div>
                                   <!-- Modal body -->
-                                <form>  
+                              
                                 <div class="modal-body">
                                     <div class="card-body">
-                                        <form id= "moteur" action = "http://caefr0p256:8125/result" method ="POST">
+                                        <form id= "moteur" action = "result.html" method ="get">
                                             <div class="row">
                                                  <div class="col-md-3">
                                                     <div class="form-group" id="1">
@@ -733,7 +735,7 @@
                                           
                                         </div>
                                     </div>
-                                </form>
+                            
                                 <hr>
                                 <div class="row">
                                     <div class="col-md-12">
@@ -746,13 +748,18 @@
                                     </div>
                                     
                                 </div>
-                            </div>            
-                        </div>
-                          <!-- Modal footer -->
+                                    <!-- Modal footer -->
                           <div class="modal-footer">
+                               
                               <button type="submit" class="btn" data-toggle="modal" id="save_modal">Sauvegarder</button>
+                             
                             <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="showResult()">Annuler</button>
                           </div>
+                      </form>
+                            </div>            
+                        </div>
+                      
+     
                         <!--<div id="overlay">-->
                             <!--<div class="spinner"></div>-->
                         <!--</div>-->
