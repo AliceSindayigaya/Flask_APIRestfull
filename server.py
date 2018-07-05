@@ -48,12 +48,17 @@ def getconfig():
         install = str(form['install'])
         humidite = float(form['humidite'])
         libpath = str(form['pathLibrary'])
-#        alt_piste = float(form['alt_piste'])
-#        temps_flex=(form['temps_flex'])
-#        typar = str(form['typar'])
-#        vapar = float(form['vapar'])
+        disa_piste = float(form['disa_piste'])
+        alt_piste = float(form['alt_piste'])
+        temps_flex= float(form['temps_flex'])
+        typar = str(form['typar'])
+        vapar = float(form['vapar'])
+#        wbiphp = float(form['wbiphp'])
 
-        print altitude, disa, mach, install, regime, file_path,humidite,libpath
+        print altitude, disa, mach, install, regime, file_path,humidite,libpath,alt_piste,disa_piste,temps_flex ,typar,vapar
+
+#        ,wbiphp   
+
         
         #Configure logging
         pfm.Logging.setLevel(pfm.Logging.Debug)
@@ -62,13 +67,20 @@ def getconfig():
         td = pfm.TestData()
         td.setNumberOfSamples(1)
         td.addParameter("ALT", "ft", [altitude])
-        td.addParameter("XM", "", [mach])
-        td.addParameter("DTAMB", "K", [disa])
+        td.addParameter("XM","", [mach])
+        td.addParameter("DTAMB","K", [disa])
+        td.addParameter("HUM","", [humidite])
+        td.addParameter("ALTR","ft", [alt_piste])
+        td.addParameter("DTAMBR","", [disa_piste])
+        td.addParameter("FLXT", "", [temps_flex])
+        td.addParameter("VAPAR","", [vapar])
+#        td.addParameter("WBIPHP", "",[wbiphp])
         td.setContext("SPPMS_IN")
+        
        
         #Create SPPMS model
         model = pfm.Sppms()
-        model.setInputTestData(td)
+        model.setData(td)
         model.setTypar("REG")
         model.setDefaultRatingCode(regime)
         model.setDefaultInstallCode(install)
@@ -77,7 +89,7 @@ def getconfig():
         model.setSamples(pfm.Range("all"))
         model.setAircraft("A350")
         model.setManufacturer("RR")
-        model.setEngine("TRENTXWB")
+        model.setEngine("TRENTXWB97")
         model.setBlPath(file_path)
         model.run()
      
@@ -107,12 +119,15 @@ def others():
 #Result and output url 
 @app.route("/result", methods= ['GET','POST'])
 def result():
-    return render_template('result.html')
+    if request.method == "POST":
+        result = request.get_json()
+        print result
+        return jsonify(result)
+    
+    return render_template ('result.html')
+ 
 
 #main function
 if __name__ == "__main__":
     app.run(host='0.0.0.0',port=8125, debug=True)
-
-
-
 
