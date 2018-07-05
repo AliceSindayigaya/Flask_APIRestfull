@@ -343,8 +343,26 @@ function verifform(form){
     }
 
 }
+    
+//Button fill in fom
+function loadValue() {
+        
+        document.getElementById ('altitude').value = "15000";
+        document.getElementById('mach').value = "0.8";
+        document.getElementById('disa').value = "-10";
+        document.getElementById('humidite').value = "-10";
+        document.getElementById('alt_piste').value = "15000";
+        document.getElementById('disa_piste').value = "-10";
+        document.getElementById('temps_flex').value = "1";
+        document.getElementById('typar').value = "FNI";
+        document.getElementById('vapar').value = "0.1";
+        document.getElementById('install').value = "005";
+        document.getElementById('regime').value = "MCL";
+        
+        }
 
-//Librairy checkbox funcion 
+
+//Library checkbox funcion 
 function getLibChecked(){
         
         var pathLib = ['path1', 'path2', 'path3','path4'];
@@ -354,41 +372,41 @@ function getLibChecked(){
                         }
                 }
         }
-// Move the modal content in result page
 
-function result (data){
-        
-        
-        }
 //function to generate result page 
-function addComment()
+function addResult(data)
 	{
-    $("#save_modal").on("click", function(){   
-     document.getElementById('resultat').style.display='block';
-       $('#Modal').modal('hide');
-        
-    });
+    $("#save_modal").on("click", function(){  
+         document.getElementById('resultat').style.display='block';
+         $('#Modal').modal('hide');
+          console.log(data);
+         var resultData = JSON.stringify(data);
+         console.log(resultData);
+        $.ajax({
+                "async": true,
+                "crossDomain": true,
+                type: "POST",
+                url: "http://caefr0p234:8125/result",
+                dataType: "json",
+                 contentType:"application/json; charset=utf-8",
+                data :resultData,
+                success: function (data) {
+                        
+                    var alldata = JSON.parse(data);
+                    
+                    console.log(alldata);
+                   
+                    
+                },
+                error:function (){
+                        alert('error');s
+                            }
+                
+                });
+      });
+            
 	}
     
-//function save(data){
-       
-  //       $("#save_modal").on("click", function(e){   
-  
-    //		var parameters = location.search.substring(1).split("&");
-
-	//	var temp = parameters[0].split("=");
-	//	l = unescape(temp[1]);
-
-	//	temp = parameters[1].split("=");
-	//	c = unescape(temp[1]);
-
-	//	document.getElementById("ZSPHUM1").innerHTML = l;
-	//	document.getElementById("ZPCON1").innerHTML = c;
-        //document.getElementById('resultat').style.display='block';
-       // $('#Modal').modal('hide');     
-         
-     //    });
- //   }
 
 $(document).ready(function(){
 
@@ -401,32 +419,33 @@ var data = {
     disa: document.getElementById('disa').value,
     humidite: document.getElementById('humidite').value,
     pathLibrary: getLibChecked(),
-    // alt_piste: document.getElementById('alt-piste').value,
-    // temps_flex: document.getElementById('temps-flex').value,
-    // typar: document.getElementById('typar').value,
-    // vapar: document.getElementById('vapar').value,
+    alt_piste: document.getElementById('alt_piste').value,
+    disa_piste: document.getElementById('disa_piste').value,
+    temps_flex: document.getElementById('temps_flex').value,
+    typar: document.getElementById('typar').value,
+    vapar: document.getElementById('vapar').value,
     install: document.getElementById('install').value, 
     // flhv: document.getElementById('flhv').value,
-    // wbiphp:document.getElementById('wbiphp').value,
+   // wbiphp:document.getElementById('wbiphp').value,
     // hpx:document.getElementById('hpx').value,
     regime: document.getElementById('regime').value
     // code_moteur:document.getElementById('code-moteur').value
 };
 
-console.log(data);
+  //console.log(data);
 
 $.ajax({
     "async": true,
     "crossDomain": true,
     type : 'POST',
-    url : "http://caefr0p233:8125/sppms/api/v1.0",
+    url : "http://caefr0p234:8125/sppms/api/v1.0",
     dataType: "html",
     data: data,
     success : function(data){
      
         let alldata = JSON.parse(data);
 
-        console.log(alldata);
+       // console.log(alldata);
                    
                    
         document.getElementById('ZSPHUM').value = alldata.ZSPHUM;
@@ -519,12 +538,13 @@ $.ajax({
         document.getElementById('ZOUT5').value = alldata.ZOUT5;
        // document.getElementById('VERSION').value = alldata.VERSION;
        
-        addComment();
+        addResult(alldata);
     
     }
     
 });
-return false
+
+    return false
     event.preventDefault();
 });
 
