@@ -344,7 +344,7 @@ function verifform(form){
 
 }
     
-//Button fill in fom
+//Button fill form
 function loadValue() {
         
         document.getElementById ('altitude').value = "15000";
@@ -379,34 +379,28 @@ function addResult(data)
     $("#save_modal").on("click", function(){  
          document.getElementById('resultat').style.display='block';
          $('#Modal').modal('hide');
-          console.log(data);
-         var resultData = JSON.stringify(data);
-         console.log(resultData);
+          //console.log(data);
+         let resultData = JSON.stringify(data);
+         // console.log(resultData);
         $.ajax({
                 "async": true,
                 "crossDomain": true,
                 type: "POST",
-                url: "http://caefr0p234:8125/result",
+                url: "http://caefr0p233:8125/result",
                 dataType: "json",
                  contentType:"application/json; charset=utf-8",
                 data :resultData,
                 success: function (data) {
-                        
-                    var alldata = JSON.parse(data);
-                    
-                    console.log(alldata);
-                   
-                    
+                   var url = "http://caefr0p233:8125/result";                        
+                   window.location.assign = url; 
+                   console.log(data);
                 },
                 error:function (){
-                        alert('error');s
+                    alert('error');
                             }
-                
                 });
-      });
-            
+      });      
 	}
-    
 
 $(document).ready(function(){
 
@@ -418,7 +412,7 @@ var data = {
     mach : document.getElementById('mach').value,
     disa: document.getElementById('disa').value,
     humidite: document.getElementById('humidite').value,
-    pathLibrary: getLibChecked(),
+    //pathLibrary: getLibChecked(),
     alt_piste: document.getElementById('alt_piste').value,
     disa_piste: document.getElementById('disa_piste').value,
     temps_flex: document.getElementById('temps_flex').value,
@@ -431,23 +425,18 @@ var data = {
     regime: document.getElementById('regime').value
     // code_moteur:document.getElementById('code-moteur').value
 };
-
   //console.log(data);
 
 $.ajax({
     "async": true,
     "crossDomain": true,
     type : 'POST',
-    url : "http://caefr0p234:8125/sppms/api/v1.0",
+    url : "http://caefr0p233:8125/sppms/api/v1.0",
     dataType: "html",
     data: data,
     success : function(data){
-     
         let alldata = JSON.parse(data);
-
-       // console.log(alldata);
-                   
-                   
+      // console.log(alldata);      
         document.getElementById('ZSPHUM').value = alldata.ZSPHUM;
         document.getElementById('ZPCON').value = alldata.ZPCON;
         document.getElementById('ZFNI').value = alldata.ZFNI;
@@ -539,18 +528,13 @@ $.ajax({
        // document.getElementById('VERSION').value = alldata.VERSION;
        
         addResult(alldata);
-    
     }
     
 });
-
     return false
     event.preventDefault();
 });
-
-
 });
-    
 
 //Auto complet alt_piste and disa_piste
 $("#altitude").keyup(function(){
@@ -567,6 +551,56 @@ $("#disa").keyup(function(){
   //      overlay.style.display ='none';
         
    //     });
+
+//function test banque moteur
+     var items = [
+            {
+
+             aircraft:[], 
+             version: [],
+             repere: []
+             },
+            {
+             aircraft: [
+                     {'name': 'A300', value: 'a300'},
+                     {'name': 'A300-600', value: 'a300-600'},
+                     {'name': 'A30X',value: 'a30x'},
+                     {'name': 'A310', value: 'a310'},
+                     {'name': 'A318', value: 'a318'},
+                     {'name': 'A319', value: 'a319'},
+                     {'name': 'A320', value: 'a320'},
+                     {'name': 'A321', value: 'a321'},
+                     {'name': 'A330', value: 'a330'},
+                     {'name': 'A330ST', value: 'a330ST'}
+                     ]
+                    },
+            {
+            version : [
+                    {'name': 'A300B2-320', value:'a300B2-320'},
+                    {'name': 'A300B4-203', value: 'a300B4-203'}
+                    
+                    ]
+                    
+                    },
+            {
+            repere: [
+                    {'name': '01/08/80', value: '01/08/80'},
+                    {'name': '01/09/81', value: '01/09/81'},
+                    {'name':'09/05/96', value: '09/05/96'}
+                    ]
+                    }
+                
+             
+                ]
+
+function testBanqueMoteur () {
+     
+        var temp = {};
+         $.each(items, function (){
+                 $("")
+                 });
+        
+        }
 
 
     
