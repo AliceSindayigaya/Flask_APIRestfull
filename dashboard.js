@@ -55,9 +55,9 @@ $(document).ready(function () {
 $(document).on('click', '.navbar-toggle', function () {
     $toggle = $(this);
 
-    if (nowuiDashboard.misc.navbar_menu_visible == 1) {
+    if (homologate.misc.navbar_menu_visible == 1) {
         $('html').removeClass('nav-open');
-        nowuiDashboard.misc.navbar_menu_visible = 0;
+        homologate.misc.navbar_menu_visible = 0;
         setTimeout(function () {
             $toggle.removeClass('toggled');
             $('#bodyClick').remove();
@@ -70,7 +70,7 @@ $(document).on('click', '.navbar-toggle', function () {
         div = '<div id="bodyClick"></div>';
         $(div).appendTo('body').click(function () {
             $('html').removeClass('nav-open');
-            nowuiDashboard.misc.navbar_menu_visible = 0;
+            homologate.misc.navbar_menu_visible = 0;
             setTimeout(function () {
                 $toggle.removeClass('toggled');
                 $('#bodyClick').remove();
@@ -121,7 +121,7 @@ showSidebarMessage: function showSidebarMessage(message) {
                 }
             });
         } catch (e) {
-            console.log('Notify library is missing, please make sure you have the notifications library added.');
+           // console.log('Notify library is missing, please make sure you have the notifications library added.');
         }
     }
 
@@ -372,36 +372,146 @@ function getLibChecked(){
                         }
                 }
         }
+//Redirect with the result page 
+function redirectResult(){
+        $('#save_modal').on('click', function(){
+                     var url = "http://caefr0p233:8125/result";
+                     document.getElementById('resultat').style.display = 'block';
+                     window.location = url;
+                     $('#Modal').modal('hide');
+        });
+        }
 
-//function to generate result page 
+redirectResult();
+
+//show result page 
 function addResult(data)
 	{
-    $("#save_modal").on("click", function(){  
-         document.getElementById('resultat').style.display='block';
-         $('#Modal').modal('hide');
-          //console.log(data);
-         let resultData = JSON.stringify(data);
-         // console.log(resultData);
+        
+    $(document).ready(function(){
+       
+        var url = "http://caefr0p233:8125/result";
+        let resultData = JSON.stringify(data);
         $.ajax({
                 "async": true,
                 "crossDomain": true,
                 type: "POST",
-                url: "http://caefr0p233:8125/result",
+                url: url,
                 dataType: "json",
                  contentType:"application/json; charset=utf-8",
                 data :resultData,
-                success: function (data) {
-                   var url = "http://caefr0p233:8125/result";                        
-                   window.location.assign = url; 
-                   console.log(data);
+                success: function (response) { 
+                  
+                        
+                 var Jdata = JSON.stringify(response);
+                                             
+                 var alldata = JSON.parse(Jdata);
+                                              
+                  console.log(alldata);
+                  console.log(Jdata);
+                
+                    document.getElementById('ZSPHUM1').value = alldata.ZSPHUM;
+                    document.getElementById('ZPCON1').value = alldata.ZPCON;
+                    document.getElementById('ZFNI1').value = alldata.ZFNI;
+                    document.getElementById('ZFGI1').value =  alldata.ZFGI;
+                    document.getElementById('ZW1A1').value = alldata.ZW1A;
+                    document.getElementById('ZWFE1').value = alldata.ZWFE;
+            
+                    document.getElementById('ZEGT1').value =  alldata.ZEGT;
+                    document.getElementById('ZPNL1').value = alldata.ZPNL;
+                    document.getElementById('ZPNH1').value = alldata.ZPNH;
+                    document.getElementById('ZPS31').value =  alldata.ZPS3;
+                    document.getElementById('ZPTF1').value = alldata.ZPTF;
+                    document.getElementById('ZPTP1').value = alldata.ZPTP;
+            
+                    document.getElementById('ZW251').value =  alldata.ZW25;
+                    document.getElementById('ZPT31').value = alldata.ZPT3;
+                    document.getElementById('ZPED1').value = alldata.ZPED;
+                    document.getElementById('ZPEF1').value =  alldata.ZPEF;
+                    document.getElementById('ZPEH1').value = alldata.ZPEH;
+                    document.getElementById('ZPEI1').value = alldata.ZPEI;
+            
+                    document.getElementById('ZP8M1').value =  alldata.ZP8M;
+                    document.getElementById('ZVEJ1').value =  alldata.ZVEJ;
+                    document.getElementById('ZWBINS1').value = alldata.ZWBINS;
+                    document.getElementById('ZPCONR1').value = alldata.ZPCONR;
+                    document.getElementById('ZFNIR1').value =  alldata.ZFNIR;
+                    document.getElementById('ZFGIR1').value = alldata.ZFGIR;
+                    document.getElementById('ZW1AR1').value = alldata.ZW1AR;
+            
+                    document.getElementById('ZWFER1').value =  alldata.ZWFER;
+                    document.getElementById('ZEGTR1').value = alldata.ZEGTR;
+                    document.getElementById('ZPNLR1').value = alldata.ZPNLR;
+                    document.getElementById('ZPNHR1').value =  alldata.ZPNHR;
+                    document.getElementById('ZEPS1').value = alldata.ZEPS;
+                    document.getElementById('ZTTF1').value = alldata.ZTTF;
+            
+                    document.getElementById('ZTTP1').value =  alldata.ZTTP;
+                    document.getElementById('ZT251').value = alldata.ZT25;
+                    document.getElementById('ZTT31').value = alldata.ZTT3;
+                    document.getElementById('ZTED1').value =  alldata.ZTED;
+                    document.getElementById('ZTEF1').value = alldata.ZTEF;
+                    document.getElementById('ZTEH1').value = alldata.ZTEH;
+            
+                    document.getElementById('ZTEI1').value =  alldata.ZTEI;
+                    document.getElementById('ZT8M1').value = alldata.ZT8M;
+                    //document.getElementById('IR1').value = alldata.IR;
+                    document.getElementById('ZPNI1').value =  alldata.ZPNI;
+                    document.getElementById('ZP1A1').value = alldata.ZP1A;
+                    document.getElementById('ZP411').value = alldata.ZP41;
+            
+                    document.getElementById('ZP51').value =  alldata.ZP5;
+                    document.getElementById('ZP81').value = alldata.ZP8;
+                    document.getElementById('ZP181').value = alldata.ZP18;
+                    document.getElementById('ZPS51').value =  alldata.ZPS5;
+                    document.getElementById('ZV91').value = alldata.ZV9;
+                    document.getElementById('ZV191').value = alldata.ZV19;
+            
+                    document.getElementById('ZAE81').value =  alldata.ZAE8;
+                    document.getElementById('ZAE181').value = alldata.ZAE18;
+                    document.getElementById('ZEPMIX1').value = alldata.ZEPMIX;
+                    document.getElementById('ZECO21').value =  alldata.ZECO2;
+                    document.getElementById('ZESO21').value = alldata.ZESO2;
+                    document.getElementById('ZEH2O1').value = alldata.ZEH2O;
+            
+                    document.getElementById('ZECO1').value =  alldata.ZECO;
+                    document.getElementById('ZEHC1').value = alldata.ZEHC;
+                    document.getElementById('ZENOX1').value = alldata.ZENOX;
+                    document.getElementById('ZPNIR1').value =  alldata.ZPNIR;
+                    document.getElementById('ZT1A1').value = alldata.ZT1A;
+                    document.getElementById('ZT411').value = alldata.ZT41;
+            
+                    document.getElementById('ZT51').value =  alldata.ZT5;
+                    document.getElementById('ZT81').value = alldata.ZT8;
+                    document.getElementById('ZT181').value = alldata.ZT18;
+                    document.getElementById('ZT131').value =  alldata.ZT13;
+                    document.getElementById('ZV9M1').value = alldata.ZV9M;
+                                           
+                    document.getElementById('ZAE8M1').value = alldata.ZAE8M;
+            
+                    document.getElementById('ZW31').value =  alldata.ZW3;
+                    document.getElementById('ZW81').value = alldata.ZW8;
+                    document.getElementById('ZW181').value = alldata.ZW18;
+                    document.getElementById('ZOUT11').value =  alldata.ZOUT1;
+                    document.getElementById('ZOUT21').value = alldata.ZOUT2;
+                    document.getElementById('ZOUT31').value = alldata.ZOUT3;
+            
+                    document.getElementById('ZOUT41').value = alldata.ZOUT4;
+                    document.getElementById('ZOUT51').value = alldata.ZOUT5;
+                   // document.getElementById('VERSION1').value = alldata.VERSION;  
+                               
+     
                 },
                 error:function (){
                     alert('error');
                             }
-                });
-      });      
+                });  
+          }); 
+         
 	}
 
+
+// Send the form to the server
 $(document).ready(function(){
 
    $('form').on('submit', function(event){
@@ -435,6 +545,8 @@ $.ajax({
     dataType: "html",
     data: data,
     success : function(data){
+             //console.log(data);
+        
         let alldata = JSON.parse(data);
       // console.log(alldata);      
         document.getElementById('ZSPHUM').value = alldata.ZSPHUM;
@@ -526,8 +638,9 @@ $.ajax({
         document.getElementById('ZOUT4').value = alldata.ZOUT4;
         document.getElementById('ZOUT5').value = alldata.ZOUT5;
        // document.getElementById('VERSION').value = alldata.VERSION;
-       
-        addResult(alldata);
+    
+                     
+       addResult(alldata);
     }
     
 });
