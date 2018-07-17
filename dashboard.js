@@ -360,8 +360,6 @@ function loadValue() {
         document.getElementById('regime').value = "MCL";
         
         }
-
-
 //Library checkbox funcion 
 function getLibChecked(){
         
@@ -373,47 +371,55 @@ function getLibChecked(){
                 }
         }
 
-//Redirect with the result page 
-function redirectResult(){
-        $('#save_modal').on('click', function(){
-                    // var url = "http://caefr0p233:8125/result";
-                     document.getElementById('resultat').style.display = 'block';
-                     //window.location = url;
-                     $('#Modal').modal('hide');
-        });
-        }
-
 
 
 //show result page 
 function addResult(data)
 	{
-
     $(document).ready(function(){
-      
-        var url = "http://caefr0p235:8125/result";
-        let resultData = JSON.stringify(data);
-        $.ajax({
-                "async": true,
-                "crossDomain": true,
-                type: "POST",
-                url:url,
-                dataType: "json",
-                contentType : "application/json",
-                data: resultData,
-                success: function(response){
-                    //var result = JSON.stringify(response);
-                       // console.log(response);
-                
-                  }
-                })
-            }); 
+      $('#moteur').on('submit', function(event){
+           //console.log(data);
+              document.getElementById('resultat').style.display = 'block';
+              $('#Modal').modal('hide');
+              var resultUrl =  "http://caefr0p235:8125/result";
+              window.open(resultUrl);
+              var url = "http://caefr0p235:8125/sppms/api/result/v1.0";
+              let resultData = JSON.stringify(data);
+            
+              $.ajax({
+                      "async": true,
+                      "crossDomain": true,
+                      type: "POST",
+                      url:url,
+                      dataType: "json",
+                      contentType: "application/json",
+                      data: resultData,
+                      success: function(response){
+                              
+                              console.log(response);
+                      //  $('#ZSPHUM1').val = response.ZSPHUM;
+                        //$('#ZPCON1').val = response.ZPCON;
+                        //$('#ZFNI1').val = response.ZFNI;
+                        //$('#ZFGI1').val =  response.ZFGI;
+                       // $('#ZW1A1').val = response.ZW1A;
+                       // $('#ZWFE1').val = response.ZWFE;
+                              }
+                      })
+       
+            return false
+            event.preventDefault();
+              }); 
+          });
+
+     
 	}
+
+
 
 // Send the form to the server
 $(document).ready(function(){
 
-   $('form').on('submit', function(event){
+   $('#form_valid').on('submit', function(event){
 /*var file = document.getElementById('hc').value;*/
 var data = {
     file_path:document.getElementById('hc').value,
@@ -444,10 +450,9 @@ $.ajax({
     dataType: "html",
     data: data,
     success : function(data){
-             //console.log(data);
-        
+        //console.log(data); 
         let alldata = JSON.parse(data);
-       console.log(alldata);      
+       //console.log(alldata);      
         document.getElementById('ZSPHUM').value = alldata.ZSPHUM;
         document.getElementById('ZPCON').value = alldata.ZPCON;
         document.getElementById('ZFNI').value = alldata.ZFNI;
