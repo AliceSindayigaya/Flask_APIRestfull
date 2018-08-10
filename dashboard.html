@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta http-equiv="Content-Language"
      content="fr,en"/>
-    <title>LIBRAIRIE HOMOLOGUEE</title>
+    <title>LIBRAIRIES SPPMS</title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
     <!--     Fonts and icons     -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
@@ -33,22 +33,21 @@
             <div class="sidebar-wrapper">
                 <ul class="nav">
                     <li class="">
-                        <a href="{{url_for('homologate')}}" data-toggle="tooltip" data-animation="false" title="Librairie moteur validée par EPG">
-                            <i class="now-ui-icons design_app"></i>
-                            <p>Librairie Homologuée</p>
+                        <a href="{{url_for('homologate')}}" data-toggle="tooltip" data-animation="false" title="Librairie moteur">
+                            <i> <img src = {{ url_for("static", filename = "img/layers-3.png")}}  width="25px" height="25px" alt="librairies sppms" title="librairies sppms" border="0"></i>
+                            <p>Librairies Sppms</p>
                         </a>
                     </li>
-                    <li>
-                        <a href="{{url_for('others')}}" data-toggle="tooltip" data-animation="false" title="Librairie moteur non validée par EPG">
-                            <i class="now-ui-icons design_bullet-list-67"></i>
-                            <p>Autres librairies</p>
-                        </a>
-                    </li>
-                    <li id="resultat" style="display: none;" >
+                    <li id="resultat" >
                         <a href="{{url_for('result') }}">
-                            <i class="now-ui-icons design_vector"></i>
+                            <i> <img src = {{ url_for("static", filename = "img/vector.png")}}  width="25px" height="25px" alt="output sppms" title="librairies sppms" border="0" ></i>
                             <p>Résultat</p>
+                          
                         </a>
+                        <ul class="output">
+                            <li><a>output1</a></li>
+                        </ul>
+                        
                     </li>
                 </ul>
             </div>
@@ -66,7 +65,7 @@
                                 <span class="navbar-toggler-bar bar3"></span>
                             </button>
                         </div>
-                        <a class="navbar-brand" href="#" data-toggle="tooltip" data-placement="botton" title="Librairie moteur validée par EPG">Librairie Homologuée</a>
+                        <a class="navbar-brand" href="#" data-toggle="tooltip" data-placement="botton" title="Librairie moteur validée ou non validée par EPG ">Librairies SPPMS</a>
 
                     </div>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
@@ -78,18 +77,18 @@
                         <ul class="navbar-nav">
                             <li class="nav-item">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="now-ui-icons loader_gear"></i>
+                                    <i> <img src = {{ url_for("static", filename = "img/settings-gear-63.png")}}  width="25px" height="25px" alt="help" title="help" border="0" ></i>
                                     <p>
                                         <span class="d-lg-none d-md-block">Help</span>
                                     </p>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                                    <a class="dropdown-item" href="../doc/mu_sppms_interface.pdf">manuel utilisateur</a>
+                                    <a class="dropdown-item" href= {{url_for("static", filename ="doc/mu_sppms_library.pdf")}}>manuel utilisateur</a>
                                 </div>
                             </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="now-ui-icons location_world"></i>
+                                    <i> <img src = {{ url_for("static", filename = "img/world.png")}}  width="25px" height="25px" alt="langues" title="langues" border="0" ></i>
                                     <p>
                                         <span class="d-lg-none d-md-block">Langue</span>
                                     </p>
@@ -106,7 +105,7 @@
             <!-- End Navbar -->
             <!--Bleu Panel-->
             <div class="panel-header panel-header-lg">
-                    <div id="output"></div>
+                   
             </div>
             <!--End bleu panel-->
             <div class="content">
@@ -114,49 +113,76 @@
                     <!--API card-->
                     <div class="col-lg-4">
                         <div class="card card-content">
-                            <div class="card-header">
-                                <h5 class="card-category"><strong>Veuillez choisir le type d'API utilisée</strong></h5>
-                                <h4 class="card-title">API</h4>
-                            </div>
-                            <div class="card-body">
-                                <div class="chart-area">
-                                    <div class="table-full-width table-responsive">
-                                       <label class="custom-control custom-radio">
-                                       <input id="radio1" name="api" type="radio" class="custom-control-input" onclick="showApiDga()">
-                                        <span class="custom-control-indicator"></span>
-                                        <span class="custom-control-description" data-toggle="tooltip" data-animation="false" title="Ancien API de gestion de base de données(n'est plus utilisées depuis 2011). Seulement utilisée en mode non optimisée double précision">API DGA</span>
-                                        </label>
-                                        <label class="custom-control custom-radio">
-                                        <input id="radio2" name="api" type="radio" class="custom-control-input" onclick="showApiBdmodel()">
-                                        <span class="custom-control-indicator"></span>
-                                        <span class="custom-control-description" data-toggle="tooltip" data-animation="false" title="Nouvelle API de gestion de bases moteur.
-                                Simple précision: 32bits.
-                                Double précision: Librairie 64bits (ne peut être utilisée sur une machine 32bits). 
-                                Normal: Librairie non optimisée, utilise les fonctions d'interpolation BDMODEL. 
-                                Optimized:Librairie qui utilise des fonctions d'interpolation recodées. 
-                                Les tests d'éxécution ont été réduites par rapport à la version non optimisée. Les fonctions concernées sont:
-                                        -BINTCT: Initialisation du descripteur de LABEL par classe(réseau,courbe).
-                                        - BLILAR:Lecture LABEL.
-                                        -rso2BI:Fonction d'interpolation pour LABEL réseau">API Bdmodel</span>
-                                      </label>
-                                    </div>
-                                    <br><br>
-                                    <span class="tooltip">Veuillez chosir un API a utilisée</span>
-                                </div>
-                            </div>
-                        </div>
+			<div class="card-header">
+				<h5 class="card-category"><strong>Veuillez choisir le type d'API utilisée</strong></h5>
+        <h4 class="card-title">API</h4>
+			</div>
+			<div class="card-body">
+				<div class="chart-area">
+          <div class="table-full-width table-responsive">
+            <div class="">
+              <label class="custom-control custom-radio">
+                <input type="radio" name="radio" id="radiohomologate" class="custom-control-input" onclick="showHomologate()">
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description" data-toggle="tooltip" title="Librairie moteur validée par EPG"> API Homologuée</span>
+              </label>
+              <div class="input-group col-mb-3" id="homologue" style="display: none;" >
+                  <div class="table-full-width table-responsive">
+                    <label class="custom-control custom-radio">
+                      <input id="radioApiDga" name="api" type="radio" class="custom-control-input" value="/opt/soft/cdtng/tools/sppms_moteur/10.4/lib/libbmoteur.a" onclick="showApiDga()">
+                      <span class="custom-control-indicator"></span>
+                      <span class="custom-control-description" data-toggle="tooltip" data-animation="false" title="Ancien API de gestion de base de données(n'est plus utilisées depuis 2011). Seulement utilisée en mode non optimisée double précision">API DGA</span>
+                    </label>
+                    <label class="custom-control custom-radio">
+                        <input id="radio2" name="api" type="radio" class="custom-control-input" onclick="showApiBdmodel()">
+                        <span class="custom-control-indicator"></span>
+                        <span class="custom-control-description" data-toggle="tooltip" data-animation="false" title="Nouvelle API de gestion de bases moteur.
+                Simple précision: 32bits.
+                Double précision: Librairie 64bits (ne peut être utilisée sur une machine 32bits). 
+                Normal: Librairie non optimisée, utilise les fonctions d'interpolation BDMODEL. 
+                Optimized:Librairie qui utilise des fonctions d'interpolation recodées. 
+                Les tests d'éxécution ont été réduites par rapport à la version non optimisée. Les fonctions concernées sont:
+                        -BINTCT: Initialisation du descripteur de LABEL par classe(réseau,courbe).
+                        - BLILAR:Lecture LABEL.
+                        -rso2BI:Fonction d'interpolation pour LABEL réseau">API Bdmodel</span>
+                  </label>
+               </div>
+             </div>
+            </div>
+            <div class="">
+              <label class="custom-control custom-radio">
+                <input type="radio" name="radio" id="radioNhomologate" class="custom-control-input"  onclick="showNhomologate()">
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description" data-toggle="tooltip" title="Librairie moteur non validée par EPG"> API non Homologuée</span>
+              </label>
+              <div class="input-group col-md-3" id="nhomologue" style="display: none;">
+                <form id= "apiFile">
+                  <label for="file" class="custom-file" >
+                    <input type="file" name="file" class="input-file">
+                  </label>
+                </form>
+              </div>
+            </div>
+          </div>
+			     <br><br>
+				 <span class="tooltip">Veuillez chosir une librairie a utilisée</span>
+				</div>
+			</div>
+		</div>
                     </div>
                     <!--End API card-->
                     <div class="col-lg-4 col-md-6">
                         <!--API Bdmodel-->
                         <div class="card card-content" id="bdmodel">
                             <div class="card-header">
-                                <h5 class="card-category"><strong>API Bdmodel</strong></h5>
+                                <h5 class="card-category library" id= "custom-library"><strong>API Bdmodel</strong></h5>
+                                <h5 class="card-category execute" id= "custom-execute" style="display: none;" ><strong>Type d'éxécution</strong></h5>
                             </div>
-                         <form id="form_valid" class="form-submit"  method="GET" action="result.html" target="_blank">
-                            <div class="card-body" >
+                
+                         <form id="form_valid" class="form-submit">
+                            <div class="card-body" id="content-bdmodel" >
                             
-                               <div class="table-type" >
+                               <div class="table-type library" id= "custom-library">
                                     <label class="custom-control custom-radio">
                                       <input id="input_path1" name="bdmodel" type="radio" class="custom-control-input" value="/opt/soft/cdtng/tools/sppms_moteur/10.4/lib/libmoteur.a">
                                       <span class="custom-control-indicator"></span>
@@ -178,7 +204,18 @@
                                       <span class="custom-control-description" data-toggle="tooltip" data-animation="false" title="Les programmes de manipulation et de gestions des bases et des labels dans cet environnement sont de type Bdmodel, les API d'interpolation et d'extrapolation sont optimisées en terme de vitesse de calcule et l'option de compilation choisie est de double précision pour les réels">Optimisée(précision simple)</span>
                                     </label>                                          
                                 </div>
-                                <span class="tooltip">Veuillez choisir un mode d'éxecution</span>
+                                 <div class="table-type execute" data-toggle= "tooltip" id="custom-execute" style="display: none;" title=" Permet de donner le mode d'éxecution(Normal ou debug)">
+                                    <label class="custom-control custom-radio">
+                                      <input id="radio1" name="bdmodel" type="radio" class="custom-control-input">
+                                      <span class="custom-control-indicator"></span>
+                                      <span class="custom-control-description">Normal</span>
+                                    </label>
+                                     <label class="custom-control custom-radio">
+                                      <input id="radio1" name="bdmodel" type="radio" class="custom-control-input">
+                                      <span class="custom-control-indicator"></span>
+                                      <span class="custom-control-description">Total View</span>
+                                    </label>                                       
+                                </div>
                             </div>
                         </div>
                 
@@ -203,7 +240,7 @@
                                          <div class="input-group mb-3" id="locale" style="display: none;">
                                            
                                                 <label for="file" class="custom-file" id="customFile">
-                                                    <input type="file" class="input-file" name="file" id="hc" accept= ".sda" webkitdirectory mozdirectory msdirectory odirectory directory multiple />
+                                                    <input type="file" class="input-file" name="file" id="hc" accept= ".sda"  />
                                                </label> 
                                               <!--<button class="btn" id="locale" type="submit" value="File" >Envoyer</button> -->
                                             
@@ -222,25 +259,25 @@
                                                 <div class="col-md-3" id="pbanque">
                                                     <div class="form-group"  >
                                                         <label>Repère</label>
-                                                        <input type="text" class="form-control inputfield" data-toggle="tooltip" data-animation="false" title="Banque moteur(ie MA320)">
+                                                        <input type="text" class="form-control inputfield" id="xrepere" data-toggle="tooltip" data-animation="false" title="Banque moteur(ie MA320)" style="font-size:10px;">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-3" id="pbanque"> 
                                                     <div class="form-group">
                                                         <label>Domaine</label>
-                                                        <input type="text" class="form-control inputfield" data-toggle="tooltip" data-animation="false" title="Version moteur(ie PW11124G1-JM)">
+                                                        <input type="text" class="form-control inputfield" id= "xdomaine" data-toggle="tooltip" data-animation="false" title="Version moteur(ie PW11124G1-JM)" style="font-size:10px;">
                                                     </div>
                                                 </div>
                                                  <div class="col-md-3" id="pbanque">
                                                     <div class="form-group">
                                                         <label>Version</label>
-                                                        <input type="text" class="form-control inputfield" data-toggle="tooltip" data-animation="false" title="Domaine de la base utilisée(ie MOTEUR)">
+                                                        <input type="text" class="form-control inputfield" id="xversion" data-toggle="tooltip" data-animation="false" title="Domaine de la base utilisée(ie MOTEUR)" style="font-size:10px;">
                                                     </div>
                                                 </div>
                                                  <div class="col-md-3" id="pbanque">
                                                     <div class="form-group">
                                                         <label>Banque</label>
-                                                        <input type="text" class="form-control inputfield" data-toggle="tooltip" data-animation="false" title="Date réference qui identifiele repère">
+                                                        <input type="text" class="form-control inputfield" id="xbanque" data-toggle="tooltip" data-animation="false" title="Date réference qui identifiele repère" style="font-size:10px;">
                                                     </div>
                                                 </div>
                                       
@@ -282,18 +319,19 @@
                                                                 <div class="col-md-3">
                                                                     <label>Domaine</label>
                                                                      <div class="btn-group">
-                                                                        <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-toggle="tooltip" data-animation="false" title="Domaine de la base utilisé(ie MOTEUR)">
+                                                                        <button type="button" class="btn btn-secondary dropdown-toggle third-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-toggle="tooltip" data-animation="false" title="Domaine de la base utilisé(ie MOTEUR)">
                                                                             Domaines
                                                                           </button>
-                                                                          <div class="dropdown-menu dropdown-menu-right">
-                                                                            <button class="dropdown-item" type="button">AERO</button>
-                                                                            <button class="dropdown-item" type="button">BRUIT</button>
-                                                                            <button class="dropdown-item" type="button">GEOM</button>
-                                                                            <button class="dropdown-item" type="button">KGENE</button>
-                                                                            <button class="dropdown-item" type="button">MOTESS</button>
-                                                                            <button class="dropdown-item" type="button">MOTEUR</button>
-                                                                            <button class="dropdown-item" type="button">QDV</button>
-                                                                            <button class="dropdown-item" type="button">MOTESS</button>
+                                                                          <div class="dropdown-menu third dropdown-menu-right" id = "sdomaine">
+                                                                          
+                                                                                <option class="dropdown-item" type="button">AERO</option>
+                                                                                <option class="dropdown-item" type="button">BRUIT</option>
+                                                                                <option class="dropdown-item" type="button">GEOM</option>
+                                                                                <option class="dropdown-item" type="button">KGENE</option>
+                                                                                <option class="dropdown-item" type="button">MOTESS</option>
+                                                                                <option class="dropdown-item" type="button">MOTEUR</option>
+                                                                                <option class="dropdown-item" type="button">QDV</option>
+                                                                        
                                                                           </div>
                                                                     </div>
                                                                     
@@ -301,18 +339,21 @@
                                                                 <div class="col-md-3">
                                                                     <label>Avion</label>
                                                                     <div class="btn-group">
-                                                                        <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-toggle="tooltip" data-animation="false" title="Sélectionne l'avion/moteur à prendre">
+                                                                        <button type="button" class="btn btn-secondary dropdown-toggle fourth-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-toggle="tooltip" data-animation="false" title="Sélectionne l'avion/moteur à prendre">
                                                                             Avions
                                                                           </button>
-                                                                          <div class="dropdown-menu dropdown-menu-right">
-                                                                            <button class="dropdown-item" type="button">MA300</button>
-                                                                            <button class="dropdown-item" type="button">MA300-600</button>
-                                                                            <button class="dropdown-item" type="button">MA310</button>
-                                                                            <button class="dropdown-item" type="button">MA319</button>
-                                                                            <button class="dropdown-item" type="button">MA320</button>
-                                                                            <button class="dropdown-item" type="button">MA321</button>
-                                                                            <button class="dropdown-item" type="button">MA330</button>
-                                                                            <button class="dropdown-item" type="button">MA340</button>
+                                                                           <div class="dropdown-menu fourth dropdown-menu-right" id="savion">
+                                                                            <option class="dropdown-item" type="button">A300</option>
+                                                                            <option class="dropdown-item" type="button">A300-600</option>
+                                                                            <option class="dropdown-item" type="button">A30X</option>
+                                                                            <option class="dropdown-item" type="button">A310</option>
+                                                                            <option class="dropdown-item" type="button">A318</option>
+                                                                            <option class="dropdown-item" type="button">A319</option>
+                                                                            <option class="dropdown-item" type="button">A320</option>
+                                                                            <option class="dropdown-item" type="button">A321</option>
+                                                                            <option class="dropdown-item" type="button">A330</option>
+                                                                            <option class="dropdown-item" type="button">A330ST</option>
+                                                        
                                                                           </div>
                                                                     </div>
                                                                     
@@ -320,13 +361,18 @@
                                                                 <div class="col-md-3">
                                                                     <label>Version Avion</label>
                                                                     <div class="btn-group">
-                                                                        <button type="button" class="btn btn-secondary dropdown-toggle" 
-                                                                        >
+                                                                        <button type="button" class="btn btn-secondary dropdown-toggle fifth-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-toggle="tooltip" data-animation="false">
                                                                                 Version
                                                                           </button>
-                                                                          <div class="dropdown-menu dropdown-menu-right">
-                                                                            <button class="dropdown-item" type="button"></button>
-                                                                           
+                                                                         <div class="dropdown-menu fifth dropdown-menu-right" id="sversion">
+                                                                            <option class="dropdown-item" type="button">A320-110-00</option>
+                                                                            <option class="dropdown-item" type="button">A320-111-00</option>
+                                                                            <option class="dropdown-item" type="button">A320-131-00</option>
+                                                                            <option class="dropdown-item" type="button">A320-210-00</option>
+                                                                            <option class="dropdown-item" type="button">A320-211-007</option>
+                                                                            <option class="dropdown-item" type="button">A320-211-001</option>
+                            
+                            
                                                                           </div>
                                                                     </div>
                                                                     
@@ -334,12 +380,18 @@
                                                                 <div class="col-md-3">
                                                                     <label>Repère</label>
                                                                     <div class="btn-group">
-                                                                        <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-toggle="tooltip" data-animation="false" title="Date référence qui identifie le repère.">
+                                                                        <button type="button" class="btn btn-secondary dropdown-toggle sixth-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-toggle="tooltip" data-animation="false" title="Date référence qui identifie le repère.">
                                                                                 Repère
                                                                           </button>
-                                                                          <div class="dropdown-menu dropdown-menu-right">
-                                                                            <button class="dropdown-item" type="button"></button>
-                                                                           
+                                                                          <div class="dropdown-menu sixth dropdown-menu-right" id="srepere">
+                                                                            <option class="dropdown-item" type="button">01/03/85</option>
+                                                                            <option class="dropdown-item" type="button">01/07/85</option>
+                                                                            <option class="dropdown-item" type="button">01/02/86</option>
+                                                                            <option class="dropdown-item" type="button">20/03/86</option>
+                                                                            <option class="dropdown-item" type="button">01/08/87</option>
+                                                                            <option class="dropdown-item" type="button">01/02/88</option>
+                
+                                                        
                                                                           </div>
                                                                     </div>
                                                                     
@@ -347,14 +399,14 @@
                                                             </div>
                                                              <br><br>
                                                             <div class="form-group">
-                                                                <input type="text" class="form-control"  name="">
+                                                                <input type="text" class="form-control"  name="file_bank" id= "file_bank">
                                                             </div>
                                                             
                                                           </div>
                                                           <!-- Modal footer -->
                                                           <div class="modal-footer">
-                                                          <button type="button" class="btn" data-toggle="modal" id="fButton">Form</button>
-                                                            <button type="button" class="btn" >Valider</button>
+                                                 
+                                                            <button type="submit" class="btn" id="pbank" >Valider</button>
                                                             <button type="button" class="btn btn-danger" data-dismiss="modal">Annuler</button>
                                                           </div>
                                                         </div>
@@ -485,7 +537,8 @@
                                         <label>CODE MOTEUR</label>
                                         <input type="text" id = "code_moteur" class="form-control"  data-toggle="tooltip" data-animation="false" name="code_moteur" title="Code utilisé pour les calculs spécifiques:
                                         Vide si non utilisé
-                                        CODMOT='***D01' pour les calculs avec des moteurs instrumentés.
+                                        CODMOT='***D01' pour les calculs avec des moteurs instru
+                                        mentés.
                                         CODMOT='***DOi' pour les calculs en moteur instrumentés mais sur des bases différentes.
                                         CODMOT='***BOi' pour les calculs avec des bases différentes"> 
                                     </div>  
@@ -536,8 +589,8 @@
                             <div class="card-body">
                              <div class="chart-area">
                                   <div class="modal-footer">
-                                        <button class="btn" onclick= "loadValue();">Form</button>
-                                        <button type="submit" class="btn" data-toggle="modal" data-target="#Modal">Valider</button>
+                                        <button class="btn" onclick ="loadValue()">Form</button>
+                                        <button type="submit" class="btn" data-toggle="modal" data-target="#Modal" >Valider</button>
                                         <button type="reset" class="btn btn-danger">RAZ</button>
                                 </div>
                                
@@ -546,8 +599,10 @@
                         </div>
                     </form>
                     </div>
+                    <!--Preloader-->
+                 
                     <!--The modal panel-->
-                    <div class="modal" id="Modal">
+                    <div class="modal" id="Modal" onload="preloader()">
                         <div class="modal-dialog modal-lg">
                             <div class="modal-content">
                                 <!-- Modal Header -->
@@ -559,7 +614,7 @@
                               
                                 <div class="modal-body">
                                     <div class="card-body">
-                                        <form id= "moteur" action = "result.html" method ="get">
+                                        <form enctype="multipart/form-data" id= "moteur" action= "http://caefr0p235:8125/result" method="get" target="_blank">
                                             <div class="row">
                                                  <div class="col-md-3">
                                                     <div class="form-group" id="1">
@@ -751,9 +806,12 @@
                                     <!-- Modal footer -->
                           <div class="modal-footer">
                                
-                              <button type="submit" class="btn" data-toggle="modal" id="save_modal">Sauvegarder</button>
+                              <button type="submit" class="btn" data-toggle="modal" id="save_modal" onclick="showResult()">Sauvegarder</button>
+                              
                              
-                            <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="showResult()">Annuler</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal" >Annuler</button>
+                                                                                                                 
+                          
                           </div>
                       </form>
                             </div>            
@@ -780,7 +838,9 @@
 <script type="text/javascript" src="{{url_for('static', filename= 'js/core/bootstrap.min.js')}}"></script>
 <script type="text/javascript" src="{{url_for('static', filename= 'js/plugins/perfect-scrollbar.jquery.min.js') }}"></script>
 <script type="text/javascript" src= "{{url_for('static',filename= 'js/sppms.js') }}"></script>
+<script type="text/javascript">
 
+</script>
  
 {% endblock %}
 </body>
