@@ -2,6 +2,7 @@
     isWindows = navigator.platform.indexOf('Win') > -1 ? true : false;
 
     if (isWindows) {
+        //PerfectionneScrollbar is not support by IE 
         //$('.sidebar .sidebar-wrapper, .main-panel, .modal').perfectScrollbar();
 
         $('html').addClass('perfect-scrollbar-on');
@@ -21,7 +22,7 @@ $(document).ready(function () {
         });
     }
 
-    nowuiDashboard.initMinimizeSidebar();
+    homologate.initMinimizeSidebar();
 
     $navbar = $('.navbar[color-on-scroll]');
     scroll_distance = $navbar.attr('color-on-scroll') || 500;
@@ -78,11 +79,10 @@ $(document).on('click', '.navbar-toggle', function () {
         });
 
         $('html').addClass('nav-open');
-        nowuiDashboard.misc.navbar_menu_visible = 1;
+        homologate.misc.navbar_menu_visible = 1;
     }
 });
-
-nowuiDashboard = {
+homologate = {
     misc: {
         navbar_menu_visible: 0
     },
@@ -98,11 +98,11 @@ nowuiDashboard = {
             if (sidebar_mini_active == true) {
                 $('body').removeClass('sidebar-mini');
                 sidebar_mini_active = false;
-                nowuiDashboard.showSidebarMessage('Sidebar mini deactivated...');
+                homologate.showSidebarMessage('Sidebar mini deactivated...');
             } else {
                 $('body').addClass('sidebar-mini');
                 sidebar_mini_active = true;
-                nowuiDashboard.showSidebarMessage('Sidebar mini activated...');
+                homologate.showSidebarMessage('Sidebar mini activated...');
             }
         });
     },
@@ -143,19 +143,40 @@ function getPath(file){
     var realPath = file_path.replace(/[\/]/g, "\\");
   return realPath;
 }
-
 //Show resultat page
 function showResult(){
     document.getElementById('resultat').style.display='block';
 }
-//content API show
-    function showApiDga(){
-        document.getElementById('bdmodel').style.display='none';
-     
-    }
+//Choose API 
+function showHomologate(){
+  document.getElementById('homologue').style.display='block';
+  document.getElementById('nhomologue').style.display='none';
+  return false;
+         }
+function showNhomologate(){
+   document.getElementById('nhomologue').style.display='block';
+   document.getElementById('homologue').style.display='none';
+   return false;
+  }
+ 
+ //Show Homogate library 
+$("#radioNhomologate").click(function(){
+         $(".library").hide();
+         $(".execute").show();
+        });
+$("#radiohomologate").click(function(){
+         $(".execute").hide();
+         $(".library").show();
+        });
+//Show type of APIDga
+$("#radioApiDga").click(function(){
+        $("#bdmodel").hide();
+        });
+//Show the APIBdmodel
     function showApiBdmodel(){
         document.getElementById('bdmodel').style.display='block';
     } 
+    
 //Show the content bank moteur
     function showLocal(){
 
@@ -164,7 +185,7 @@ function showResult(){
     }
        
     function showProjet(){
-    
+
         document.getElementById('projet').style.display='block';
         document.getElementById('locale').style.display='none';
     } 
@@ -210,6 +231,25 @@ function showResult(){
     $('.second a').on('click', function(){    
     $('.second-toggle').html($(this).html());    
 })
+    
+    $('.third option').on('click', function(){    
+    $('.third-toggle').html($(this).html());    
+})
+    
+    $('.fourth option').on('click', function(){    
+    $('.fourth-toggle').html($(this).html());    
+})
+
+    $('.fifth option').on('click', function(){    
+    $('.fifth-toggle').html($(this).html());    
+})
+    $('.sixth option').on('click', function(){    
+    $('.sixth-toggle').html($(this).html());    
+})
+
+
+
+
 
 //Control the user enter
 // Fonction to unable the "tooltips"
@@ -272,22 +312,20 @@ check['api'] =function (){
 
 
 //Submit button
-$(document).ready(function() {
-    $("#buttons").click(function(){
-        var select = $('#cresult');
-        if (select.val() === ''){
-            alert("Veuillez sélectionner le code résultat.");
-        }else if (select.val() === '1'){
-            document.getElementById('1').style.display='block';
-        }
-            return false;
-      
+//$(document).ready(function() {
+  //  $("#buttons").click(function(){
+    //    var select = $('#cresult');
+      //  if (select.val() === ''){
+        //    alert("Veuillez sélectionner le code résultat.");
+       // }else if (select.val() === '1'){
+         //   document.getElementById('1').style.display='block';
+        //}
+         //   return false;
 
+        //  });
+//
 
-          });
-});
-
-//Check the form
+//Check if the form is valid
 
 function surligne(champ,error){
     if (error)
@@ -302,7 +340,7 @@ function selectLib(){
     }
 }
 
-
+//Check if the InstallInput is valid 
 function verifinstall(champ){
 
     if(champ.value.length <3){
@@ -317,6 +355,7 @@ function verifinstall(champ){
     }
 }
 
+//Check if the RegimeInput is valid 
 function verifregime(champ){
     if(champ.value.length <3){
         surligne(champ, true);
@@ -328,7 +367,7 @@ function verifregime(champ){
         return true;
     }
 }
-//Check the form content
+//Check if all input the form is valable to be send
 function verifform(form){
     var install = verifinstall(form.install);
     var regime = verifregime(form.regime);
@@ -344,7 +383,7 @@ function verifform(form){
 
 }
     
-//Button fill form
+//Button fill form (only for test-be deleted)
 function loadValue() {
         
         document.getElementById ('altitude').value = "15000";
@@ -360,7 +399,8 @@ function loadValue() {
         document.getElementById('regime').value = "MCL";
         
         }
-//Library checkbox funcion 
+
+//Choose the library path
 function getLibChecked(){
         
         var pathLib = ['path1', 'path2', 'path3','path4'];
@@ -371,63 +411,45 @@ function getLibChecked(){
                 }
         }
 
+//CLose the modal after open output page  
+function redirectResult(){
+    $('#save_modal').on('click', function(){  
+        $('#Modal').modal('hide');
 
-
-//show result page 
-function addResult(data)
-	{
-    $(document).ready(function(){
-      $('#moteur').on('submit', function(event){
-           //console.log(data);
-              document.getElementById('resultat').style.display = 'block';
-              $('#Modal').modal('hide');
-              var resultUrl =  "http://caefr0p235:8125/result";
-              window.open(resultUrl);
-              var url = "http://caefr0p235:8125/sppms/api/result/v1.0";
-              let resultData = JSON.stringify(data);
-            
-              $.ajax({
-                      "async": true,
-                      "crossDomain": true,
-                      type: "POST",
-                      url:url,
-                      dataType: "json",
-                      contentType: "application/json",
-                      data: resultData,
-                      success: function(response){
-                              
-                              console.log(response);
-                      //  $('#ZSPHUM1').val = response.ZSPHUM;
-                        //$('#ZPCON1').val = response.ZPCON;
-                        //$('#ZFNI1').val = response.ZFNI;
-                        //$('#ZFGI1').val =  response.ZFGI;
-                       // $('#ZW1A1').val = response.ZW1A;
-                       // $('#ZWFE1').val = response.ZWFE;
-                              }
-                      })
-       
-            return false
-            event.preventDefault();
-              }); 
-          });
-
-     
-	}
-
-
+     });
+} 
+redirectResult()
+ 
+ //Local banque path 
+ function getBasePath(){
+   var filePath = "";
+   var basePath= document.getElementById('hc');
+   var repere = $('#repere').val();
+   var domaine = $('#domaine').val();
+   var version = $('#version').val();
+   var banque= $('#banque').val();
+    if (basePath.length !=0){
+            filePath = basePath.value;
+    }else if(repere.length !=0 && domaine.length !=0 && version.length !=0 && banque.length !=0 ) {
+           // $('#hc').val ('');
+            filePath = "\\10.122.80.194\moteur_ap\A350\RR\BASE\TXWB97_1000_d1368_ref\TXWB97_1000_d1368_ref_1.sda"
+    }else{
+            filePath = $('#file_bank').val();
+            }
+        
+   }
+    
 
 // Send the form to the server
 $(document).ready(function(){
-
    $('#form_valid').on('submit', function(event){
-/*var file = document.getElementById('hc').value;*/
 var data = {
     file_path:document.getElementById('hc').value,
     altitude : document.getElementById('altitude').value,
     mach : document.getElementById('mach').value,
     disa: document.getElementById('disa').value,
     humidite: document.getElementById('humidite').value,
-    //pathLibrary: getLibChecked(),
+    pathLibrary: getLibChecked(),
     alt_piste: document.getElementById('alt_piste').value,
     disa_piste: document.getElementById('disa_piste').value,
     temps_flex: document.getElementById('temps_flex').value,
@@ -440,7 +462,7 @@ var data = {
     regime: document.getElementById('regime').value
     // code_moteur:document.getElementById('code-moteur').value
 };
-  //console.log(data);
+  console.log(data);
 
 $.ajax({
     "async": true,
@@ -542,11 +564,11 @@ $.ajax({
         document.getElementById('ZOUT4').value = alldata.ZOUT4;
         document.getElementById('ZOUT5').value = alldata.ZOUT5;
        // document.getElementById('VERSION').value = alldata.VERSION;
-    
-                     
-       addResult(alldata);
-    }
-    
+       
+        setTimeout(function(){
+            $('#loader').html('Chargement'+ loader.login + '...' +loader.location).addClass('border');
+             },3000);
+    }    
 });
     return false
     event.preventDefault();
@@ -562,12 +584,16 @@ $("#disa").keyup(function(){
         });
 
 //Preloader
-//var overlay = document.getElementById("overlay");
+var start;
 
-//window.addEventListenner('load',function(){
-  //      overlay.style.display ='none';
-        
-   //     });
+function preloader(){
+        start = setTimeout(showpage, 25000);
+        }
+function showpage(){
+        document.getElementById("loader").style.display= "none";
+        document.getElementById('modal-content').style.display= "block";
+        }
+    
 
 //function test banque moteur
      var items = [
@@ -610,14 +636,21 @@ $("#disa").keyup(function(){
              
                 ]
 
-function testBanqueMoteur () {
-     
-        var temp = {};
-         $.each(items, function (){
-                 $("")
-                 });
-        
-        }
+function parmBank() {
+      $('#pbank').on('click', function(){ 
+            
+          var domaine = "AERO";
+          var avion = "A320";
+          var version = "A320-110-00";
+          var repere = "01/02/86";
+          document.getElementById('xdomaine').value = domaine;
+          document.getElementById('xbanque').value = avion;
+          document.getElementById('xversion').value = version;
+          document.getElementById('xrepere').value = repere;
+                                 
+        $('#myModal').modal('hide'); 
+    });
+   }
 
-
+parmBank();
     
