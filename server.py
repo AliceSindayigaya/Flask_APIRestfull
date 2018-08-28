@@ -3,10 +3,12 @@
 #==============================================================================
 #import system library
 import os
+import zipfile
 
 #import flask library
 from flask import Flask, request,jsonify
 from flask import render_template
+from flask import send_file
 
 #Flask application start 
 app = Flask(__name__)
@@ -35,11 +37,13 @@ import pypfm as pfm
 #Get value parameter and  launch sppms by libpfm
 @app.route ("/sppms/api/v1.0", methods= ['GET','POST'])
 def getconfig():
+    
 
     if request.method ==  "POST":
-
+       
         #Get the form value
         form = request.form
+        
         altitude = float(form['altitude'])
         disa = float(form['disa'])
         mach = float(form['mach'])
@@ -55,10 +59,7 @@ def getconfig():
         vapar = float(form['vapar'])
 #        wbiphp = float(form['wbiphp'])
 
-        print altitude, disa, mach, install, regime, file_path,humidite,libpath,alt_piste,disa_piste,temps_flex ,typar,vapar
-
-#        ,wbiphp   
-
+        print altitude, disa, mach, install, regime, file_path,humidite,libpath,disa_piste ,alt_piste,temps_flex ,typar,vapar   
         
         #Configure logging
         pfm.Logging.setLevel(pfm.Logging.Debug)
@@ -80,21 +81,23 @@ def getconfig():
        
         #Create SPPMS model
         model = pfm.Sppms()
-        model.setData(td)
-        model.setTypar("REG")
+        model.setInputTestData(td)
+        model.setTypar(typar)
         model.setDefaultRatingCode(regime)
         model.setDefaultInstallCode(install)
         model.setAnemometry([pfm.AnemoType.AC])
+        model.setOutputFormat("csv")
         model.setOutputDirectory("OUT")
         model.setSamples(pfm.Range("all"))
         model.setAircraft("A350")
         model.setManufacturer("RR")
-        model.setEngine("TRENTXWB97")
+        model.setEngine("TRENTXWB")
         model.setBlPath(file_path)
         model.run()
      
         #Read output test data
         reader = pfm.createTestDataReader("orma")
+        reader.configure("excludeErrors", "9000-9300")
         reader.setInputFile("OUT/ENGINE_1_AC/BIN_HOMOLOG_BDM")
         out = reader.read()
         print out, out.countSamples(), out.countParameters()
@@ -105,25 +108,28 @@ def getconfig():
             dct[param] = out.getParameterValueAtSample(param, 0)
         return jsonify(dct)
     return "Success"
+
+#Download output all files
+@app.route('/download')
+def download():
+    zipf = zipfile.ZipFile('output.zip','w', zipfile.ZIP_DEFLATED)
+    for root,dirs,files in os.walk('OUT/ENGINE_1_AC/'):
+        for file in files:
+            zipf.write('OUT/ENGINE_1_AC/'+file)
+    zipf.close()
+    return send_file('output.zip',
+                     mimetype = 'zip',
+                     attachment_filename ="Output.zip",
+                     as_attachment= True)
     
 #Homologate library url
-@app.route("/homologate", methods= ['GET','POST'])
+@app.route("/librairies", methods= ['GET','POST'])
 def homologate():
-    return render_template('homologate.html')
-
-#Other library url
-@app.route("/others", methods= ['GET','POST'])
-def others():
-    return render_template('others_lib.html')
+    return render_template('librairies.html')
 
 #Result and output url 
 @app.route("/result", methods= ['GET','POST'])
 def result():
-    if request.method == "POST":
-        result = request.get_json()
-        print result
-        return jsonify(result)
-    
     return render_template ('result.html')
  
 
