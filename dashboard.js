@@ -334,14 +334,56 @@ function surligne(champ,error){
         champ.style.backgroundColor = "";
 }
 
+function checkApiHommologate(){
+        if ($("#radiohomologate").is(":checked"))
+        {
+            return true;
+                }else{
+                 return false;
+                        }
+        }
+//Check if the APINHomologate is selected
+function checkApiNHomologate(){
+        if($("#radioApiDga").is(":checked")){
+                return true;
+                }else{
+                    return false;
+                        }
+        }
+//Check if the APIBDmodel is selected
+function checkLib(){
+        if(($("#input_path1").is(":checked")) || 
+           ($("#input_path2").is(":checked")) || 
+           ($("#input_path3").is("checked")) || 
+           ($("#input_path4").is("checked")) ){
+             return true;     
+                }else{
+                 
+                 return false;
+                        }
+        }
+//Check if API is selected
+function checkApi(){
+        if (checkApiHommologate() == true && checkLib() == true){
+           return true; 
+        }else{
+            alert ("Veuillez choisir une librairie de l'APIBDmodel à utuliser!"); 
+            return false;
+                    }
+        }
+//Check if the local base is selected
 function selectLib(){
     if(document.getElementById("hc").files.length == 0){
-        alert('No file selected');
-    }
+        alert('Veuillez sélectionner une banque moteur!');
+        return false;
+    }else{
+        return true;
+            }
 }
+//Check the input type text
 
 //Check if the InstallInput is valid 
-function verifinstall(champ){
+function verifInstall(champ){
 
     if(champ.value.length <3){
         surligne(champ, true);
@@ -355,8 +397,39 @@ function verifinstall(champ){
     }
 }
 
+function verifAltitude(champ){
+    if(champ.value.length <3){
+        surligne(champ, true);
+        return false;
+    }
+    else
+
+    {
+        surligne(champ, false);
+        return true;
+    }
+        
+        
+        }
+function verifMach(champ){
+    if(champ.value.length <3){
+        surligne(champ, true);
+        return false;
+    }
+    else
+
+    {
+        surligne(champ, false);
+        return true;
+    }
+        
+        
+  }
+
+
+
 //Check if the RegimeInput is valid 
-function verifregime(champ){
+function verifRegime(champ){
     if(champ.value.length <3){
         surligne(champ, true);
         return false;
@@ -368,15 +441,18 @@ function verifregime(champ){
     }
 }
 //Check if all input the form is valable to be send
-function verifform(form){
-    var install = verifinstall(form.install);
-    var regime = verifregime(form.regime);
+function validateform(form){
+    var altitude = verifAltitude(form.altitude);
+    var mach = verifRegime(form.regime);
+    var install = verifInstall(form.install);
+    var regime = verifRegime(form.regime);
+                            
 
-    if(install && regime)
+    if(install && regime && altitude && mach)
     {
         return true;
     }else{
-        alert("Veuiller remplir correctement, INSTALL, REGIME");
+        alert("Veuiller remplir correctement les réquis, ALTITUDE, MACH, INSTALL, REGIME");
         
         return false;
     }
@@ -468,7 +544,7 @@ $.ajax({
     "async": true,
     "crossDomain": true,
     type : 'POST',
-    url : "http://caefr0p235:8125/sppms/api/v1.0",
+    url : "http://caefr0p230:8125/sppms/api/v1.0",
     dataType: "html",
     data: data,
     success : function(data){
@@ -583,58 +659,9 @@ $("#disa").keyup(function(){
         $("#disa_piste").val(this.value)
         });
 
-//Preloader
-var start;
 
-function preloader(){
-        start = setTimeout(showpage, 25000);
-        }
-function showpage(){
-        document.getElementById("loader").style.display= "none";
-        document.getElementById('modal-content').style.display= "block";
-        }
     
 
-//function test banque moteur
-     var items = [
-            {
-
-             aircraft:[], 
-             version: [],
-             repere: []
-             },
-            {
-             aircraft: [
-                     {'name': 'A300', value: 'a300'},
-                     {'name': 'A300-600', value: 'a300-600'},
-                     {'name': 'A30X',value: 'a30x'},
-                     {'name': 'A310', value: 'a310'},
-                     {'name': 'A318', value: 'a318'},
-                     {'name': 'A319', value: 'a319'},
-                     {'name': 'A320', value: 'a320'},
-                     {'name': 'A321', value: 'a321'},
-                     {'name': 'A330', value: 'a330'},
-                     {'name': 'A330ST', value: 'a330ST'}
-                     ]
-                    },
-            {
-            version : [
-                    {'name': 'A300B2-320', value:'a300B2-320'},
-                    {'name': 'A300B4-203', value: 'a300B4-203'}
-                    
-                    ]
-                    
-                    },
-            {
-            repere: [
-                    {'name': '01/08/80', value: '01/08/80'},
-                    {'name': '01/09/81', value: '01/09/81'},
-                    {'name':'09/05/96', value: '09/05/96'}
-                    ]
-                    }
-                
-             
-                ]
 
 function parmBank() {
       $('#pbank').on('click', function(){ 
