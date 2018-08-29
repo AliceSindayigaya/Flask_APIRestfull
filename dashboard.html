@@ -44,9 +44,9 @@
                             <p>Résultat</p>
                           
                         </a>
-                        <ul class="output">
-                            <li><a>output1</a></li>
-                        </ul>
+                      <!--  <ul class="output">-->
+                        <!--   <li><a>output1</a></li>-->
+                      <!--  </ul>-->
                         
                     </li>
                 </ul>
@@ -314,7 +314,7 @@
                                                           </div>
                                                     
                                                           <!-- Modal body -->
-                                                          <div class="modal-body1">
+                                                          <div class="modal-body1" id="myModal1">
                                                             <div class="row">
                                                                 <div class="col-md-3">
                                                                     <label>Domaine</label>
@@ -406,7 +406,7 @@
                                                           <!-- Modal footer -->
                                                           <div class="modal-footer">
                                                  
-                                                            <button type="submit" class="btn" id="pbank" >Valider</button>
+                                                            <button type="button" class="btn" id="pbank" >Valider</button>
                                                             <button type="button" class="btn btn-danger" data-dismiss="modal">Annuler</button>
                                                           </div>
                                                         </div>
@@ -505,7 +505,7 @@
                                     <div class="form-group">
                                          
                                         <label>INSTALL</label>
-                                        <input type="text" id="install" name="install" class="form-control" data-toggle="tooltip" data-animation="false" name="install" title="Code d'installation">
+                                        <input type="text" id="install" name="install" class="form-control required" data-toggle="tooltip" data-animation="false" name="install" title="Code d'installation">
                                         <label>FLHV(btu/lb)</label>
                                         <input type="text" id = "flhv" class="form-control" data-toggle="tooltip" data-animation="false" name="flhv" title="Pouvoir calorifique inférieur du carburant.
                                             FLHV = 0. :Calcul avec la valeur de référence contenue dans la base.
@@ -529,7 +529,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>REGIME</label>
-                                        <input type="text" name="regime" id="regime" class="form-control" data-toggle="tooltip" data-animation="false" name="regime" title="Régime((T0N,MCL,..)">
+                                        <input type="text" name="regime" id="regime" class="form-control required" data-toggle="tooltip" data-animation="false" name="regime" title="Régime((T0N,MCL,..)">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -590,7 +590,7 @@
                              <div class="chart-area">
                                   <div class="modal-footer">
                                         <button class="btn" onclick ="loadValue()">Form</button>
-                                        <button type="submit" class="btn" data-toggle="modal" data-target="#Modal" >Valider</button>
+                                        <button type="submit" class="btn" data-toggle="modal" data-target="#Modal" onclick="validateform(form)" >Valider</button>
                                         <button type="reset" class="btn btn-danger">RAZ</button>
                                 </div>
                                
@@ -614,7 +614,7 @@
                               
                                 <div class="modal-body">
                                     <div class="card-body">
-                                        <form enctype="multipart/form-data" id= "moteur" action= "http://caefr0p235:8125/result" method="get" target="_blank">
+                                        <form enctype="multipart/form-data" id= "moteur" action= "http://caefr0p230:8125/result" method="get" target="_blank">
                                             <div class="row">
                                                  <div class="col-md-3">
                                                     <div class="form-group" id="1">
