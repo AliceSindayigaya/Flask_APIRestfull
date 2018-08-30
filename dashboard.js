@@ -380,7 +380,7 @@ function selectLib(){
         return true;
             }
 }
-//Check the input type text
+
 
 //Check if the InstallInput is valid 
 function verifInstall(champ){
@@ -544,7 +544,7 @@ $.ajax({
     "async": true,
     "crossDomain": true,
     type : 'POST',
-    url : "http://caefr0p230:8125/sppms/api/v1.0",
+    url : "http://caefr0p266:8125/sppms/api/v1.0",
     dataType: "html",
     data: data,
     success : function(data){
@@ -641,9 +641,6 @@ $.ajax({
         document.getElementById('ZOUT5').value = alldata.ZOUT5;
        // document.getElementById('VERSION').value = alldata.VERSION;
        
-        setTimeout(function(){
-            $('#loader').html('Chargement'+ loader.login + '...' +loader.location).addClass('border');
-             },3000);
     }    
 });
     return false
